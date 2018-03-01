@@ -1,3 +1,3 @@
 # myapp
 
-[an alternative way for making daily report](dailyreport.html)
+[an alternative way for making daily report](https://houzhenni.github.io/myapp/dailyreport.html)
