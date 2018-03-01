@@ -7,11 +7,12 @@
 	<title>客服工作日志</title>
 	<style>
 	.visibleEntry{word-wrap: break-word; word-break: break-all;}
+	#inputTable, #inputTable input, #inputTable select, #inputTable td{margin: 0px; padding: 0px;}
 	</style>
 </head>
 
 <body>
-	<h4>&nbsp;</h4>
+	<h7>&nbsp;</h7>
 	<div class="row">
 		<div class="col-lg-10 col-lg-offset-1">
 			<div class="panel panel-default">
@@ -21,7 +22,7 @@
 					<div class="col-sm-6">
 						<div class="text-center">
 							<span>
-								日期：
+								今天是：
 							</span>
 							<span id="myDate">
 								年 月 日 星期
@@ -35,44 +36,84 @@
 						</div>
 					</div>
 				</div>
+				<h7>&nbsp;</h7>
+				<div class="row">
+					<div class="col-sm-10 col-sm-offset-1">
+						<div class="row">
+							<div class="col-sm-3 col-sm-offset-1 text-danger" style="margin-top: 3px;">
+								<span>记录的日期：</span>
+								<span id="recDate">
+									????年??月??日
+								</span>
+							</div>
+							<div class="col-sm-4">
+								<span>自定时间：</span>
+								<input style="width: 45px;" id="inputYear" maxlength="4" type="text">
+								<span>&nbsp;年&nbsp;</span>
+								<input style="width: 25px;" id="inputMonth" maxlength="2" type="text">
+								<span>&nbsp;月&nbsp;</span>
+								<input style="width: 25px;" id="inputDay" maxlength="2" type="text">
+								<span>&nbsp;日</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<h7>&nbsp;</h7>
+				<div class="row">
+					<button class="col-sm-offset-2 btn btn-primary" id="updateDate">刷新日期</button>
+					<button id="customDate" class="btn btn-primary">使用自定时间</button>
+				</div>
 				<!--文档信息区结束-->
+				<h7>&nbsp;</h7>
 				<h4 class="text-center"><b>重要目标：协助用户在最短的时间内解决问题！将用户的意见传达给公司</b></h4>
 				<div class="row">
 					<div class="col-sm-10 col-sm-offset-1">
-						<table class="table table-striped table-bordered">
+						<table id="inputTable" class="table table-striped table-bordered text-center">
 							<tbody>
 								<tr>
-									<td>接触方向</td>
-									<td>接触方式</td>
+									<td>接触<br>方向</td>
+									<td>接触<br>方式</td>
 									<td>联络人：<br>电话/QQ</td>
-									<td>SoldEazy-ID</td>
+									<td>账号ID</td>
 									<td>问题描述<br>最好有例子</td>
-									<td>教学编号</td>
-									<td>成功解决？</td>
+									<td>问题类型</td>
+									<td>教学参考</td>
+									<td>成功<br>解决？</td>
 									<td>跟进/<br>转介？</td>
 								</tr>
 								<tr>
 									<td>
-										<select id="inOrOut" class="form-control" style="width: 65px;">
-											<option selected="selected" disabled="disabled"  style='display: none'></option>
+										<select id="inOrOut" class="form-control" style="width: 40px;">
+											<option selected="selected" disabled="disabled" style='display: none'></option>
 										    <option>入</option>
 										    <option>出</option>
 										</select>
 									</td>
 									<td>
-										<select id="touchMethod" class="form-control" style="width: 65px;">
-											<option selected="selected" disabled="disabled"  style='display: none'></option>
+										<select id="touchMethod" class="form-control" style="width: 50px;">
+											<option selected="selected" disabled="disabled" style='display: none'></option>
 										    <option>QQ</option>
 										    <option>电话</option>
 										</select>
 									</td>
-									<td><input id="contactNum" class="form-control" type="text" style="width: 100px;"></td>
-									<td><input id="seId" type="text" class="form-control" style="width: 80px;"></td>
-									<td><textarea class="form-control" id="queryDetail" style="width: 200px; height: 150px;"></textarea></td>
-									<td><input id="qaNum" class="form-control" type="text" style="width: 80px;"></td>
+									<td><input id="contactNum" class="form-control" type="text"></td>
+									<td><input id="accID" type="text" class="form-control"></td>
+									<td><textarea class="form-control" id="queryDetail" style="width: 250px; resize: none;"></textarea></td>
 									<td>
-										<select id="solvedOrNot" class="form-control" style="width: 65px;">
-											<option selected="selected" disabled="disabled"  style='display: none'></option>
+										<select id="queryType" class="form-control" style="width: 80px;">
+											<option selected="selected" disabled="disabled" style='display: none'></option>
+										    <option>操作类</option>
+										    <option>报错类</option>
+										    <option>数据填写</option>
+										    <option>账单查询</option>
+										    <option>系统故障</option>
+										    <option>功能建议</option>
+										</select>
+									</td>
+									<td><input id="qaNum" class="form-control" type="text" ></td>
+									<td>
+										<select id="solvedOrNot" class="form-control"  style="width: 45px;">
+											<option selected="selected" disabled="disabled" style='display: none'></option>
 										    <option>是</option>
 										    <option>否</option>
 										</select>
@@ -83,8 +124,10 @@
 						</table>
 					</div>
 				</div>
+				<h7>&nbsp;</h7>
 				<div class="row">
 					<div class="col-sm-10 col-sm-offset-1">
+						<button id="resetRec" class="btn btn-primary">重置本条</button>
 						<button id="addNew" class="btn btn-primary">新增一条</button>
 						<button id="delLast" class="btn btn-danger">删除一条</button>
 					</div>
@@ -95,17 +138,23 @@
 						<table id="recordToday" class="table table-striped table-bordered">
 							<tbody>
 								<tr>
-									<td style="width: 45px;">序号</td>
-									<td style="width: 75px;">接触方向</td>
-									<td style="width: 75px;">接触方式</td>
-									<td style="width: 105px;">联络人：<br>电话/QQ</td>
-									<td style="width: 105px;">SoldEazy-ID</td>
+									<td style="width: 55px;">员工</td>
+									<td style="width: 82px;">日期</td>
+									<td style="width: 35px;">序号</td>
+									<td style="width: 45px;">接触方向</td>
+									<td style="width: 48px;">接触方式</td>
+									<td style="width: 95px;">联络人：<br>电话/QQ</td>
+									<td style="width: 85px;">账号ID</td>
 									<td>问题描述</td>
-									<td style="width: 85px;">教学编号</td>
-									<td style="width: 95px;">成功解决？</td>
-									<td style="width: 95px;">跟进/<br>转介？</td>
+									<td style="width: 75px;">问题类型</td>
+									<td style="width: 75px;">教学参考</td>
+									<td style="width: 60px;">成功解决？</td>
+									<td style="width: 65px;">跟进/<br>转介？</td>
 								</tr>
 								<tr>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
 									<td>&nbsp;</td>
 									<td>&nbsp;</td>
 									<td>&nbsp;</td>
@@ -151,6 +200,7 @@
 			var month = dateNow.getMonth() + 1;
 			var day = dateNow.getDate();
 			var theDay = dateNow.getDay();
+
 			if(year < 10){
 				year = "0" + year;
 			}
@@ -164,8 +214,51 @@
 				$("#myDate").html(year + "年" + month + "月" + day + "日" + weekday[theDay]);
 			})();
 
+			$("#updateDate").click(function(){
+				$("#recDate").html(year + "年" + month + "月" + day + "日");
+				//每次修改日志时间都同时更新localStorage
+				localStorage.setItem("lastStoredTime",$("#recDate").html());
+			});
+
+			$("#customDate").click(function(){
+				var inputYear = $("#inputYear").val(), inputMonth, inputDay;
+				if(Number($("#inputMonth").val()) < 10){
+					inputMonth = "0" + Number($("#inputMonth").val());
+				}else{
+					inputMonth = $("#inputMonth").val();
+				}
+				if(Number($("#inputDay").val()) < 10){
+					inputDay = "0" + Number($("#inputDay").val());
+				}else{
+					inputDay = $("#inputDay").val();
+				}
+				$("#recDate").html(inputYear + "年" + inputMonth + "月" + inputDay + "日");
+				//每次修改日志时间都同时更新localStorage
+				localStorage.setItem("lastStoredTime",$("#recDate").html());
+			});
+
+			/*从localStorage获取上次修改时填写的时间*/
+			(function(){
+				if(!localStorage.getItem("lastStoredTime")){
+					localStorage.setItem("lastStoredTime",$("#recDate").html());
+				}else{
+					$("#recDate").html(localStorage.getItem("lastStoredTime"));
+				}
+			})();
+			/*获取结束*/
+
+			/*从localStorage获取上次修改时填写的数据*/
+			(function(){
+				if(!localStorage.getItem("lastStoredData")){
+					localStorage.setItem("lastStoredData",$("#recordToday tbody").html());
+				}else{
+					$("#recordToday tbody").html(localStorage.getItem("lastStoredData"));
+				}
+			})();
+			/*获取结束*/
+
 			function updateSequence(){
-				var visibleRef = $(".visibleEntry td:first-child");
+				var visibleRef = $(".visibleEntry td:nth-child(3)");
 				for(var i = 0; i < visibleRef.length; i++){
 					visibleRef[i].innerHTML = i + 1;
 				}
@@ -173,7 +266,7 @@
 
 			$("#addNew").on("click",function(){
 				var newEntry = [];
-				var val01 = "", val02 = "", val03 = "", val04 = "", val05 = "", val06 = "", val07 = "", val08 = "";
+				var val01 = "", val02 = "", val03 = "", val04 = "", val05 = "", val06 = "", val07 = "", val08 = "", val09 = "", val10 = "";
 				if($("#inOrOut").val() != "入" && $("#inOrOut").val() != "出"){
 					val01 = "方向只能是“出”或“入”\n";
 				}
@@ -183,7 +276,7 @@
 				if(!$("#contactNum").val().match(/^(\d|\+)+$/)){
 					val03 = "联系方式只能输入数字\n";
 				}
-				if(!$("#seId").val().match(/^\w+$/)){
+				if(!$("#accID").val().match(/^\w+$/)){
 					val04 = "账号名只能是字母和数字的组合\n";
 				}
 				// if(!$("#queryDetail").val().match(/^[\u4e00-\u9fa5_a-zA-Z0-9]+$/)){
@@ -196,15 +289,25 @@
 					val07 = "到底解决没有？\n";
 				}
 				if(!$("#needFollowUp").val().match(/^[\u4e00-\u9fa5_a-zA-Z0-9]+$/)){
-					val08 = "需要跟进吗？";
+					val08 = "需要跟进吗？\n";
 				}
-				var msg = val01 + val02 + val03 + val04 + val05 + val06 + val07 + val08;
+				if($("#recDate").html().match(/\?/)){
+					val09 = "日志的日期对吗?\n";
+				}
+				if(!$("#myName").val()){
+					val10 = "你的名字是？";
+				}
+				var msg = val01 + val02 + val03 + val04 + val05 + val06 + val07 + val08 + val09 + val10;
 				if(!msg){
+					newEntry.push($("#myName").val());
+					newEntry.push($("#recDate").html());
+					newEntry.push("");
 					newEntry.push($("#inOrOut").val());
 					newEntry.push($("#touchMethod").val());
 					newEntry.push($("#contactNum").val());
-					newEntry.push($("#seId").val());
+					newEntry.push($("#accID").val());
 					newEntry.push($("#queryDetail").val());
+					newEntry.push($("#queryType").val());
 					newEntry.push($("#qaNum").val());
 					newEntry.push($("#solvedOrNot").val());
 					newEntry.push($("#needFollowUp").val());
@@ -213,7 +316,7 @@
 						m = "<td>" + m + "</td>";
 						newTr.push(m);
 					});
-					var joinedTr = "<tr class='visibleEntry'><td></td>" + newTr.join("") + "</tr>";
+					var joinedTr = "<tr class='visibleEntry'>" + newTr.join("") + "</tr>";
 					var veryFirstTd = $("#recordToday tr:nth-child(2)").children("td")[0];
 					console.log(veryFirstTd);
 					if($(veryFirstTd).html() == "&nbsp;"){
@@ -221,6 +324,7 @@
 					}
 					$("#recordToday tbody").append(joinedTr);
 					updateSequence();
+					localStorage.setItem("lastStoredData",$("#recordToday tbody").html());
 				}else{
 					alert(msg);
 				}
@@ -231,17 +335,34 @@
 				if($("#recordToday tr").length == 2){
 					if($(veryLastTd).html() != "&nbsp;"){
 						$("#recordToday tr:last-child").remove();
-						var vacantLine = "<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>";
+						var vacantLine = "<td>&nbsp;</td>";
+						vacantLine += vacantLine;
+						vacantLine += vacantLine;
+						vacantLine += vacantLine + vacantLine;
+						vacantLine = "<tr>" + vacantLine + "</tr>";
 						$("#recordToday tbody").append(vacantLine);
+						localStorage.setItem("lastStoredData",$("#recordToday tbody").html());
 					}
 				}else{
 					console.log($("#recordToday tr").length);
 					$("#recordToday tr:last-child").remove();
+					localStorage.setItem("lastStoredData",$("#recordToday tbody").html());
 				}
 			});
 
+			$("#resetRec").click(function(){
+				$("#inOrOut").val("");
+				$("#touchMethod").val("");
+				$("#contactNum").val("");
+				$("#accID").val("");
+				$("#queryDetail").val("");
+				$("#qaNum").val("");
+				$("#solvedOrNot").val("");
+				$("#needFollowUp").val("");
+			});
+
 			$("#exportBtn").click(function(){
-				if(!$("#myName").val()){
+				if($("#myName").val() == ""){
 					alert("你的名字是？");
 				}else{
 					if(confirm("确认导出？")){
