@@ -60,8 +60,8 @@
 				</div>
 				<h7>&nbsp;</h7>
 				<div class="row">
-					<button class="col-sm-offset-2 btn btn-primary" id="updateDate">刷新日期</button>
-					<button id="customDate" class="btn btn-primary">使用自定时间</button>
+					<button class="col-sm-offset-2 btn btn-primary" id="updateDate">使用当前日期</button>
+					<button id="customDate" class="btn btn-primary">使用自定日期</button>
 				</div>
 				<!--文档信息区结束-->
 				<h7>&nbsp;</h7>
@@ -130,6 +130,7 @@
 						<button id="resetRec" class="btn btn-primary">重置本条</button>
 						<button id="addNew" class="btn btn-primary">新增一条</button>
 						<button id="delLast" class="btn btn-danger">删除一条</button>
+						<button id="delAll" class="btn btn-danger">删除全部</button>
 					</div>
 				</div>
 				<div class="row">
@@ -348,6 +349,18 @@
 					$("#recordToday tr:last-child").remove();
 					localStorage.setItem("lastStoredData",$("#recordToday tbody").html());
 				}
+			});
+			
+			$("#delAll").click(function(){
+				var firstTr = $("#recordToday tr:first-child");
+				$("#recordToday tr").remove();
+				var vacantLine = "<td>&nbsp;</td>";
+				vacantLine += vacantLine;
+				vacantLine += vacantLine;
+				vacantLine += vacantLine + vacantLine;
+				vacantLine = "<tr>" + vacantLine + "</tr>";
+				$("#recordToday tbody").append(firstTr + vacantLine);
+				localStorage.setItem("lastStoredData",$("#recordToday tbody").html());
 			});
 
 			$("#resetRec").click(function(){
