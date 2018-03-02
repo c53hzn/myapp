@@ -352,7 +352,8 @@
 			});
 			
 			$("#delAll").click(function(){
-				var firstTr = $("#recordToday tr:first-child");
+				var firstTr = $("#recordToday tr:first-child").html();
+				firstTr = "<tr>" + firstTr + "</tr>";
 				$("#recordToday tr").remove();
 				var vacantLine = "<td>&nbsp;</td>";
 				vacantLine += vacantLine;
