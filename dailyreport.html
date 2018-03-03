@@ -378,9 +378,14 @@
 					alert("你的名字是？");
 				}else{
 					if(confirm("确认导出？")){
-						var recDateForExport = 
-						var recYear = 
-						var myFileName = year + month + day + "DailyWorksheet_" + $("#myName").val();
+						var dateStr = $("#recDate").html();
+						var dateArr = dateStr.split("年");
+						var tempArr = dateArr[1].split("月");
+						dateArr[1] = tempArr[0];
+						tempArr = tempArr[1].split("日");
+						dateArr.push(tempArr[0]);
+						var dateForExport = dateArr.join("");
+						var myFileName = dateForExport + "DailyWorksheet_" + $("#myName").val();
 						console.log(myFileName);
 
 						/*table2excel方法*/
