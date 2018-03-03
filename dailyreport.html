@@ -127,7 +127,7 @@
 				<h7>&nbsp;</h7>
 				<div class="row">
 					<div class="col-sm-10 col-sm-offset-1">
-						<button id="resetRec" class="btn btn-primary">重置本条</button>
+						<button id="resetEntry" class="btn btn-primary">重置本条</button>
 						<button id="addNew" class="btn btn-primary">新增一条</button>
 						<button id="delLast" class="btn btn-danger">删除一条</button>
 						<button id="delAll" class="btn btn-danger">删除全部</button>
@@ -319,7 +319,6 @@
 					});
 					var joinedTr = "<tr class='visibleEntry'>" + newTr.join("") + "</tr>";
 					var veryFirstTd = $("#recordToday tr:nth-child(2)").children("td")[0];
-					console.log(veryFirstTd);
 					if($(veryFirstTd).html() == "&nbsp;"){
 						$("#recordToday tr:nth-child(2)").remove();
 					}
@@ -345,7 +344,6 @@
 						localStorage.setItem("lastStoredData",$("#recordToday tbody").html());
 					}
 				}else{
-					console.log($("#recordToday tr").length);
 					$("#recordToday tr:last-child").remove();
 					localStorage.setItem("lastStoredData",$("#recordToday tbody").html());
 				}
@@ -364,7 +362,7 @@
 				localStorage.setItem("lastStoredData",$("#recordToday tbody").html());
 			});
 
-			$("#resetRec").click(function(){
+			$("#resetEntry").click(function(){
 				$("#inOrOut").val("");
 				$("#touchMethod").val("");
 				$("#contactNum").val("");
@@ -380,6 +378,8 @@
 					alert("你的名字是？");
 				}else{
 					if(confirm("确认导出？")){
+						var recDateForExport = 
+						var recYear = 
 						var myFileName = year + month + day + "DailyWorksheet_" + $("#myName").val();
 						console.log(myFileName);
 
