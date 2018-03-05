@@ -389,16 +389,6 @@
 						var myFileName = dateForExport + "DailyWorksheet_" + $("#myName").val();
 						console.log(myFileName);
 
-						/*table2excel方法*/
-						// $("#recordToday").table2excel({
-						// 	// 不被导出的表格行的CSS class类
-						// 	exclude: ".noExl",
-						// 	// 导出的Excel文档的名称
-						// 	name: "Excel Document Name",
-						// 	// Excel文件的名称
-						// 	filename: myFileName
-						// });
-
 						/*tableExport方法*/
 						$("#recordToday").tableExport({
 							format:'csv',
@@ -422,19 +412,9 @@
 						var dateForExport = dateArr.join("");
 						var myFileName = dateForExport + "DailyWorksheet_" + $("#myName").val();
 						console.log(myFileName);
-
+						
 						/*table2excel方法*/
-						// $("#recordToday").table2excel({
-						// 	// 不被导出的表格行的CSS class类
-						// 	exclude: ".noExl",
-						// 	// 导出的Excel文档的名称
-						// 	name: "Excel Document Name",
-						// 	// Excel文件的名称
-						// 	filename: myFileName
-						// });
-
-						/*tableExport方法*/
-						$("#recordToday").tableExport({
+						$("#recordToday").table2excel({
 							name:"Excel Document Name",
 							filename:myFileName
 						});
