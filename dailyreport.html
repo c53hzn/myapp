@@ -173,7 +173,8 @@
 				<div class="row">
 					<div class="col-sm-10 col-sm-offset-1">
 						<!-- <button id="submitBtn" class="btn btn-primary">全部提交</button> -->
-						<button id="exportBtn" class="btn btn-primary">导出csv</button>
+						<button id="exportCsv" class="btn btn-primary">导出csv</button>
+						<button id="exportXls" class="btn btn-primary">导出xls</button>
 					</div>
 				</div>
 				<h4>&nbsp;</h4>
@@ -373,7 +374,7 @@
 				$("#needFollowUp").val("");
 			});
 
-			$("#exportBtn").click(function(){
+			$("#exportCsv").click(function(){
 				if($("#myName").val() == ""){
 					alert("你的名字是？");
 				}else{
@@ -402,6 +403,40 @@
 						$("#recordToday").tableExport({
 							format:'csv',
 							fileName:myFileName
+						});
+					}
+				}
+			});
+			
+			$("#exportXls").click(function(){
+				if($("#myName").val() == ""){
+					alert("你的名字是？");
+				}else{
+					if(confirm("确认导出？")){
+						var dateStr = $("#recDate").html();
+						var dateArr = dateStr.split("年");
+						var tempArr = dateArr[1].split("月");
+						dateArr[1] = tempArr[0];
+						tempArr = tempArr[1].split("日");
+						dateArr.push(tempArr[0]);
+						var dateForExport = dateArr.join("");
+						var myFileName = dateForExport + "DailyWorksheet_" + $("#myName").val();
+						console.log(myFileName);
+
+						/*table2excel方法*/
+						// $("#recordToday").table2excel({
+						// 	// 不被导出的表格行的CSS class类
+						// 	exclude: ".noExl",
+						// 	// 导出的Excel文档的名称
+						// 	name: "Excel Document Name",
+						// 	// Excel文件的名称
+						// 	filename: myFileName
+						// });
+
+						/*tableExport方法*/
+						$("#recordToday").tableExport({
+							name:"Excel Document Name",
+							filename:myFileName
 						});
 					}
 				}
