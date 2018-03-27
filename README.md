@@ -7,3 +7,5 @@ I made some applications for real use, some for work, and some for entertainment
 * [my favorite PC game: minesweeper](https://houzhenni.github.io/myapp/minesweeper.html)
 
 * [plain text to html tool](https://houzhenni.github.io/myapp/converttohtml.html)
+
+* [random quote machine](https://houzhenni.github.io/myapp/randomquote.html)
