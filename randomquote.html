@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0,user-scalable=0"
+      http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <title>Jenny's Blog</title>
+  <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
+<link rel='stylesheet prefetch' href='https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css'>
+
+<style>
+body{min-width: 320px; color: black; background: white;}
+#grayCover{position: fixed; width: 100%; height: 100%; background: gray; opacity: .8; z-index: 999;}
+h1{margin: 25px; color: white;}
+#divQuote{margin-top: 20px;background: white; border-radius: 10px;}
+.divQuoteInner{margin: 34px;}
+#quoteContent{border-left: 3px solid white; padding-left: 15px;font-size: 23px; text-indent: 25px;color: white;}
+#quoteAuthor, #saidByWhom{font-style: italic; color: white;}
+#quoteAuthor:before{
+  content: "Originally written by: ";
+  font-style: normal;
+}
+#saidByWhom:before{
+  content: "Said by: "; font-style: normal;
+}
+#quoteBottom{margin-top: 15px;}
+#iconTwitter, #iconWeibo{padding: 5px;border-radius: 5px; font-size: 24px; background: white; color: white;} 
+#changeQuote{display: inline-block; float: right; background: white; color: white;}
+#shareQuote a{text-decoration: none;}
+#author{color: white; margin: 10px auto;}
+#backToIndex{
+	position: fixed;
+	bottom: 20px;
+	right: 10%;
+	width: 50px;
+	height: 50px;
+	border-radius: 50px;
+	background-color: #F75000;
+	color: white;
+	font-size: 19px;
+	line-height: 50px;
+	text-align: center;
+	box-shadow: 0px 0px 5px black;
+}
+@media all and (max-width: 768px){
+  #quoteTitle{margin-bottom: 10px; font-size: 25px;}
+}
+</style>
+</head>
+
+<body translate="no" >
+<div id="grayCover"></div>
+<div class="container">
+  <div class="row">
+    <h1 id="quoteTitle" class="text-center col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2">Random Quote Machine: <br/>Criminal Minds Season 3 Quotes</h1>
+    <div id="divQuote" class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+      <div class="divQuoteInner">
+        <div id="quoteContent">
+          <!--Once you eliminate the impossible, whatever remains, no matter how improbable, must be the truth.-->
+        </div>
+        <div id="quoteAuthor" class="text-right">
+          <!--             Arthur Conan Doyle -->
+        </div>
+        <div id="saidByWhom" class="text-right">
+          <!--             Sherlock Holmes -->
+        </div>
+        <div class="row" id="quoteBottom">
+          <div id="shareQuote" class="col">
+            <a id="twitterLink" href="#" target="_blank">
+              <i class="fa fa-twitter" id="iconTwitter"></i>
+            </a>
+            <a id="weiboLink" href="https://service.weibo.com/share/share.php" target="_blank">
+              <i class="fa fa-weibo" id="iconWeibo"></i>
+            </a>
+            <button id="changeQuote" type="button" class="btn">New Quote</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="author" class="text-center">
+  by Jenny
+</div>
+<a class="noDecorLink" href="index.html" target="_self">
+  <div id="backToIndex">
+    Back
+  </div>
+</a>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.transit/0.9.12/jquery.transit.min.js'></script>
+
+<script >
+ //定义整体颜色
+var colors = [
+  "blueviolet",
+  "dimgray",
+  "indianred",
+  "cornflowerblue",
+  "deeppink",
+  "peru",
+  "forestgreen",
+  "darkorange",
+  "lightcoral",
+  "lightseagreen",
+  "darkcyan",
+  "midnightblue",
+  "teal",
+  "maroon",
+  "salmon",
+  "yellowgreen"
+];
+var allQuotes = [];
+//页面加载完成后开始执行
+$(document).ready(function() {
+  //获取JSON数据
+  function toRetrieveData() {
+    $.ajaxSetup({
+      error: function(x, e) {
+        $("#quoteContent").css("color","red").html("Cannot load required contents-1");
+        return false;
+      }
+    });
+    // $.ajaxSettings.async = false;
+    $.getJSON(
+      "./mywork/criminal-minds-quotes.json",
+      function(data) {
+        if (data !== "") {
+          allQuotes = data.quotes;
+          console.log("Data retrieved successfully");
+          toChange();
+        } else {
+          $("#quoteContent").css("color","green").html("Cannot load required contents-2");
+        }
+      }
+    );
+    // $.ajaxSettings.async = true;
+  }
+  toRetrieveData();
+  $("#grayCover").fadeOut(1500);
+  var tempColor1 = "white",
+    tempColor2 = "white",
+    randomColor = "white";
+  var tempNum1 = 0,
+    tempNum2 = 0,
+    randomNum = 0;
+  //toChange: 生成新的名言，更改整体颜色
+  function toChange() {
+    function toGenerateColor() {
+      var colorIndex = Math.floor(Math.random() * colors.length);
+      tempColor1 = colors[colorIndex]; //0 <= colorIndex <= colors.length - 1
+      if (randomColor == tempColor1) {
+        //为了防止生成相同的颜色
+        console.log("tempColor1 = " + tempColor1);
+        toGenerateColor();
+      } else {
+        tempColor2 = tempColor1;
+        randomColor = tempColor2;
+        console.log("randomColor = " + randomColor);
+      }
+    }
+    function toGenerateNum() {
+      tempNum1 = Math.floor(Math.random() * 32); //因为最小值是0才能这么简单，0 <= tempNum1 <=31
+      if (randomNum == tempNum1) {
+        //为了防止生成相同的数字
+        console.log("tempNum1 = " + tempNum1);
+        toGenerateNum();
+      } else {
+        tempNum2 = tempNum1;
+        randomNum = tempNum2;
+        console.log("randomNum = " + randomNum);
+      }
+    }
+    toGenerateColor();
+    toGenerateNum();
+    //改颜色
+    $("body").transition({ background: randomColor }, 800);
+    $("#quoteContent").transition(
+      { color: randomColor, borderLeftColor: randomColor },
+      800
+    );
+    $("#quoteAuthor").transition({ color: randomColor }, 800);
+    $("#saidByWhom").transition({ color: randomColor }, 800);
+    $("#iconTwitter").transition({ background: randomColor }, 800);
+    $("#iconWeibo").transition({ background: randomColor }, 800);
+    $("#changeQuote").transition({ background: randomColor }, 800);
+    //改内容
+    $("#quoteContent").html(allQuotes[randomNum].quote);
+    $("#quoteAuthor").html(allQuotes[randomNum].author);
+    $("#saidByWhom").html(allQuotes[randomNum].whosaidit);
+    //为twitter转义分号
+    function html2Escape(sHtml) {
+ return sHtml.replace(/[;]/g,function(c){return {';':'%3B'}[c];});
+}
+    var twitterTxtBefore = allQuotes[randomNum].quote;
+    var twitterTxt = html2Escape(twitterTxtBefore);
+    $("#twitterLink").attr("href","https://twitter.com/intent/tweet?related=freecodecamp&text=" + twitterTxt + "%20--%20" + allQuotes[randomNum].author);
+    //twitter结束
+    $("#weiboLink").attr("href","https://service.weibo.com/share/share.php?url=https://codepen.io/houzhenni/full/GyjzZb/&title=" + allQuotes[randomNum].quote + "%20--%20" + allQuotes[randomNum].author);
+  }
+  // toChange();
+  $("#changeQuote").on("click", toChange);
+});
+</script>
+</body>
+</html>
