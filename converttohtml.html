@@ -30,6 +30,9 @@
 <button id="aNewBtn">To new page link</button>
 <button id="tableBtn">To table</button>
 </div>
+<div>
+<button id="brBtn2">Add br & keep vacant line</button>
+</div>
 <p style="margin: 2px;">output</p>
 <textarea style="width: 98%; height: 40%; word-wrap: break-word; word-break: break-all;" id="outputTxt"></textarea>
 </div>
@@ -49,6 +52,19 @@ $(document).ready(function(){
 				var str = m + "<br>";
 				newArr.push(str);
 			}
+		});
+		var separatedTxt = newArr.join("\n");//给每个换行符添加分行标签
+		$("#outputTxt").val(separatedTxt);//输出
+	});
+	//添加<br/>
+	$("#brBtn2").on("click",function(){
+		$("#outputTxt").val("");//清空結果的textarea
+		var origTxt = $("#sourceTxt").val();//获取输入的内容
+		var arr = origTxt.split("\n");
+		var newArr = [];
+		arr.forEach(function(m){
+			var str = m + "<br>";
+			newArr.push(str);
 		});
 		var separatedTxt = newArr.join("\n");//给每个换行符添加分行标签
 		$("#outputTxt").val(separatedTxt);//输出
