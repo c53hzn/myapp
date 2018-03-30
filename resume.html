@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0,user-scalable=0"
+      http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://fonts.gdgdocs.org/css?family=Lobster">
+	<link rel="stylesheet" type="text/css" href="topstyles.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
+<title>Jenny's blog</title>
+</head>
+
+<style>
+body{min-width: 320px;}
+.myHeaderText{font-family: Lobster;}
+.menuBarQuater{font-family: Microsoft Yahei;}
+.menuDropDown a{font-family: Times New Roman; font-weight: bold;}
+.menuBarText p:nth-child(1){display: block;}
+.menuBarText p:nth-child(2){display: none;}
+.myIntro_text{margin: 20px; font-size: 18px; text-align: left;}
+.myPortfolio{padding-bottom: 10px;}
+.myPortfolio div{margin: 20px; width: 40%; display: inline-block;}
+.myPortfolio div:hover {box-shadow: 0px 0px 5px gray;}
+.centered{text-align: center;}
+.centered a{text-decoration: none;}
+.contactBtn{width: 20%; margin: 10px auto; display: inline-block;}
+.contactBtn span{font-size: 21px;}
+@media all and (max-width: 1080px)
+{
+	.myIntro_text{margin: 10px 10px 20px 10px;}
+	#backToIndex{right: 5%;}
+}
+@media all and (max-width: 768px)
+{
+	.myPortfolio div{margin: 10px;}
+	.contactBtn{width: 40%;}
+}
+@media all and (max-width: 600px)
+{
+	.menuBarText p:nth-child(1){display: none;}
+	.menuBarText p:nth-child(2){display: block;}
+}
+@media all and (max-width: 485px)
+{
+	.myPortfolio div{width: 80%;}
+	.contactBtn i{font-size: 18px;}
+	.contactBtn span{font-size: 15px;}
+	#backToIndex{right: 1%;}
+}
+</style>
+
+<html>
+	<body>
+		<div class="subBody">
+			<div class="upperPart">
+				<div class="myHeaderPhoto">
+				</div>
+				<div class="myHeaderText">
+					<p>HOU Zhenni Jenny</p>
+				</div>
+			</div>
+			<div class="menuBar" id="float_menubar">
+				<div class="menuBarQuater" onmouseover="">
+					<div class="menuBarText">
+						<p>About me</p>
+						<p>About</p>
+					</div>
+					<div class="menuDropDown">
+						<a href="#myIntro">Who am I?</a>
+					</div>
+				</div>
+				<div class="menuBarQuater" onmouseover="">
+					<div class="menuBarText">
+						<p>My skills</p>
+						<p>Skills</p>
+					</div>
+					<div class="menuDropDown">
+						<a href="#mySkills">What I can do</a>
+					</div>
+				</div>
+				<div class="menuBarQuater" onmouseover="">
+					<div class="menuBarText">
+						<p>My Portfolio</p>
+						<p>Portfolio</p>
+					</div>
+					<div class="menuDropDown">
+						<a href="#myPortfolio">Projects accomplished</a>
+					</div>
+				</div>
+				<div class="menuBarQuater" onmouseover="">
+					<div class="menuBarText">
+						<p>Contact Me</p>
+						<p>Contact</p>
+					</div>
+					<div class="menuDropDown">
+						<a href="#myContact">You can find me here</a>
+					</div>
+				</div>
+			</div>
+			<div id="myIntro"></div>
+			<div class="middlePart" id="float_middlePart">
+			</div>
+			<div class="lowerPart">
+				<div class="lowerInnerPart">
+					<div class="panel panel-default">
+						<h3>Jenny HOU</h3>
+						<div class="row myIntro_text">
+							<div class="col-sm-8 col-md-8">
+								<div class="thumbnail" style="margin-bottom: 0px;">
+									<img class="img-responsive" src="./photo/index-04.jpg" alt="picture of me" />
+								</div>
+							</div>
+							<div class="col-sm-4 col-md-4">
+								<div class="myIntro_text">
+									<p>Customer support for IT company, with passion to learn various programming languages</p>
+									<hr style="border-top-color: black;"/>
+									<p>
+										Front-end developer
+										<br/>
+										Chi/Jap/Eng Translator
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<p id="mySkills">&nbsp;</p>
+					<p>&nbsp;</p>
+					<div class="panel panel-default">
+						<h3>My Skills</h3>
+						<div class="row myIntro_text">
+							<div class="col-sm-8 col-md-8 col-md-push-4 col-sm-push-4">
+								<div class="thumbnail" style="margin-bottom: 0px;">
+									<img class="img-responsive" src="https://www.brainscape.com/blog/wp-content/uploads/2014/07/Languages1.png" alt="natural languages" />
+								</div>
+							</div>
+							<div class="col-sm-4 col-md-4 col-md-pull-8 col-sm-pull-8">
+								<div class="myIntro_text">
+									<p>Natural Languages</p>
+									<hr style="border: 1px solid black;"/>
+									<p>
+										Mandarin(Native)
+										<br/>
+										Japanese(Fluent)
+										<br/>
+										English(Fluent)
+										<br/>
+										Cantonese(Fluent)
+										<br/>
+										Korean(Fair)
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="row myIntro_text">
+							<div class="col-sm-8 col-md-8">
+								<div class="thumbnail" style="margin-bottom: 0px;">
+									<img class="img-responsive" src="photo/front-end-languages.jpg" alt="programming languages" />
+								</div>
+							</div>
+							<div class="col-sm-4 col-md-4">
+								<div class="myIntro_text">
+									<p>Programming Languages</p>
+									<hr style="border: 1px solid black;"/>
+									<p>
+										HTML
+										<br/>
+										CSS
+										<br/>
+										JavaScript
+										<br/>
+										jQuery
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<p id="myPortfolio">&nbsp;</p>
+					<p>&nbsp;</p>
+					<div class="panel panel-default">
+						<h3>My Portfolio</h3>
+						<div class="myPortfolio">
+							<div class="thumbnail">
+								<a href="https://codepen.io/houzhenni/pen/wPrBeR" target="_blank">
+									<img class="img-responsive" src="https://s1.ax1x.com/2017/12/24/vmYan.png" alt="timetable of Jay Chou's concert" />
+								</a>
+							</div>
+							<div class="thumbnail">
+								<a href="https://codepen.io/houzhenni/pen/xXLqxe" target="_blank">
+									<img class="img-responsive" src="https://s1.ax1x.com/2017/12/24/vmt5q.png" alt="a JavaScript calculator" />
+								</a>
+							</div>
+							<div class="thumbnail">
+								<a href="randomquote.html" target="_blank">
+									<img class="img-responsive" src="https://s1.ax1x.com/2017/12/24/vmUP0.png" alt="Random Quote Machine: Criminal Minds Season 3 Quotes" />
+								</a>
+							</div>
+							<div class="thumbnail">
+								<a href="calculator.html" target="_blank">
+									<img class="img-responsive" src="https://s1.ax1x.com/2017/12/24/vmt5q.png" alt="JavaScript Calculator" />
+								</a>
+							</div>
+						</div>
+					</div>
+					<p id="myContact">&nbsp;</p>
+					<p>&nbsp;</p>
+					<div class="panel panel-default">
+						<h3>Contact Me</h3>
+						<div class="row myIntro_text centered">
+							<a href="https://www.github.com/houzhenni" target="_blank">
+								<button type="button" class="btn btn-danger contactBtn">
+									<i class="fa fa-2x fa-github-square"></i>
+									<span>Github</span>
+								</button>
+							</a>
+							<a href="https://codepen.io/houzhenni" target="_blank">
+								<button type="button" class="btn btn-danger contactBtn">
+									<i class="fa fa-2x fa-codepen"></i>
+									<span>Codepen</span>
+								</button>
+							</a>
+							<a href="mailto:admin@houzhenni.com">
+								<button type="button" class="btn btn-danger contactBtn">
+									<i class="fa fa-2x fa-envelope"></i>
+									<span>Email</span>
+								</button>
+							</a>
+							<a href="https://facebook.com/jenny.hou.1048" target="_blank">
+								<button type="button" class="btn btn-danger contactBtn">
+									<i class="fa fa-2x fa-facebook"></i>
+									<span>Facebook</span>
+								</button>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+<script src="topjs.js" type="text/javascript"></script>
+</html>

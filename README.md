@@ -2,10 +2,14 @@
 
 I made some applications for real use, some for work, and some for entertainment, have fun with them~
 
-* [an alternative way for making daily report](https://houzhenni.github.io/myapp/dailyreport.html)
+* [my resume](https://www.houzhenni.com/myapp/resume.html)
 
-* [my favorite PC game: minesweeper](https://houzhenni.github.io/myapp/minesweeper.html)
+* [an alternative way for making daily report](https://www.houzhenni.com/myapp/dailyreport.html)
 
-* [plain text to html tool](https://houzhenni.github.io/myapp/converttohtml.html)
+* [my favorite PC game: minesweeper](https://www.houzhenni.com/myapp/minesweeper.html)
 
-* [random quote machine](https://houzhenni.github.io/myapp/randomquote.html)
+* [plain text to html tool](https://www.houzhenni.com/myapp/converttohtml.html)
+
+* [random quote machine](https://www.houzhenni.com/myapp/randomquote.html)
+
+* [JavaScript calculator](https://www.houzhenni.com/myapp/calculator.html)

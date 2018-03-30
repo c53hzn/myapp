@@ -102,7 +102,6 @@ $(document).ready(function() {
         return false;
       }
     });
-    // $.ajaxSettings.async = false;
     $.getJSON(
       "./mywork/criminal-minds-quotes.json",
       function(data) {
@@ -115,7 +114,6 @@ $(document).ready(function() {
         }
       }
     );
-    // $.ajaxSettings.async = true;
   }
   toRetrieveData();
   $("#grayCover").fadeOut(1500);

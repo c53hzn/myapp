@@ -1,0 +1,238 @@
+html{width: 100%;
+	height: 100%;
+	background-color: white;
+	background-image: url(https://images3.alphacoders.com/853/85305.jpg);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	background-blend-mode: hard-light;
+	background-attachment: fixed;
+}
+body{width: 1080px;
+	max-width: 100%;
+	min-width: 320px;
+	height: 100%;
+	margin: 0px auto;
+	background: none;
+	text-align: center;
+}
+.subBody{
+	position: relative;
+	width: 900px;
+	min-height: 100%;
+	height: auto;
+	margin: 0px auto;
+	background-color: rgba(255,250,205,0.9);
+	box-shadow: 0px 0px 20px black;
+	z-index: 0;
+}
+.upperPart{
+	position: relative;
+	width: 100%;
+	height: 150px;
+	margin: 0px auto;
+	z-index: 0;
+}
+.myHeaderPhoto{
+	position: relative;
+	top: 15px;
+	width: 120px;
+	height: 120px;
+	border-radius: 60px;
+	box-shadow: 0px 0px 10px black;
+	background: #F75000 url(https://www.houzhenni.com/assets/img/author-pic-1x.png) no-repeat;
+	background-size: contain;
+	background-blend-mode: luminosity;
+	overflow: hidden;
+	display: inline-block;
+}
+/*.myHeaderPhoto img{
+	width: 100%;
+}*/
+.myHeaderText{
+	position: relative;
+	top: -20px;
+	height: 120px;
+	display: inline-block;
+}
+.myHeaderText p{
+	margin: 0px;
+	font-size: 50px;
+	line-height: 120px;
+	color: #9e0500;
+	font-weight: bold;
+	text-shadow: 0px 2px 4px #ffc107;
+}
+.menuBar{
+	width: 930px;
+	min-width: 320px;
+	height: 60px;
+	margin: 0px 0px 0px -15px;
+	text-align: center;
+	background-color: #F75000;
+	z-index: 2;
+}
+.menuBarFixated{
+	position: fixed;
+	top: 0px;
+	width: 930px;
+	min-width: 320px;
+	height: 60px;
+	margin: 0px 0px 0px -15px;
+	text-align: center;
+	background-color: #F75000;
+	z-index: 2;
+}
+.menuBar:before, .menuBar:after{
+	content:"";
+	position: absolute;
+	width: 917px;
+	height: 40px;
+	top: 161px;
+	bottom: 22px;
+	background: transparent;
+	z-index: -1;
+}
+.menuBar:before{
+	right:-5px;
+	box-shadow: 4px 7px 10px #5B5B5B;
+	transform: skew(-5deg) rotate(-1deg);
+}
+.menuBar:after{
+	left: -5px;
+	box-shadow: -4px 7px 10px #5B5B5B;
+	transform: skew(5deg) rotate(1deg);
+}
+.menuBarQuater{
+	position: relative;
+	display: inline-block;
+	text-align: center;
+	width: 24%;
+	margin: 0px;
+	padding: 0px;
+	cursor: pointer;
+}
+.menuBarText{
+	display: inline-block;
+	width: 100%;
+	height: 40px;
+	color: white;
+	margin: 10px auto 10px auto;
+	padding: 0px;
+	text-align: center;
+}
+.menuBarText p{
+	line-height: 40px;
+	font-size: 18px;
+	margin: 0px;
+}
+.menuDropDown{
+	position: absolute;
+	left: 0px;
+	width: 100%;
+	margin: 0px auto;
+	padding: 18px 0px;
+	border: none;
+	background-color: white;
+	text-align: center;
+	line-height: 13px;
+	box-shadow: 0px 1px 5px gray;
+	cursor: default;
+	display: none;
+	z-index: 2;
+}
+.menuDropDown a:link{text-decoration: none; color: blue;}
+.menuDropDown a:visited{color: blue;}
+.menuDropDown a:active{color: green;}
+.menuDropDown a:hover{color: blue;}
+.menuBarQuater:hover{
+	background-color: #FFAD86;
+}
+.menuBarQuater:hover .menuDropDown{
+	display: block;
+}
+.menuBarQuater:hover > .menuBarText{
+	color: black;
+}
+.middlePart{
+	position: relative;
+	width: 100%;
+	min-width: 320px;
+	height: 70px;
+	margin: 0px auto;
+	padding: 0px;
+}
+.middlePartFixated{
+	position: relative;
+	width: 100%;
+	min-width: 320px;
+	height: 130px;
+	margin: 0px auto;
+	padding: 0px;
+}
+.lowerPart{
+	position: relative;
+	width: 100%;
+	margin: 0px auto;
+	padding: 0px 0px 30px 0px;
+	text-align: center;
+	z-index: 1;
+}
+.lowerInnerPart{
+	position: relative;
+	margin: 0px 30px;
+}
+.lowerInnerPart h1{margin: 0 auto; text-align: center;}
+.myList{
+	list-style: none;
+	padding: 0px;
+	margin: 0px auto 0px 33%;
+	font-size: 20px;
+	text-align: left;
+}
+ul.myList{list-style: decimal; color: blue;}
+.myList a:link{text-decoration: none; color: blue;}
+.myList a:visited, .myList a:active, .myList a:hover{color: blue;}
+@media all and (max-width: 1081px)
+{
+	body, .subBody, .menuBar, .menuBarFixated{width: 100%; margin: 0px;}
+	.menuBar:before, .menuBar:after{display: none;}
+}
+@media all and (max-width: 800px)
+{
+	.menuBarQuater:nth-child(3) .menuDropDown, .menuBarQuater:nth-child(4) .menuDropDown{
+		left: auto;
+		right: 0px;
+	}
+	.menuDropDown{width: 200px;}
+	.lowerInnerPart{
+	margin: 0px 20px 20px 20px;
+	}
+}
+@media all and (max-width: 600px)
+{
+	.middlePart{height: 35px;}
+	.middlePartFixated{height: 95px;}
+	.myList{margin-left: 25%;}
+}
+@media all and (max-width: 485px)
+{
+	.myHeaderPhoto{top: 25px; width: 100px; height: 100px; border-radius: 50px;}
+	.myHeaderPhoto img{width: 200px; top: -28px; left: -48px;}
+	.myHeaderText{top: -8px;}
+	.myHeaderText p{font-size: 40px;}
+	.lowerInnerPart{
+	margin: 0px 15px 20px 15px;
+	}
+	.myList{margin-left: 20%;}
+}
+@media all and (max-width: 400px)
+{
+	.upperPart{height: 120px;}
+	.myHeaderPhoto{top: 15px; width: 90px; height: 90px; border-radius: 45px;}
+	.myHeaderPhoto img{width: 180px; top: -25px; left: -43px;}
+	.myHeaderText{top: -15px;}
+	.myHeaderText p{font-size: 33px;}
+	.menuBarQuater{width: 23%;}
+	.menuBarText p{font-size: 16px;}
+	.myList{margin-left: 15%;}
+}

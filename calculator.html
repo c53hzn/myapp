@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0,user-scalable=0"
+      http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>JavaScript Calculator</title>
+<style>
+.Calc{
+	-moz-user-select:none;
+	-webkit-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	border-spacing:10px; padding:5px; background-color:#FF8F59;}
+table.Calc{margin: 0px auto;}
+.number,.function,.result
+{
+ background-color: white; 
+ width:80px; height:80px;
+ font-size:48px;line-height:38px; 
+ border:solid 2px black;
+} 
+.number,.function
+{
+ cursor:pointer;display:table-cell;box-shadow:1px 3px 3px black;
+ text-align:center;font-family: Times New Roman;
+}
+.number:hover,.function:hover{background: #D2E9FF;} 
+.result{text-align:right;font-family:Times New Roman;}
+#upperhalf
+{
+text-align:right;font-size:38px;word-wrap:break-word;word-break:break-all;
+}
+#Back{font-size:30px;}
+
+@media all and (max-width: 1081px)
+{}
+@media all and (max-width: 800px)
+{}
+@media all and (max-width: 600px)
+{
+	.number,.function,.result{
+	 width:60px; height:60px;
+	 font-size:36px;line-height:36px; 
+	} 
+	#upperhalf{
+	font-size:32px;
+	}
+	#Back{font-size:25px;}
+}
+@media all and (max-width: 485px)
+{
+	.number,.function,.result{
+	 width:45px; height:45px;
+	 font-size:30px;line-height:30px; 
+	} 
+	#upperhalf{
+	font-size:27px;
+	}
+	#Back{font-size:22px;}
+}
+@media all and (max-width: 400px)
+{
+	.number,.function,.result{
+	 width:42px; height:42px;
+	 font-size:28px;line-height:28px; 
+	} 
+	#upperhalf{
+	font-size:25px;
+	}
+	#Back{font-size:20px;}
+}
+</style>
+
+
+<body>
+	<div class="subBody">
+		<div class="lowerPart">
+			<table class="Calc" id="Calc">
+				<tbody>
+					<tr>
+						<td colspan="5" class="result">
+							<div id="upperhalf">0</div>
+							<div id="lowerhalf">0</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="number" onclick="calc01()">1</td>
+						<td class="number" onclick="calc01()">2</td>
+						<td class="number" onclick="calc01()">3</td>
+						<td class="function" onclick="calc01()"><strong>+</strong></td>
+						<td class="function" onclick="clear01()">C</td>
+					</tr>
+					<tr>
+						<td class="number"  onclick="calc01()">4</td>
+						<td class="number" onclick="calc01()">5</td>
+						<td class="number" onclick="calc01()">6</td>
+						<td class="function" onclick="calc01()"><strong>-</strong></td>
+						<td rowspan="3" class="function" onclick="equals01()">=</td>
+					</tr>
+					<tr>
+						<td class="number" onclick="calc01()">7</td>
+						<td class="number" onclick="calc01()">8</td>
+						<td class="number" onclick="calc01()">9</td>
+						<td class="function"  onclick="calc01()">*</td>
+					</tr>
+					<tr>
+						<td class="function" onclick="back01()" id="Back">Back</td>
+						<td class="number" onclick="calc01()">0</td>
+						<td class="number" onclick="calc01()"><strong>.</strong></td>
+						<td class="function" onclick="calc01()"><strong>/</strong></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+<script type="text/javascript">
+<!-----禁止Safari上双击放大------->
+var lastTouchEnd = 0; 
+document.documentElement.addEventListener
+(
+ 'touchend', 
+ function (event)
+ {
+  var now = Date.now();
+  if (now - lastTouchEnd <= 500) 
+  {
+   event.preventDefault(); 
+  } 
+  lastTouchEnd = now; 
+ },
+ false
+);
+<!-----禁止双击放大结束------->
+
+
+<!---------声明变量------------>
+var result101="";
+var Adding01="";
+var Ans01="";
+var reg01=/^\d|^\./;//正则表达，字符串的第一个字符是0-9的整数*或者*小数点
+<!---------声明结束------------->
+
+<!-----输入错误时显示错误信息------->
+onerror=function(event)
+{
+result101="";
+Adding01="";
+Ans01="";
+upperhalf.innerText="0";
+lowerhalf.innerText="输入错误";
+}
+<!-----报错结束------->
+
+<!-----把输入的内容累加起来------>
+  function calc01()
+{
+	Adding01+=event.srcElement.innerText;
+	if(Adding01.match(reg01)
+	  )
+	{
+		if(Ans01=="")
+		{			  
+		result101=Adding01;
+		upperhalf.innerText=result101;
+		}
+	    else
+		{
+        Ans01="";
+		result101=Ans01+Adding01;
+		upperhalf.innerText=result101;
+		}
+	}
+    else
+	{
+	result101=Ans01+Adding01;
+	upperhalf.innerText=result101;
+	}
+}
+
+<!---------累加结束---------->
+
+<!---------等于的同时用计算结果替换原先的累加内容-------->
+  function equals01()
+{
+  if(result101!="")
+  {
+    Ans01=eval(result101);
+    lowerhalf.innerText=Ans01;
+    result101="";
+    Adding01="";
+  }
+  else{return;}
+}
+<!---------计算结果结束--------->
+
+<!---------退格开始-------->
+
+  function back01()
+{
+    if(result101.length > 1 && Adding01.length > 0)
+	{
+	var NewResult=result101.substring(0,result101.length-1);
+	var NewAdding=Adding01.substring(0,Adding01.length-1);
+	result101=NewResult;
+	Adding01=NewAdding;
+	upperhalf.innerText=result101;
+	}
+	else
+	{  
+	clear01()
+	}
+}
+<!---------退格结束--------->
+
+<!---------画面清除开始-------->
+  function clear01()
+{
+	result101="";
+	Adding01="";
+	Ans01="";
+	upperhalf.innerText="0";
+	lowerhalf.innerText="0";
+}
+<!---------清除结束--------->
+</script>
+</body>
+</html>
