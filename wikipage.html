@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0,user-scalable=0"
+      http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Jenny's blog</title>
+
+<style>
+body{margin: 0px; background: #003333; text-align: center; min-width: 320px;}
+#randomWiki{margin: 130px auto 0px auto; color: white; font-size: 18px;}
+#randomWiki a{text-decoration: none; color: white;}
+#magnifier{position: relative; margin: 10px auto; height: 35px; width: 35px; background: #003333; border: 5px solid darkorange; border-radius: 33px; cursor: pointer;}
+#magnifierHandle{position: absolute; top: 40px; left: 27px; width: 22px; border-top: 5px solid darkorange; transform:rotate(45deg); z-index: -1;}
+#searchBox{margin: 10px auto; background: none; width: 35px; height: 35px; border: 5px solid darkorange; border-radius: 33px; display: none;}
+#searchContent{margin-top: 3px; margin-left: 6px; width: 0px; height: 20px; color: white; font-size: 18px; background: none; border: none; outline: none; display: none;}
+#closeIcon{margin-top: 3px; width: 0px; color: darkorange; font-size: 20px; cursor: pointer; display: none;}
+#desc{margin: 25px auto; color: white; font-size: 18px;}
+#searchResultBox{width: 800px; margin: 10px auto;}
+#searchResultBox a{text-decoration: none; display: none;}
+.searchResult{
+  margin: 15px auto; width: 100%; padding: 3px; text-align: left; color: black; background: white; border-left: 4px solid teal; cursor: pointer;
+}
+.searchResult p{margin: 0px;}
+.searchResult:hover{
+  border-left: 4px solid darkorange;
+}
+.searchResultTitle{margin: 10px 0px; font-size: 22px; font-weight: bold; font-family: Times New Roman;}
+@media all and (max-width: 1080px){
+  #searchResultBox{width: 80%;}
+}
+@media all and (max-width: 768px){
+  #searchResultBox{ margin-left: 10px; margin-right: 0px; width: 90%;}
+}
+ </style>
+
+ </head>
+
+<body translate="no" >
+<div id="randomWiki">
+  <a href="https://en.wikipedia.org/wiki/Special:Random" target="_blank">
+    <p>Click here for a random Wiki page</p>
+  </a>
+</div>
+<div id="magnifier">
+  <div id="magnifierHandle"></div>
+</div>
+<div id="searchBox">
+  <input id="searchContent" type="text" placeholder="Wikipedia search">
+  <div id="closeIcon">&#215;</div>
+</div>
+<div id="desc">Click the magnifier to search</div>
+<div id="searchResultBox">
+</div>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.transit/0.9.12/jquery.transit.min.js'></script>
+
+<script >
+$(document).ready(function() {
+  function toShowSearchBoxFull() {
+    function showSearchBox() {
+      function toShowInputBox() {
+        $("#closeIcon").css("width", "5%");
+        $("#searchContent").css("width", "83%");
+        $("#closeIcon").css("display", "inline-block");
+        $("#searchContent").css("display", "inline-block");
+      }
+      $("#searchBox").css("margin-top", 10);
+      $("#searchBox").css("display", "block");
+      $("#magnifier").css("display", "none");
+      $("#searchBox").transition({ width: 300 }, 300);
+      //等搜索框变宽后回调显示输入框和关闭按钮
+      setTimeout(toShowInputBox, 300);
+    }
+    //0.5秒的时间缩小把手
+    $("#magnifierHandle").transition({ top: 15, left: 0 }, 200);
+    //等放大镜把手缩小后回调隐藏放大镜和显示搜索框的函数
+    setTimeout(showSearchBox, 200);
+  }
+  function toShowMagnifierFull() {
+    function showMagnifier() {
+      $("#searchBox").css("margin-top", 50);
+      $("#searchBox").css("width", 0);
+      $("#searchBox").css("display", "none");
+      $("#magnifier").css("display", "block");
+      $("#magnifierHandle").transition({ top: 40, left: 27 }, 200);
+      setTimeout('$("#randomWiki").transition({ marginTop: 130 }, 200)', 200);
+      setTimeout('$("#desc").fadeIn(200)', 400);
+    }
+    $("#closeIcon").css("width", 0);
+    $("#searchContent").val("");
+    $("#searchContent").css("width", 0);
+    $("#searchResultBox").html("");
+    $("#closeIcon").css("display", "none");
+    $("#searchContent").css("display", "none");
+    //0.5秒的时间缩小搜索框
+    $("#searchBox").transition({ width: 40 }, 300);
+    //等搜索框变窄之后回调隐藏搜索框和显示放大镜的函数
+    setTimeout(showMagnifier, 300);
+  }
+  function toSearch(val) {  
+    var myFade = function (posts){
+    	posts.fadeIn (100, function (){
+            var nextOne = $ (this).next ('#searchResultBox a');
+            if (nextOne.length > 0){
+                myFade (nextOne);
+            }
+        });
+    }
+    if (val != "") {
+      $.getJSON(
+        "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&generator=search&exsentences=1&exintro=1&gsrsearch=" +
+          val +
+          "&gsrnamespace=0&gsrlimit=10&callback=?",
+        function(data) {
+          var dataArr = data.query.pages;
+          console.log("Data retrieved successfully");
+          console.log(dataArr);
+          var wikiIDs = [];
+          //遍历一个有未知属性的JSON对象并获取所有属性名，此处为所有文章的ID
+          function getAttr(obj) {
+            var arr = [];
+            for (var key in obj) arr.push(key);
+            return arr;
+          }
+          wikiIDs = getAttr(dataArr);
+          console.log(wikiIDs);
+          for (i = 0; i < wikiIDs.length; i++) {
+            var resultTitle = dataArr[wikiIDs[i]].title;
+            //创造节点并赋予内容，此时内容有冗余HTML标签
+            var resultExtract = $("<div></div>").html(
+              dataArr[wikiIDs[i]].extract
+            );
+            //用text()提取内容，可消除所有HTML标签
+            var resultContent =
+              "<div class='searchResultTitle'>" +
+              resultTitle +
+              "</div>" +
+              resultExtract.text();
+            var resultDIV = $('<div class="searchResult"></div>').html(
+              resultContent
+            );
+            var resultURL = $('<a target="_blank"></a>').html(resultDIV);
+            resultURL.attr(
+              "href",
+              "https://en.wikipedia.org/?curid=" + wikiIDs[i]
+            );
+            $("#searchResultBox").append(resultURL);
+          }
+          jQuery (function ($){
+          	myFade ($ ("#searchResultBox a:first"));
+          });
+        }
+      );
+    }
+  }
+  $("#magnifier").on("click", toShowSearchBoxFull);
+  $("#closeIcon").on("click", toShowMagnifierFull);
+  $("#searchContent").keyup(function(event) {
+    if (event.keyCode == 13) {
+      $("#randomWiki").css("margin-top", 10);
+      $("#desc").css("display", "none");
+      $("#searchResultBox").html("");
+      var keyWords = $("#searchContent").val();
+      toSearch(keyWords);
+    }
+  });
+});
+
+</script>
+</body>
+</html>
+
