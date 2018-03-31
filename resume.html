@@ -14,6 +14,9 @@
 <style>
 body{min-width: 320px;}
 .myHeaderText{font-family: Lobster;}
+.myHeaderText:after{
+	content: "Jenny";
+}
 .menuBarQuater{font-family: Microsoft Yahei;}
 .menuDropDown a{font-family: Times New Roman; font-weight: bold;}
 .menuBarText p:nth-child(1){display: block;}
@@ -40,13 +43,27 @@ body{min-width: 320px;}
 {
 	.menuBarText p:nth-child(1){display: none;}
 	.menuBarText p:nth-child(2){display: block;}
+	.myHeaderText:after{
+		display: block;
+	}
+	.myHeaderText{
+		top: 0px;
+	}
+	.myHeaderText,{
+		height: 60px;
+		line-height: 60px;
+	}
 }
 @media all and (max-width: 485px)
 {
 	.myPortfolio div{width: 80%;}
 	.contactBtn i{font-size: 18px;}
 	.contactBtn span{font-size: 15px;}
-	#backToIndex{right: 1%;}
+	.myHeaderText{
+		font-size: 35px;
+		height: 40px;
+		line-height: 40px;
+	}
 }
 </style>
 
@@ -57,7 +74,7 @@ body{min-width: 320px;}
 				<div class="myHeaderPhoto">
 				</div>
 				<div class="myHeaderText">
-					<p>HOU Zhenni Jenny</p>
+					HOU Zhenni
 				</div>
 			</div>
 			<div class="menuBar" id="float_menubar">
