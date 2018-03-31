@@ -192,8 +192,12 @@ ul.myList{list-style: decimal; color: blue;}
 .myList a:visited, .myList a:active, .myList a:hover{color: blue;}
 @media all and (max-width: 1081px)
 {
+	html{background: none;}
 	body, .subBody, .menuBar, .menuBarFixated{width: 100%; margin: 0px;}
 	.menuBar:before, .menuBar:after{display: none;}
+	.subbody{
+		background-color: rgb(255,250,205);
+	}
 }
 @media all and (max-width: 800px)
 {
