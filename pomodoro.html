@@ -83,14 +83,16 @@ h1{
   position: absolute;
   left: 0px;
   right: 0px;
-  margin: 50px auto;
   color: white;
   font-size: 40px;
   text-shadow: 0px 0px 8px black;
   cursor: pointer;
 }
+#break-txt, #session-txt{
+  top: 60px;
+}
 #break-time-left, #session-time-left{
-  top: 100px;
+  top: 130px;
 }
 @media all and (max-width: 768px){
   #pomodoro{margin-top: 0px; width: 320px; height: fit-content;}
@@ -136,18 +138,18 @@ h1{
       <div id="break-timer-outer">
         <div id="break-timer-inner">
           <div id="break-progress"></div>
+          <div id="break-txt">Break!</div>
+          <div id="break-time-left">5:00</div>
         </div>
-        <div id="break-txt">Break!</div>
-        <div id="break-time-left">5:00</div>
       </div>
     </div>
     <div id="session-timer">
       <div id="session-timer-outer">
         <div id="session-timer-inner">
           <div id="session-progress"></div>
+          <div id="session-txt">Session</div>
+          <div id="session-time-left">25:00</div>
         </div>
-        <div id="session-txt">Session</div>
-        <div id="session-time-left">25:00</div>
       </div>
     </div>
   </div>
@@ -223,7 +225,7 @@ $(document).ready(function() {
   $("#break-timer").css("display", "none");
   sessionLeft = $("#session-time").html() * 60;
   breakLeft = $("#break-time").html() * 60;
-  $("#break-timer-outer").on("click", function() {
+  $("#break-timer-inner").on("click", function() {
     if (breakStatus == "off") {
       breakStatus = "on";
       console.log("breakStatus = " + breakStatus);
@@ -235,7 +237,7 @@ $(document).ready(function() {
       clearTimeout(breakTimer);
     }
   });
-  $("#session-timer-outer").on("click", function() {
+  $("#session-timer-inner").on("click", function() {
     if (sessionStatus == "off") {
       sessionStatus = "on";
       console.log("sessionStatus = " + sessionStatus);
