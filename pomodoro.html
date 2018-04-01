@@ -76,7 +76,6 @@ h1{
   width: 250px;
   height: 250px;
   background: #003E3E;
-  z-index: -1;
 }
 #break-txt, #break-time-left, #session-txt, #session-time-left{
   position: absolute;
@@ -171,6 +170,7 @@ function breakCount(){
     breakLeft--;
     var heightLeft = 250 * breakLeft / ($("#break-time").html() * 60);
     $("#break-progress").css("height",heightLeft);
+    $("#break-timer-inner").css("overflow","hidden");
     breakTimer = setTimeout(breakCount,1000);
   }else{
     $("#break-timer").css("display", "none");
@@ -199,6 +199,7 @@ function sessionCount(){
     }
     sessionLeft--;
     var heightLeft = 250 * sessionLeft / ($("#session-time").html() * 60);
+    $("#session-timer-inner").css("overflow","hidden");
     $("#session-progress").css("height",heightLeft);
     sessionTimer = setTimeout(sessionCount,1000);
   }else{
