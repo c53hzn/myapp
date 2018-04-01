@@ -17,3 +17,5 @@ I made some applications for real use, some for work, and some for entertainment
 * [Wikipedia search page](https://www.houzhenni.com/myapp/wikipage.html)
 
 * [a fake twitch tv streamer list](https://www.houzhenni.com/myapp/twitchtv.html)
+
+* [a pomodoro clock for better time management](https://www.houzhenni.com/myapp/pomodoro.html)

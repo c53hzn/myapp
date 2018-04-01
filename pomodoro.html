@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <title>plain text to HTML code tool</title>
+  <meta id="viewport" name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+  <style>
+  html{width: 100%; height: 100%;}
+body{
+  margin: 0px;
+  background: #003E3E;
+}
+h1{
+  color: #CEFFCE;
+  text-align: center;
+  font-family: Algerian, Arial;
+}
+#pomodoro{
+  user-select: none;
+  margin: 20px auto;
+  width: 500px;
+  height: 400px;
+  color: #CEFFCE;
+}
+#upper{
+  height: 80px;
+}
+#break-set, #session-set{
+  margin: 10px;
+  text-align: center;
+  display: inline-block;
+}
+#break-set{width: 280px;}
+#break-less, #break-time, #break-more, #session-less, #session-time, #session-more{
+  margin-top: 20px;
+  font-size: 25px;
+  display: inline-block;
+}
+#break-less, #break-more, #session-less, #session-more{
+  cursor: pointer;
+}
+#break-time, #session-time{
+  width: 35px;
+}
+#break-timer, #session-timer{
+  margin: 10px;
+  text-align: center;
+}
+#break-timer{display: none;}
+#break-timer-outer, #session-timer-outer{
+  position: relative;
+  margin: 0px auto;
+  padding: 10px;
+  width: 250px;
+  height: 250px;
+  border: 2px solid #CEFFCE;
+  border-radius: 150px;
+}
+#break-timer-inner, #session-timer-inner{
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  border-radius: 150px;
+  overflow: hidden;
+  cursor: pointer;
+}
+#break-timer-inner{
+  background: #ff7575;
+}
+#session-timer-inner{
+  background: #CEFFCE;
+}
+#break-progress, #session-progress{
+  width: 250px;
+  height: 250px;
+  background: #003E3E;
+}
+#break-txt, #break-time-left, #session-txt, #session-time-left{
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  margin: 50px auto;
+  color: white;
+  font-size: 40px;
+  text-shadow: 0px 0px 8px black;
+  cursor: pointer;
+}
+#break-time-left, #session-time-left{
+  top: 100px;
+}
+
+</style>
+</head>
+<body>
+<h1>Pomodoro Clock</h1>
+<div id="pomodoro">
+  <div id="upper">
+    <div id="break-set">
+      <div>BREAK LENGTH</div>
+      <div id="break-calc">
+        <div id="break-less">-</div>
+        <div id="break-time">5</div>
+        <div id="break-more">+</div>
+      </div>
+    </div>
+    <div id="session-set">
+      <div>SESSION LENGTH</div>
+      <div id="session-calc">
+        <div id="session-less">-</div>
+        <div id="session-time">25</div>
+        <div id="session-more">+</div>
+      </div>
+    </div>
+  </div>
+  <div id="lower">
+    <div id="break-timer">
+      <div id="break-timer-outer">
+        <div id="break-timer-inner">
+          <div id="break-progress"></div>
+        </div>
+        <div id="break-txt">Break!</div>
+        <div id="break-time-left">5:00</div>
+      </div>
+    </div>
+    <div id="session-timer">
+      <div id="session-timer-outer">
+        <div id="session-timer-inner">
+          <div id="session-progress"></div>
+        </div>
+        <div id="session-txt">Session</div>
+        <div id="session-time-left">25:00</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<script>
+var breakStatus = "off", sessionStatus = "off";
+var breakLen, sessionLen;
+var breakTimer, sessionTimer;
+var breakLeft, sessionLeft;
+function breakCount(){
+  if(breakLeft > 0){
+    var minute = Math.floor(breakLeft / 60);
+    var second = breakLeft % 60;
+    if(second > 0){
+      second--;
+    }else{
+      minute--;
+      second = 59;
+    }
+    if(second > 9){
+      $("#break-time-left").html(minute + ":" + second);
+    }else{
+      $("#break-time-left").html(minute + ":0" + second);
+    }
+    breakLeft--;
+    var heightLeft = 250 * breakLeft / ($("#break-time").html() * 60);
+    $("#break-progress").css("height",heightLeft);
+    breakTimer = setTimeout(breakCount,1000);
+  }else{
+    $("#break-timer").css("display", "none");
+    $("#session-timer").css("display", "block");
+    breakLeft = $("#break-time").html() * 60;
+    breakStatus = "off";
+    sessionStatus = "on";
+    clearTimeout(breakTimer);
+    sessionCount();
+  }
+}
+function sessionCount(){
+  if(sessionLeft > 0){
+    var minute = Math.floor(sessionLeft / 60);
+    var second = sessionLeft % 60;
+    if(second > 0){
+      second--;
+    }else{
+      minute--;
+      second = 59;
+    }
+    if(second > 9){
+      $("#session-time-left").html(minute + ":" + second);
+    }else{
+      $("#session-time-left").html(minute + ":0" + second);
+    }
+    sessionLeft--;
+    var heightLeft = 250 * sessionLeft / ($("#session-time").html() * 60);
+    $("#session-progress").css("height",heightLeft);
+    sessionTimer = setTimeout(sessionCount,1000);
+  }else{
+    $("#break-timer").css("display", "block");
+    $("#session-timer").css("display", "none");
+    sessionLeft = $("#session-time").html() * 60;
+    sessionStatus = "off";
+    breakStatus = "on";
+    clearTimeout(sessionTimer);
+    breakCount();
+  }
+}
+$(document).ready(function() {
+  $("#session-timer").css("display", "block");
+  $("#break-timer").css("display", "none");
+  sessionLeft = $("#session-time").html() * 60;
+  breakLeft = $("#break-time").html() * 60;
+  $("#break-timer-outer").on("click", function() {
+    if (breakStatus == "off") {
+      breakStatus = "on";
+      console.log("breakStatus = " + breakStatus);
+      console.log("breakLeft = " + breakLeft + " s");
+      breakCount();
+    } else {
+      breakStatus = "off";
+      console.log("breakStatus = " + breakStatus);
+      clearTimeout(breakTimer);
+    }
+  });
+  $("#session-timer-outer").on("click", function() {
+    if (sessionStatus == "off") {
+      sessionStatus = "on";
+      console.log("sessionStatus = " + sessionStatus);
+      console.log("sessionLeft = " + sessionLeft + " s");
+      sessionCount();
+    } else {
+      sessionStatus = "off";
+      console.log("sessionStatus = " + sessionStatus);
+      clearTimeout(sessionTimer);
+    }
+  });
+  $("#break-less").on("click", function() {
+    if(breakStatus == "off" && sessionStatus == "off"){
+      var breakTime = $("#break-time").html();
+      if (breakTime > 1) {
+        breakTime--;
+        breakLeft = breakTime * 60;
+        $("#break-time-left").html(breakTime + ":00");
+      }
+      $("#break-time").html(breakTime);
+    }
+  });
+  $("#break-more").on("click", function() {
+    if(breakStatus == "off" && sessionStatus == "off"){
+      var breakTime = $("#break-time").html();
+      if (breakTime < 99) {
+        breakTime++;
+        breakLeft = breakTime * 60;
+        $("#break-time-left").html(breakTime + ":00");
+      }
+      $("#break-time").html(breakTime);
+    }
+  });
+  $("#session-less").on("click", function() {
+    if(breakStatus == "off" && sessionStatus == "off"){
+      var sessionTime = $("#session-time").html();
+      if (sessionTime > 1) {
+        sessionTime--;
+        sessionLeft = sessionTime * 60;
+        $("#session-time-left").html(sessionTime + ":00");
+      }
+      $("#session-time").html(sessionTime);
+    }
+  });
+  $("#session-more").on("click", function() {
+    if(breakStatus == "off" && sessionStatus == "off"){
+      var sessionTime = $("#session-time").html();
+      if (sessionTime < 99) {
+        sessionTime++;
+        sessionLeft = sessionTime * 60;
+        $("#session-time-left").html(sessionTime + ":00");
+      }
+      $("#session-time").html(sessionTime);
+    }
+  });
+});
+
+</script>
+</body>
+</html>
