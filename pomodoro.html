@@ -95,6 +95,12 @@ h1{
   #upper{
     height: 74px; text-align: center;
   }
+  #break-timer, #session-timer{
+    margin: 0px;
+  }
+  #break-timer-outer, #session-timer-outer{
+    border: 5px;
+  }
   #break-set, #session-set{width: 116px; margin-top: 0px;}
   #break-less, #break-time, #break-more, #session-less, #session-time, #session-more{
     margin-top: 0px;
@@ -170,7 +176,6 @@ function breakCount(){
     breakLeft--;
     var heightLeft = 250 * breakLeft / ($("#break-time").html() * 60);
     $("#break-progress").css("height",heightLeft);
-    $("#break-timer-inner").css("overflow","hidden");
     breakTimer = setTimeout(breakCount,1000);
   }else{
     $("#break-timer").css("display", "none");
@@ -199,7 +204,6 @@ function sessionCount(){
     }
     sessionLeft--;
     var heightLeft = 250 * sessionLeft / ($("#session-time").html() * 60);
-    $("#session-timer-inner").css("overflow","hidden");
     $("#session-progress").css("height",heightLeft);
     sessionTimer = setTimeout(sessionCount,1000);
   }else{
