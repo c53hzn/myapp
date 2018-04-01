@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <title>plain text to HTML code tool</title>
+  <meta id="viewport" name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+  <style>
+  html{width: 100%; height: 100%;}
+body{
+  margin: 0px; width: 100%; height: 100%;
+  background: lightgreen;
+}
+.noDecorLink{
+  text-decoration: none;
+  color: inherit;
+}
+#twitch{
+  margin: 0px auto;
+  width: 320px;
+  height: 520px;
+  background: white;
+  overflow-x: hidden;
+}
+#nav{
+  background: darkgreen;
+  user-select: none;
+}
+#nav ul{
+  list-style: none;
+  padding-left: 0px;
+  margin: 0px;
+  color: white;
+}
+#nav li{
+  display: inline-block;
+  height: 40px;
+  line-height: 40px;
+  width: 32%;
+  text-align: center;
+  cursor: pointer;
+}
+#nav2{
+  position: relative;
+  margin-top: 0px;
+}
+#nav2-1, #nav2-2, #nav2-3{
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  background: none;
+  border-left: 12px solid transparent; 
+  border-right: 12px solid transparent; 
+  border-top: 10px solid darkgreen; 
+  display: none;
+  z-index: 1;
+}
+#nav2-1{
+  left: 40px;
+}
+#nav2-2{
+  left: 148px;
+}
+#nav2-3{
+  left: 250px;
+}
+#lower{background: white;}
+#lower hr{
+  margin: 0px 10px;
+}
+#searchBox{
+  position: relative;
+  width: 100%;
+  background: white;
+}
+#searchInput{
+  margin: 15px 10px 10px 10px;
+  padding: 5px 5px 5px 10px;
+  width: 281px;
+  height: 20px;
+  border: 2px solid gray;
+  border-radius: 20px;
+  outline: none;
+}
+#clearSearch{
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 30px;
+  color: darkgreen;
+  display: none;
+  cursor: pointer;
+}
+#tvs{
+  font-size: 20px;
+  padding: 0px 10px 0px 10px;
+  margin: 10px auto;
+  width: 340px;
+  height: 399px;
+  background: white;
+  color: darkgreen;
+  user-select: none;
+  overflow-y: scroll;
+}
+#tv-all, #tv-on, #tv-off{display: none;}
+.streamer{position: relative;}
+.logo{width: 46px; display: inline-block;}
+.logo img{width: 100%; border-radius: 23px;}
+.name, .status{line-height: 46px; vertical-align: top; display: inline-block;}
+.name{
+  margin-left: 5px;
+}
+.status{
+  position: absolute;
+  text-align: center;
+  right: 35px;
+}
+</style>
+</head>
+<body>
+<div id="twitch">
+  <div id="upper">
+    <div id="nav">
+      <ul>
+        <li>All</li>
+        <li>Online</li>
+        <li>Offline</li>
+      </ul>
+    </div>
+    <div id="nav2">
+      <div id="nav2-1"></div>
+      <div id="nav2-2"></div>
+      <div id="nav2-3"></div>
+    </div>
+  </div>
+  <div id="lower">
+    <div id="searchBox">
+      <input type="text" id="searchInput" placeholder="search streamers..."/>
+      <div id="clearSearch">&times;</div>
+    </div>
+    <hr>
+    <div id="tvs">
+      <div id="tv-all">
+      </div>
+      <div id="tv-on">
+       </div>
+      <div id="tv-off">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<script>
+var streamList = [
+  {
+    "stream": {
+      "display_name": "freecodecamp",
+      "logo": "https://static-cdn.jtvnw.net/jtv_user_pictures/freecodecamp-profile_image-d9514f2df0962329-300x300.png",
+      "url": "https://www.twitch.tv/freecodecamp",
+      "status": "off"
+    }
+  },
+  {
+    "stream": {
+      "display_name": "houzhenni",
+      "logo": "https://www.houzhenni.com/assets/img/author-pic-1x.png",
+      "url": "https://www.houzhenni.com",
+      "status": "on"
+    }
+  },
+  {
+    "stream": {
+      "display_name": "ESL_SC2",
+      "logo": "https://static-cdn.jtvnw.net/jtv_user_pictures/esl_sc2-profile_image-d6db9488cec97125-300x300.jpeg",
+      "url": "https://www.twitch.tv/esl_sc2",
+      "status": "off"
+    }
+  },
+  {
+    "stream": {
+      "display_name": "esl_sc3",
+      "logo": "https://www.houzhenni.com/assets/img/author-pic-1x.png",
+      "url": "https://www.houzhenni.com",
+      "status": "off"
+    }
+  },
+  {
+    "stream": {
+      "display_name": "HouZhenni_jenny",
+      "logo": "https://www.houzhenni.com/assets/img/author-pic-1x.png",
+      "url": "https://www.houzhenni.com",
+      "status": "on"
+    }
+  },
+  {
+    "stream": {
+      "display_name": "freecamp",
+      "logo": "https://www.houzhenni.com/assets/img/author-pic-1x.png",
+      "url": "https://www.houzhenni.com",
+      "status": "off"
+    }
+  },
+  {
+    "stream": {
+      "display_name": "AndyLau",
+      "logo": "https://www.houzhenni.com/assets/img/author-pic-1x.png",
+      "url": "https://www.houzhenni.com",
+      "status": "off"
+    }
+  },
+  {
+    "stream": {
+      "display_name": "CalvinHo",
+      "logo": "https://www.houzhenni.com/assets/img/author-pic-1x.png",
+      "url": "https://www.houzhenni.com",
+      "status": "off"
+    }
+  },
+  {
+    "stream": {
+      "display_name": "DaisyLau",
+      "logo": "https://www.houzhenni.com/assets/img/author-pic-1x.png",
+      "url": "https://www.houzhenni.com",
+      "status": "off"
+    }
+  },
+  {
+    "stream": {
+      "display_name": "JackZhang",
+      "logo": "https://www.houzhenni.com/assets/img/author-pic-1x.png",
+      "url": "https://www.houzhenni.com",
+      "status": "off"
+    }
+  },
+  {
+    "stream": {
+      "display_name": "JackMa",
+      "logo": "https://www.houzhenni.com/assets/img/author-pic-1x.png",
+      "url": "https://www.houzhenni.com",
+      "status": "off"
+    }
+  },
+  {
+    "stream": {
+      "display_name": "PonyMa",
+      "logo": "https://www.houzhenni.com/assets/img/author-pic-1x.png",
+      "url": "https://www.houzhenni.com",
+      "status": "off"
+    }
+  },
+  {
+    "stream": {
+      "display_name": "Hugh_Jackman",
+      "logo": "https://www.houzhenni.com/assets/img/author-pic-1x.png",
+      "url": "https://www.houzhenni.com",
+      "status": "on"
+    }
+  },
+];
+var str1 = "<a class='noDecorLink' target='_blank' href='";
+var str2 = "'><div class='streamer'><div class='logo'><img src='";
+var str3 = "'/></div><div class='name'>";
+var str4 = "</div><div class='status' style='color: ";
+var str5 = ";'>";
+var str6 = "</div></div></a>";
+$(document).ready(function(){
+  streamList.forEach(function(item){
+    var streamer = item.stream;
+    if(streamer.status == "on"){
+      $("#tv-all").append(str1 + streamer.url + str2 + streamer.logo + str3 + streamer.display_name + str4 + "green" + str5 + "&#10004;" + str6);
+      $("#tv-on").append(str1 + streamer.url + str2 + streamer.logo + str3 + streamer.display_name + str4 + "green" + str5 + "&#10004;" + str6);
+    }else{
+      $("#tv-all").append(str1 + streamer.url + str2 + streamer.logo + str3 + streamer.display_name + str4 + "red" + str5 + "!&nbsp;" + str6);
+      $("#tv-off").append(str1 + streamer.url + str2 + streamer.logo + str3 + streamer.display_name + str4 + "red" + str5 + "!&nbsp;" + str6);
+    }
+  });
+  $("#nav2-1").css("display","block");
+  $("#tv-all").css("display","block");
+  $("#nav li").eq(0).on("click",function(){
+    $("#nav2-1").css("display","inline-block");
+    $("#nav2-2").css("display","none");
+    $("#nav2-3").css("display","none");
+    $("#tv-all").css("display","block");
+    $("#tv-on").css("display","none");
+    $("#tv-off").css("display","none");
+  });
+  $("#nav li").eq(1).on("click",function(){
+    $("#nav2-2").css("display","inline-block");
+    $("#nav2-1").css("display","none");
+    $("#nav2-3").css("display","none");
+    $("#tv-all").css("display","none");
+    $("#tv-on").css("display","block");
+    $("#tv-off").css("display","none");
+  });
+  $("#nav li").eq(2).on("click",function(){
+    $("#nav2-3").css("display","inline-block");
+    $("#nav2-1").css("display","none");
+    $("#nav2-2").css("display","none");
+    $("#tv-all").css("display","none");
+    $("#tv-on").css("display","none");
+    $("#tv-off").css("display","block");
+  });
+  $("#searchInput").on("input",function(){//只要监听到有输入变化就执行
+    $("#clearSearch").css("display","block");
+    var searchVal = $("#searchInput").val();//获取输入的值
+    searchVal = searchVal.toLowerCase();//将输入的值转为小写
+    if(searchVal.length == 0){
+      $("#clearSearch").css("display","none");
+    }
+    function searchStreamer(){
+      $(".name").each(function(){//遍历所有的streamer昵称的div
+        var nameVal = $(this).html();//获取昵称的值
+        nameVal = nameVal.toLowerCase();//昵称转小写，便于匹配搜索的值
+        if(nameVal.indexOf(searchVal) != -1){
+          //有的话就维持显示状态
+          $(this).parent().css("display","block");
+        }else{//没有这个人就变为隐藏
+          $(this).parent().css("display","none");
+        }
+      });
+    }
+    searchStreamer();
+  });
+  $("#clearSearch").on("click",function(){
+    $("#searchInput").val("");
+    $("#clearSearch").css("display","none");
+    $(".streamer").css("display","block");
+  });
+});
+</script>
+</body>
+</html>
