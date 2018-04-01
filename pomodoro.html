@@ -9,7 +9,6 @@
   <style>
   html{width: 100%; height: 100%;}
 body{
-  position:relative;
   margin: 0px;
   background: #003E3E;
 }
@@ -58,6 +57,7 @@ h1{
   height: 250px;
   border: 2px solid #CEFFCE;
   border-radius: 150px;
+  overflow: hidden;
 }
 #break-timer-inner, #session-timer-inner{
   position: absolute;
@@ -176,9 +176,7 @@ function breakCount(){
     }
     breakLeft--;
     var heightLeft = 250 * breakLeft / ($("#break-time").html() * 60);
-    var breakProgress = document.getElementById("break-progress");
-    breakProgress.style.height = heightLeft + "px";
-    // $("#break-progress").css("height",heightLeft);
+    $("#break-progress").css("height",heightLeft);
     breakTimer = setTimeout(breakCount,1000);
   }else{
     $("#break-timer").css("display", "none");
@@ -207,9 +205,7 @@ function sessionCount(){
     }
     sessionLeft--;
     var heightLeft = 250 * sessionLeft / ($("#session-time").html() * 60);
-    var sessionProgress = document.getElementById("session-progress");
-    sessionProgress.style.height = heightLeft + "px";
-    // $("#session-progress").css("height",heightLeft);
+    $("#session-progress").css("height",heightLeft);
     sessionTimer = setTimeout(sessionCount,1000);
   }else{
     $("#break-timer").css("display", "block");
