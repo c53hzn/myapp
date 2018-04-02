@@ -62,16 +62,15 @@ h1{
   height: 250px;
   border: 2px solid #CEFFCE;
   border-radius: 150px;
-  overflow: hidden;
+  
 }
 #break-timer-inner, #session-timer-inner{
   position: absolute;
   width: 250px;
   height: 250px;
   border-radius: 150px;
-  -webkit-appearance : none;
-  -webkit-transform:rotate(0deg);
   cursor: pointer;
+  overflow: hidden;
 }
 #break-timer-inner{
   background: #ff7575;
@@ -82,7 +81,7 @@ h1{
 #break-progress, #session-progress{
   width: 250px;
   height: 250px;
-  background: #003E3E;
+  background-color: #003E3E;
 }
 #break-txt, #break-time-left, #session-txt, #session-time-left{
   position: absolute;
@@ -163,6 +162,24 @@ h1{
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 <script>
+<!-----禁止Safari上双击放大------->
+var lastTouchEnd = 0; 
+document.documentElement.addEventListener
+(
+ 'touchend', 
+ function (event)
+ {
+  var now = Date.now();
+  if (now - lastTouchEnd <= 500) 
+  {
+   event.preventDefault(); 
+  } 
+  lastTouchEnd = now; 
+ },
+ false
+);
+<!-----禁止双击放大结束------->
+
 var breakStatus = "off", sessionStatus = "off";
 var breakLen, sessionLen;
 var breakTimer, sessionTimer;
