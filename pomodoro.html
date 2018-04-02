@@ -20,6 +20,10 @@ h1{
 #pomodoro{
   user-select: none;
   -webkit-user-select: none;
+  position: fixed;
+  top: 80px;
+  left: 0px;
+  right: 0px;
   margin: 20px auto;
   width: 500px;
   height: 400px;
@@ -98,7 +102,7 @@ h1{
 @media all and (max-width: 768px){
   #pomodoro{margin-top: 0px; width: 320px; height: fit-content;}
   #upper{
-    height: 74px; text-align: center;
+    height: 78px; text-align: center;
   }
   #break-timer, #session-timer{
     margin: 0px;
@@ -106,7 +110,7 @@ h1{
   #break-timer-outer, #session-timer-outer{
     border: 5px solid #CEFFCE;
   }
-  #break-set, #session-set{width: 116px; margin-top: 0px;}
+  #break-set, #session-set{width: 100px; margin: 0px 25px;}
   #break-less, #break-time, #break-more, #session-less, #session-time, #session-more{
     margin-top: 0px;
   }
