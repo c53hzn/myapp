@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0,user-scalable=0"
+      http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Wikipedia Viewer</title>
+
+<style>
+html, body{
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+}
+#container{
+  margin: 0px auto;
+  padding: 20px auto;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  overflow:hidden;
+}
+.timer-outer{
+  margin: 40px auto;
+  width: 200px;
+  height: 200px;
+}
+.timer-inner{
+  position: relative;
+  margin: 0px auto;
+  width: 100%;
+  height: 100%;
+  background: beige;
+  border-radius: 100%;
+  box-shadow: 1px 3px 4px 3px black, 0px 0px 8px 2px black inset;
+}
+.dial{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  width: 100%;
+  height: 100%;
+  opacity: .7;
+  border-radius: 100%;
+}
+.dial img{
+  width: 100%;
+  height: 100%;
+}
+.timer-pointer{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 100%;
+}
+
+.disc{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  margin: 48%;
+  width: 4%;
+  height: 4%;
+  background: beige;
+  border-radius: 100%;
+  box-shadow: 1px 2px 3px 2px black, 0px 0px 2px 1px black inset;
+}
+.pointer-h-outer, .pointer-m-outer, .pointer-s-outer{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+.pointer-h-inner{
+  position: absolute;
+  top: 48.5%;
+  left: 24%;
+  width: 35%;
+  height: 3%;
+  background: black;
+  box-shadow: 0px 0px 1px 2px #777770;
+}
+.pointer-m-inner{
+  position: absolute;
+  top: 48%;
+  left: 14.5%;
+  width: 45%;
+  height: 4%;
+  background: black;
+  box-shadow: 0px 0px 1px 2px #777770 inset;
+}
+.pointer-s-inner{
+  position: absolute;
+  top: 49.4%;
+  left: 10%;
+  width: 51%;
+  height: 1%;
+  background: black;
+  box-shadow: 0px 0px 0px 2px #777770;
+}
+</style>
+</head>
+
+<body translate="no" >
+<div id="container">
+  <div class="timer-outer">
+    <div class="timer-inner">
+      <div class="dial">
+        <img title="" alt="" src="https://www.houzhenni.com/myassets/%E8%A1%A8%E7%9B%98.png"/>
+      </div>
+      <div class="timer-pointer">
+        <div class="pointer-h-outer" id="hand-h">
+          <div class="pointer-h-inner"></div>
+        </div>
+        <div class="pointer-m-outer" id="hand-m">
+          <div class="pointer-m-inner"></div>
+        </div>
+        <div class="pointer-s-outer" id="hand-s">
+          <div class="pointer-s-inner"></div>
+        </div>
+      </div>
+      <div class="disc"></div>
+    </div>
+  </div>
+</div>
+
+<script >
+var t;
+window.onload = function(){
+  var hand_h = document.getElementById("hand-h");
+  var hand_m = document.getElementById("hand-m");
+  var hand_s = document.getElementById("hand-s");
+  hand_h.style.display = "block";
+  hand_m.style.display = "block";
+  hand_s.style.display = "block";
+  function clockTick(){
+    var timeStart = new Date();
+    var time_h = timeStart.getHours();
+    var time_m = timeStart.getMinutes();
+    var time_s = timeStart.getSeconds();
+    var angle_h = Math.floor((time_h * 60 + time_m)/12) * 6 + 90;
+    var angle_m = time_m * 6 + 90;
+    var angle_s = time_s * 6 + 90;
+    hand_h.style.transform = "rotate(" + angle_h + "deg)";
+    hand_m.style.transform = "rotate(" + angle_m + "deg)";
+    hand_s.style.transform = "rotate(" + angle_s + "deg)";
+    t = setTimeout(clockTick,1000);
+  }
+  clockTick();
+}
+
+</script>
+</body>
+</html>
+
