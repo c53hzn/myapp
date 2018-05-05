@@ -31,7 +31,7 @@ html, body{
   height: 100%;
   background: beige;
   border-radius: 100%;
-  box-shadow: 1px 3px 4px 3px black, 0px 0px 8px 2px black inset;
+  box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.63), -1px -2px 6px 1px rgba(0,0,0,0.63) inset;
 }
 .dial{
   position: absolute;
@@ -40,12 +40,14 @@ html, body{
   right: 0px;
   width: 100%;
   height: 100%;
-  opacity: .7;
   border-radius: 100%;
 }
 .dial img{
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  top: 1%;
+  left: 1%;
+  width: 98%;
+  height: 98%;
 }
 .timer-pointer{
   position: relative;
@@ -68,41 +70,22 @@ html, body{
   border-radius: 100%;
   box-shadow: 1px 2px 3px 2px black, 0px 0px 2px 1px black inset;
 }
-.pointer-h-outer, .pointer-m-outer, .pointer-s-outer{
+.hand-h-outer, .hand-m-outer, .hand-s-outer{
   position: absolute;
   top: 0px;
   left: 0px;
   right: 0px;
   width: 100%;
   height: 100%;
-  display: none;
 }
-.pointer-h-inner{
+.hand-h-outer img, .hand-m-outer img, .hand-s-outer img{
   position: absolute;
-  top: 48.5%;
-  left: 24%;
-  width: 35%;
-  height: 3%;
-  background: black;
-  box-shadow: 0px 0px 1px 2px #777770;
-}
-.pointer-m-inner{
-  position: absolute;
-  top: 48%;
-  left: 14.5%;
-  width: 45%;
-  height: 4%;
-  background: black;
-  box-shadow: 0px 0px 1px 2px #777770 inset;
-}
-.pointer-s-inner{
-  position: absolute;
-  top: 49.4%;
-  left: 10%;
-  width: 51%;
-  height: 1%;
-  background: black;
-  box-shadow: 0px 0px 0px 2px #777770;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  width: 100%;
+  height: 100%;
+  opacity: .9;
 }
 </style>
 </head>
@@ -112,17 +95,17 @@ html, body{
   <div class="timer-outer">
     <div class="timer-inner">
       <div class="dial">
-        <img title="" alt="" src="https://www.houzhenni.com/myassets/%E8%A1%A8%E7%9B%98.png"/>
+        <img title="" alt="" src="https://www.houzhenni.com/myassets/dial.png"/>
       </div>
       <div class="timer-pointer">
-        <div class="pointer-h-outer" id="hand-h">
-          <div class="pointer-h-inner"></div>
+        <div class="hand-h-outer" id="hand-h">
+          <img title="" alt="" src="https://www.houzhenni.com/myassets/hand_h.png"/>
         </div>
-        <div class="pointer-m-outer" id="hand-m">
-          <div class="pointer-m-inner"></div>
+        <div class="hand-m-outer" id="hand-m">
+          <img title="" alt="" src="https://www.houzhenni.com/myassets/hand_m.png"/>
         </div>
-        <div class="pointer-s-outer" id="hand-s">
-          <div class="pointer-s-inner"></div>
+        <div class="hand-s-outer" id="hand-s">
+          <img title="" alt="" src="https://www.houzhenni.com/myassets/hand_s.png"/>
         </div>
       </div>
       <div class="disc"></div>
@@ -139,14 +122,15 @@ window.onload = function(){
   hand_h.style.display = "block";
   hand_m.style.display = "block";
   hand_s.style.display = "block";
+  
   function clockTick(){
     var timeStart = new Date();
     var time_h = timeStart.getHours();
     var time_m = timeStart.getMinutes();
     var time_s = timeStart.getSeconds();
-    var angle_h = Math.floor((time_h * 60 + time_m)/12) * 6 + 90;
-    var angle_m = time_m * 6 + 90;
-    var angle_s = time_s * 6 + 90;
+    var angle_h = Math.floor((time_h * 60 + time_m)/12) * 6;
+    var angle_m = time_m * 6;
+    var angle_s = time_s * 6;
     hand_h.style.transform = "rotate(" + angle_h + "deg)";
     hand_m.style.transform = "rotate(" + angle_m + "deg)";
     hand_s.style.transform = "rotate(" + angle_s + "deg)";
