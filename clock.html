@@ -119,9 +119,6 @@ window.onload = function(){
   var hand_h = document.getElementById("hand-h");
   var hand_m = document.getElementById("hand-m");
   var hand_s = document.getElementById("hand-s");
-  hand_h.style.display = "block";
-  hand_m.style.display = "block";
-  hand_s.style.display = "block";
   
   function clockTick(){
     var timeStart = new Date();
@@ -134,6 +131,9 @@ window.onload = function(){
     hand_h.style.transform = "rotate(" + angle_h + "deg)";
     hand_m.style.transform = "rotate(" + angle_m + "deg)";
     hand_s.style.transform = "rotate(" + angle_s + "deg)";
+    hand_h.style.display = "block";
+    hand_m.style.display = "block";
+    hand_s.style.display = "block";
     t = setTimeout(clockTick,1000);
   }
   clockTick();
