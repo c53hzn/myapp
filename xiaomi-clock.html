@@ -1,0 +1,396 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0,user-scalable=0"
+      http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Wikipedia Viewer</title>
+
+<style>
+html, body{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  background: darkgreen;
+}
+body{
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  display: flex;
+}
+#container{
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+  margin: auto;
+  width: 100%;
+  height: -webkit-fit-content;
+  text-align: center;
+/*  overflow:hidden; */
+}
+#upper, #lower{
+  position: relative;
+  margin: 0px auto;
+  width: 310px;
+}
+#upper{
+  height: 50px;
+}
+#upper div{
+  width: 28%;
+  line-height: 50px;
+  text-align: center;
+  color: white;
+  font-family: Arial;
+  font-size: 18px;
+  display: inline-block;
+  opacity: .4;
+  cursor: pointer;
+}
+#upper div:nth-child(1){
+  opacity: 1;
+}
+#upper div:nth-child(1), #upper div:nth-child(2){
+  width: 17%;
+}
+#lower{
+  height: auto;
+  overflow:hidden;
+}
+.pure-css-clock{
+  position: relative;
+  margin: 20px auto;
+  width: 300px;
+  height: 300px;
+  color: white;
+}
+.clock-dial{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+}
+.quater-arc-outer{
+  position: absolute;
+  top: 2%;
+  left: 2%;
+  width: 96%;
+  height: 96%;
+}
+.quater-arc-inner{
+  position: absolute;
+  top: -6%;
+  left: -6%;
+  width: 50%;
+  height: 50%;
+  overflow: hidden;
+}
+.quater-arc-circle{
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 200%;
+  height: 200%;
+  border: 5px solid white;
+  border-radius: 100%;
+}
+.upper-right{
+  transform: rotate(90deg);
+}
+.lower-right{
+  transform: rotate(180deg);
+}
+.lower-left{
+  transform: rotate(-90deg);
+}
+.num-12, .num-3, .num-6, .num-9{
+  position: absolute;
+}
+.num-12, .num-6{
+  width: 100%;
+  text-align: center;
+}
+.num-12{
+  top: -2%;
+}
+.num-6{
+  bottom: -2%;
+}
+.num-horizontal{
+  position: absolute;
+  top: 47%;
+  height: 10%;
+  width: 100%;
+  line-height: 10%;
+}
+.num-3, .num-9{
+  line-height: 100%;
+}
+.num-3{
+  right: 0%;
+}
+.num-9{
+  left: 0%;
+}
+.timer-pointer{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 100%;
+}
+.hand-h-outer, .hand-m-outer{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+.hand-h-inner, .hand-m-inner{
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  margin: 0px auto;
+  width: 5px;
+  background: white;
+}
+.hand-h-inner{
+  top: 32%;
+  height: 14%;
+  opacity: .6;
+}
+.hand-m-inner{
+  top: 22%;
+  height: 25%;
+}
+.disc{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  margin: auto;
+  width: 5%;
+  height: 5%;
+  border: 5px solid white;
+  border-radius: 100%;
+}
+.clock-seconds{
+  position: absolute;
+}
+.clock-seconds{
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  margin: auto;
+}
+.clock-seconds img{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  width: 100%;
+  height: 100%;
+}
+.sec-pointer{
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+}
+.sec-pointer img{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  width: 100%;
+  height: 100%;
+}
+.alarm-clock, .stopwatch, .count-down{
+  display: none;
+}
+</style>
+</head>
+
+<body translate="no" >
+<div id="container">
+  <div id="upper">
+    <div>clock</div>
+    <div>alarm</div>
+    <div>stopwatch</div>
+    <div>countdown</div>
+  </div>
+  <div id="lower">
+    <div class="pure-css-clock">
+    <div class="clock-dial">
+      <div class="quater-arc-outer upper-left">
+        <div class="quater-arc-inner">
+          <div class="quater-arc-circle"></div>
+        </div>
+      </div>
+      <div class="quater-arc-outer upper-right">
+        <div class="quater-arc-inner">
+          <div class="quater-arc-circle"></div>
+        </div>
+      </div>
+      <div class="quater-arc-outer lower-left">
+        <div class="quater-arc-inner">
+          <div class="quater-arc-circle"></div>
+        </div>
+      </div>
+      <div class="quater-arc-outer lower-right">
+        <div class="quater-arc-inner">
+          <div class="quater-arc-circle"></div>
+        </div>
+      </div>
+      <div class="num-12">12</div>
+      <div class="num-6">6</div>
+      <div class="num-horizontal">
+        <div class="num-3">3</div>
+        <div class="num-9">9</div>
+      </div>
+      <div class="timer-pointer">
+        <div class="hand-h-outer" id="hand-h">
+          <div class="hand-h-inner"></div>
+        </div>
+        <div class="hand-m-outer" id="hand-m">
+          <div class="hand-m-inner"></div>
+        </div>
+        <div class="sec-pointer" id="hand-s">
+          <img title="" alt="" src="https://www.houzhenni.com/myassets/%E7%A7%92%E9%92%88%E6%8C%87%E9%92%88.png"/>
+        </div>
+      </div>
+      <div class="disc"></div>
+      <div class="clock-seconds">
+        <img title="" alt="" src="https://www.houzhenni.com/myassets/%E7%A7%92%E9%92%88%E6%95%88%E6%9E%9C.png"/>
+      </div>
+    </div>
+  </div>
+    <div class="alarm-clock"></div>
+    <div class="stopwatch"></div>
+    <div class="count-down"></div>
+  </div>
+</div>
+
+<script >
+var t;
+window.onload = function(){
+  var lastTime;
+  var lastSec;
+  var sec_unit = '<div class="seconds-unit"><div class="seconds-unit-inner"></div></div>';
+  var clock_seconds = document.getElementsByClassName("clock-seconds")[0];
+  
+  
+  function initClock(){
+    clearTimeout(t);
+  }
+
+  var hand_h = document.getElementById("hand-h");
+  var hand_m = document.getElementById("hand-m"); 
+  var hand_s = document.getElementById("hand-s");
+  function clockTick(){
+    var timeStart = new Date();
+    if(t){
+      if(lastTime.getSeconds() == timeStart.getSeconds()){
+        lastSec += 0.125;
+      }else{
+        lastTime = new Date();
+        lastSec = lastTime.getSeconds();
+      }
+    }else{
+      lastTime = new Date();
+      lastSec = lastTime.getSeconds();
+    }
+    var angle_s = lastSec * 6;
+    hand_s.style.transform = "rotate(" + angle_s + "deg)";
+    
+    var time_h = timeStart.getHours();
+    var time_m = timeStart.getMinutes();
+    var angle_h = Math.floor((time_h * 60 + time_m)/12) * 6;
+    var angle_m = time_m * 6;
+    hand_h.style.transform = "rotate(" + angle_h + "deg)";
+    hand_m.style.transform = "rotate(" + angle_m + "deg)";
+    
+    if(lastSec % 0.5 == 0){
+      var tempDeg = angle_s;
+      clock_seconds.style.transform = "rotate(" + tempDeg + "deg)";
+    }
+    hand_h.style.display = "block";
+    hand_m.style.display = "block";
+    hand_s.style.display = "block";
+
+    t = setTimeout(clockTick,125);
+  }
+  initClock();
+  clockTick();
+
+  var upper = document.getElementById("upper");
+  var upper_div = upper.children;
+  var lower = document.getElementById("lower");
+  var lower_div = lower.children;
+  upper_div[0].onclick = function(){
+    upper_div[1].style.opacity = 0.4;
+    upper_div[2].style.opacity = 0.4;
+    upper_div[3].style.opacity = 0.4;
+    upper_div[0].style.opacity = 1;
+    initClock();
+    clockTick();
+    lower_div[1].style.display = "none";
+    lower_div[2].style.display = "none";
+    lower_div[3].style.display = "none";
+    lower_div[0].style.display = "block";
+  }
+  upper_div[1].onclick = function(){
+    upper_div[0].style.opacity = 0.4;
+    upper_div[2].style.opacity = 0.4;
+    upper_div[3].style.opacity = 0.4;
+    upper_div[1].style.opacity = 1;
+    lower_div[0].style.display = "none";
+    clearTimeout(t);
+    clock_seconds.style = "";
+    clock_seconds.innerHTML = "";
+    lower_div[2].style.display = "none";
+    lower_div[3].style.display = "none";
+    lower_div[1].style.display = "block";
+  }
+  upper_div[2].onclick = function(){
+    upper_div[0].style.opacity = 0.4;
+    upper_div[1].style.opacity = 0.4;
+    upper_div[3].style.opacity = 0.4;
+    upper_div[2].style.opacity = 1;
+    lower_div[0].style.display = "none";
+    clearTimeout(t);
+    clock_seconds.style = "";
+    clock_seconds.innerHTML = "";
+    lower_div[1].style.display = "none";
+    lower_div[3].style.display = "none";
+    lower_div[2].style.display = "block";
+  }
+  upper_div[3].onclick = function(){
+    upper_div[0].style.opacity = 0.4;
+    upper_div[1].style.opacity = 0.4;
+    upper_div[2].style.opacity = 0.4;
+    upper_div[3].style.opacity = 1;
+    lower_div[0].style.display = "none";
+    clearTimeout(t);
+    clock_seconds.style = "";
+    clock_seconds.innerHTML = "";
+    lower_div[1].style.display = "none";
+    lower_div[2].style.display = "none";
+    lower_div[3].style.display = "block";
+  }
+}
+</script>
+</body>
+</html>
+

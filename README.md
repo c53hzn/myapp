@@ -21,3 +21,5 @@ I made some applications for real use, some for work, and some for entertainment
 * [a pomodoro clock for better time management](https://www.houzhenni.com/myapp/pomodoro.html)
 
 * [a round clock that actually ticks](https://www.houzhenni.com/myapp/clock.html)
+
+* [another round clock that actually ticks](https://www.houzhenni.com/myapp/xiaomi-clock.html)
