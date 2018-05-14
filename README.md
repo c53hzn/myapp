@@ -23,3 +23,5 @@ I made some applications for real use, some for work, and some for entertainment
 * [a round clock that actually ticks](https://www.houzhenni.com/myapp/clock.html)
 
 * [another round clock that actually ticks](https://www.houzhenni.com/myapp/xiaomi-clock.html)
+
+* [Image size checker](https://www.houzhenni.com/myapp/image-size-checker.html)
