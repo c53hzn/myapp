@@ -6,9 +6,8 @@
   <title>Image size checker</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
  <style>
- html, body{
+html, body{
   width: 100%;
-  height: 100%;
   margin: 0px;
 }
 #container{
@@ -16,41 +15,79 @@
 	margin: 20px auto;
 }
 #myImg{
-	width: 80%;
+	width: 99.5%;
 }
-#sizeOutput{
+#imgOutput{
 	width: 100%;
-	height: 400px;
+	padding: 20px;
+	box-sizing: border-box;
+	border: gray solid 1px;
+}
+#imgOutput img{
+	max-height: 80px;
+	min-height: 80px;
 }
 </style>
 </head>
 
 <body translate="no" >
-  <div id="container">
-	<p>Split image URLs with ";"(semicolon), put the URLs in the box and press "Get Size"</p>
-	<input id="myImg" type="text"/>
+<div id="container">
+	<h3>Image Size Checker for eBay</h3>
+	<h5>As we all know, eBay has certain requirements for product pictures, so I designed this to check whether the product pictures have met eBay's requirements.</h5>
+	<p>How to check:<br>
+		Seperate your image URLs with ";"(semicolon) or white space, both are acceptable.<br>
+		Put your URLs in the box and press "Get Size".<br>
+		Picture smaller than <strong>500 x 500 px</strong> will stand out with red border and red text.
+	</p>
+	<input id="myImg" value="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1495785/profile/profile-80.jpg;https://www.houzhenni.com/myassets/starry-night.jpg" type="text"/>
+	<p></p>
 	<button id="getSize">Get Size</button>
 	<p></p>
-	<textarea id="sizeOutput"></textarea>
+	<div id="imgOutput">
+		<p><img style="border: 2px solid red;" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1495785/profile/profile-80.jpg" /><span style="color: red;">Picture 1: w 80 x h 80 px</span></p>
+		<p><img style="border: 2px black solid;" src="https://www.houzhenni.com/myassets/starry-night.jpg" /><span>Picture 2: w 1280 x h 1014 px</span>
+	</div>
 </div>
   
 <script >
 var myImg = document.getElementById("myImg");
 var getSize = document.getElementById("getSize");
-var sizeOutput = document.getElementById("sizeOutput");
+var imgOutput = document.getElementById("imgOutput");
 var outputValue = "";
+var container = document.getElementById("container");
 getSize.onclick = function(){
 	var imgSrc = myImg.value;
+	imgOutput.innerHTML = "";
+	if(imgSrc.indexOf(" ")){
+		imgSrc = imgSrc.replace(/\s+/g,';');
+	}
 	if(imgSrc.indexOf(";")){
 		imgSrc = imgSrc.split(";");
 	}
+	var tempArr = [];
+	for(var k = 0; k < imgSrc.length; k++){
+		if(imgSrc[k]){
+			tempArr.push(imgSrc[k]);
+		}
+	}
+	imgSrc = tempArr;
 	let i = 0;
+
 	function iterateImg(){
-		var img = document.createElement("img");
-		img.setAttribute("src",imgSrc[i]);
+		var img = new Image();
+		img.src = imgSrc[i];
+		img.style = "border: solid black 2px;";
+		var p = document.createElement("p");
+		p.appendChild(img);
+		var tempSpan = document.createElement("span");
 		img.onload = function(){
-			outputValue = sizeOutput.value + "Photo-" + (i + 1) + ": w " + img.width + " x h " + img.height + " px\n";
-			sizeOutput.value = outputValue;
+			tempSpan.innerHTML = "Picture " + (i + 1) + ": w " + img.width + " x h " + img.height + " px";
+			if(img.width < 500 || img.height < 500){
+				img.style.borderColor = "red";
+				tempSpan.style = "color: red;"
+			}
+			p.appendChild(tempSpan);
+			imgOutput.appendChild(p);
 			if(i < imgSrc.length - 1){
 				i++;
 				iterateImg();
@@ -58,6 +95,17 @@ getSize.onclick = function(){
 				return;
 			}
 		}
+		img.onerror = function(){
+			tempSpan.innerHTML = "Picture " + (i + 1) + ": Invalid Picture Path";
+			p.appendChild(tempSpan);
+			imgOutput.appendChild(p);
+			if(i < imgSrc.length - 1){
+				i++;
+				iterateImg();
+			}else{
+				return;
+			}
+		}	
 	}
 	iterateImg();
 }
