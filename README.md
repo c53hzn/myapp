@@ -2,13 +2,9 @@
 
 I made some applications for real use, some for work, and some for entertainment, have fun with them~
 
+### FreeCodeCamp Projects
+
 * [my resume](https://www.houzhenni.com/myapp/resume.html)
-
-* [an alternative way for making daily report](https://www.houzhenni.com/myapp/dailyreport.html)
-
-* [my favorite PC game: minesweeper](https://www.houzhenni.com/myapp/minesweeper.html)
-
-* [plain text to html tool](https://www.houzhenni.com/myapp/converttohtml.html)
 
 * [random quote machine](https://www.houzhenni.com/myapp/randomquote.html)
 
@@ -20,8 +16,20 @@ I made some applications for real use, some for work, and some for entertainment
 
 * [a pomodoro clock for better time management](https://www.houzhenni.com/myapp/pomodoro.html)
 
+### Useful tools
+
+* [an alternative way for making daily report](https://www.houzhenni.com/myapp/dailyreport.html)
+
+* [plain text to html tool](https://www.houzhenni.com/myapp/converttohtml.html)
+
+* [Image size checker](https://www.houzhenni.com/myapp/image-size-checker.html)
+
+### Interesting things
+
+* [my favorite PC game: minesweeper](https://www.houzhenni.com/myapp/minesweeper.html)
+
 * [a round clock that actually ticks](https://www.houzhenni.com/myapp/clock.html)
 
 * [another round clock that actually ticks](https://www.houzhenni.com/myapp/xiaomi-clock.html)
 
-* [Image size checker](https://www.houzhenni.com/myapp/image-size-checker.html)
+
