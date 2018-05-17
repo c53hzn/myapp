@@ -51,6 +51,9 @@ html, body{
   
 <script >
 var myImg = document.getElementById("myImg");
+myImg.onfocus = function(){
+	this.select();
+}
 var getSize = document.getElementById("getSize");
 var imgOutput = document.getElementById("imgOutput");
 var outputValue = "";
