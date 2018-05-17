@@ -55,6 +55,11 @@ myImg.onfocus = function(){
 	this.select();
 }
 var getSize = document.getElementById("getSize");
+myImg.onkeydown = function(e){
+	if(e.keyCode == 13){
+		getSize.click();
+	}
+}
 var imgOutput = document.getElementById("imgOutput");
 var outputValue = "";
 var container = document.getElementById("container");
