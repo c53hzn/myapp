@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">  
+<style>
+body, html{
+	margin: 0px;
+	width: 100%;
+	height: 100%
+}
+body{
+	user-select: none;
+	-webkit-user-select: none;
+	-webkit-tap-highlight-color: transparent;
+}
+#container{
+	position: relative;
+	margin:auto;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	overflow: hidden;
+}
+#calc_outer{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	margin: auto;
+	width: 400px;
+	height: 400px;
+	background: #e6e4d7;
+	border-radius: 10%;
+	box-shadow: 0px 2px 4px 1px gray, 0px 3px 4px 0px white inset, 0px -3px 4px 0px silver inset;
+}
+#calc_inner{
+	position: absolute;
+	top: -5%;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	margin: auto;
+	width: 80%;
+	height: 80%;
+}
+#calc_upper{
+	position: absolute;
+	top: 0px;
+	padding: 4% 3% 3% 3%;
+	width: 100%;
+	height: 25%;
+	background: #f5f5f5;
+	border-radius: 4% 4% 4% 4%/16% 16% 16% 16%;
+	box-shadow: 0px 1px 2px 2px gray inset;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+#calc_upper p{
+	margin: 0px;
+	text-align: right;
+}
+#calc_process{
+	font-size: 18px;
+}
+#calc_result{
+	font-size: 30px;
+}
+#calc_lower{
+	position: absolute;
+	top: 25%;
+	width: 100%;
+	height: 70%;
+	font-family: Arial;
+	font-size: 20px;
+	font-weight: bold;
+}
+#calc_lower_1{
+	margin-top: 3.7%;
+	height: 24.28%;
+}
+#calc_lower_2{
+	position: relative;
+	margin-top: 3.7%;
+	width: 100%;
+	height: 70%;
+}
+#calc_lower_2_left{
+	position: absolute;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+}
+.calc_lower_left{
+	margin-bottom: 3.7%;
+	width: 100%;
+	height: 34.68%;
+	text-align: left;
+}
+#calc_lower_2_right{
+	position: absolute;
+	right: 0%;
+	width: 17%;
+	height: 119%;
+}
+.num_outer{
+	position: relative;
+	width: 17%;
+	height: 100%;
+	margin-right: 3.7%;
+	border-radius: 10%;
+	text-align: center;
+	cursor: pointer;
+	display: inline-block;
+}
+.num_outer:nth-child(1){
+	margin-left: 0px;
+}
+.num_outer:nth-child(5){
+	margin-right: 0px;
+}
+.num_inner, .num_inner_on{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	border-radius: 10%;
+	background: #e6e4d7;
+	box-sizing: content-box;
+}
+.num_inner{
+	font-size: 34px;
+	line-height: 160%;
+	box-shadow: 0px 1px 2px 1px gray;
+}
+.num_inner_on{
+	font-size: 32px;
+	line-height: 180%;
+}
+.num_inner:before, .num_inner_on:before{
+	position: absolute;
+	top: 0px;
+	content: "";
+	width: 100%;
+	height: 100%;
+	display: block;
+	border-radius: 10%;
+	background: none;
+}
+.num_inner:before{
+	box-shadow: 0px 1px 1px 1px white inset, 0px -1px 1px 1px silver inset;
+}
+.num_inner_on:before{
+	box-shadow: 0px 1px 1px 0px gray inset, 0px 0px 1px 1px gray inset, 0px -2px 2px 1px white inset;
+}
+#ope_equal{
+	width: 100%;
+	height: 100%;
+	border-radius: 12% 12% 12% 12%/3% 3% 3% 3%;
+}
+#ope_equal_inner{
+	font-size: 34px;
+	line-height: 500%;
+	border-radius: 20% 20% 20% 20%/5% 5% 5% 5%;
+}
+#ope_equal_inner:before{
+	border-radius: 20% 20% 20% 20%/5% 5% 5% 5%;
+}
+#ope_back{
+	font-size: 18px;
+	line-height: 300%;
+}
+
+
+
+@media all and (max-width: 768px){
+	#container{
+		width: 100%;
+		height: 100%;
+	}
+	#calc_outer{
+		width: 300px;
+		height: 300px;
+		box-shadow: 0px 1px 2px 1px gray, 0px 2px 2px 0px white inset, 0px -2px 2px 0px silver inset;
+	}
+	#calc_upper{
+		box-shadow: 0px 1px 1px 1px gray inset;
+		padding: 3% 3% 3% 3%;
+	}
+	#calc_process{
+		font-size: 16px;
+	}
+	#calc_result{
+		font-size: 24px;
+	}
+	.num_inner{
+		font-size: 24px;
+		line-height: 175%;
+	}
+	.num_inner_on{
+		font-size: 22px;
+		line-height: 190%;
+	}
+	#ope_equal_inner{
+		font-size: 24px;
+		line-height: 540%;
+	}
+	#ope_back{
+		font-size: 14px;
+		line-height: 300%;
+	}
+}
+</style>
+</head>
+<body translate="no" >
+<div id="container">
+	<div id="calc_outer">
+		<div id="calc_inner">
+			<div id="calc_upper">
+				<p id="calc_process">&nbsp;</p>
+				<p id="calc_result">0</p>
+			</div>
+			<div id="calc_lower">
+				<div id="calc_lower_1"><!--
+				 --><div class="num_outer"><!--
+					 --><div class="num_inner">1</div><!--
+				 --></div><!--
+		  	 --><div class="num_outer"><!--
+					 --><div class="num_inner">2</div><!--
+				 --></div><!--
+				 --><div class="num_outer"><!--
+					 --><div class="num_inner">3</div><!--
+				 --></div><!--
+				 --><div class="num_outer" id="ope_plus"><!--
+					 --><div class="num_inner">+</div><!--
+	    	--></div><!--
+				 --><div class="num_outer" id="ope_clear"><!--
+					 --><div class="num_inner">C</div><!--
+				 --></div><!--
+		 --></div>
+				<div id="calc_lower_2">
+					<div id="calc_lower_2_left">
+						<div class="calc_lower_left"><!--
+					--><div class="num_outer"><!--
+						 --><div class="num_inner">4</div><!--
+					 --></div><!--
+					 --><div class="num_outer"><!--
+						 --><div class="num_inner">5</div><!--
+					 --></div><!--
+					 --><div class="num_outer"><!--
+						 --><div class="num_inner">6</div><!--
+					 --></div><!--
+					 --><div class="num_outer"><!--
+						 --><div class="num_inner">-</div><!--
+					--></div><!--
+				 --></div>
+						<div class="calc_lower_left"><!--
+					--><div class="num_outer"><!--
+						 --><div class="num_inner">7</div><!--
+					 --></div><!--
+					 --><div class="num_outer"><!--
+						 --><div class="num_inner">8</div><!--
+					 --></div><!--
+					 --><div class="num_outer"><!--
+						 --><div class="num_inner">9</div><!--
+					 --></div><!--
+					 --><div class="num_outer"><!--
+						 --><div class="num_inner">&times;</div><!--
+					--></div><!--
+				 --></div>
+						<div class="calc_lower_left"><!--
+					--><div class="num_outer"><!--
+						 --><div class="num_inner"  id="ope_back">Back</div><!--
+					 --></div><!--
+					 --><div class="num_outer"><!--
+						 --><div class="num_inner">0</div><!--
+					 --></div><!--
+					 --><div class="num_outer"><!--
+						 --><div class="num_inner">.</div><!--
+					 --></div><!--
+					 --><div class="num_outer"><!--
+						 --><div class="num_inner">&divide;</div><!--
+					--></div><!--
+				 --></div>
+					</div>
+					<div id="calc_lower_2_right">
+						<div class="num_outer" id="ope_equal">
+							<div class="num_inner" id="ope_equal_inner">=</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script >
+window.onload = function(){
+	/* 解决浮点数问题 start */
+	/* http://www.jb51.net/article/47659.htm */
+	Math.formatFloat = function(f, digit) { 
+    var m = Math.pow(10, digit); 
+    return parseInt(f * m, 10) / m;
+	}
+	/* 解决浮点数问题 end */
+	var calc_outer = document.getElementById("calc_outer");
+	calc_outer.ontouchstart = function(e){
+		e.preventDefault();
+	}
+	calc_outer.ontouchend = function(e){
+		e.preventDefault();
+	}
+	var calc_process = document.getElementById("calc_process");
+	var calc_result = document.getElementById("calc_result");
+	var lastAns = "";
+	var currArr = [];
+	var currArr2 = [];
+	var currX = "";
+	function getOpe(){
+		if(currX == "+" || currX == "-"){
+			currArr.push(currX);
+			currArr2.push(currX);
+		}else if(currX == "×"){
+			currArr.push("*");
+			currArr2.push("×");
+		}else if(currX == "÷"){
+			currArr.push("/");
+			currArr2.push("÷");
+		}else if(currX == "^"){
+			currArr.push("**");
+			currArr2.push("^");
+		}
+	}
+	function calcNum(num){
+		if(!currX){
+			if(lastAns){
+				lastAns = "";
+				currArr.pop();
+				currArr2.pop();
+			}
+			currX = num;
+			calc_process.innerHTML = currX;
+		}else{
+			if(/(\d|\.)+/.test(currX)){
+				if(/^0$/.test(currX)){
+					console.log("^0$");
+					console.log("currX = " + currX);
+					currX = num;
+					let tempStr = currArr2.join("") + currX;
+					calc_process.innerHTML = tempStr;
+				}else{
+					currX += num;
+					let tempStr = currArr2.join("") + currX;
+					calc_process.innerHTML = tempStr;
+				}
+			}else{
+				getOpe();
+				currX = num;
+				let tempStr = currArr2.join("") + currX;
+				calc_process.innerHTML = tempStr;
+			}
+		}
+	}
+	function calcDot(){
+		if(!currX){
+			if(lastAns){
+				lastAns = "";
+				currArr.pop();
+				currArr2.pop();
+			}
+			currX = "0.";
+			calc_process.innerHTML = currX;
+		}else if(!/\d/.test(currX)){
+			getOpe();
+			currX = "";
+		}
+		if(currX.indexOf(".") == -1){
+			currX += ".";
+		}
+		if(currX == "."){
+			currX = "0.";
+		}
+		let tempStr = currArr2.join("") + currX;
+		calc_process.innerHTML = tempStr;
+	}
+	function calcOpe(ope){
+		if(!(currArr.length == 0 && currX == "")){
+			if(/\d/.test(currX)){
+				if(currX.substring(currX.length - 1,currX.length) == "."){
+					currX = currX.substring(0,currX.length - 1);
+				}
+				currArr.push(currX);
+				currArr2.push(currX);
+				if(ope == "×"){
+					currX = "×";
+				}else if(ope == "÷"){
+					currX = "÷";
+				}else{
+					currX = ope;
+				}
+				let tempStr = currArr2.join("") + currX;
+				calc_process.innerHTML = tempStr;
+			}else{
+				if(currX == "×" && ope == "×"){
+					currX = "^";
+				}else if(currX == "^" && ope == "×"){
+					//如果本来选了次方，现在又多按乘号，则无反应
+				}else{
+					currX = ope;
+				}
+				let tempStr = currArr2.join("") + currX;
+				calc_process.innerHTML = tempStr;
+			}
+		}
+	}
+	function calcClear(){
+		lastAns = "";
+		currArr = [];
+		currArr2 = [];
+		currX = "";
+		calc_process.innerHTML = "&nbsp;";
+		calc_result.innerHTML = "0";
+	}
+	function calcEqual(){
+		function getResult(){
+			let tempAns = currArr.join("");
+			if(tempAns.substring(0,1) == "-"){
+				tempAns = "0" + tempAns;
+			}
+			if(tempAns){
+				lastAns = Math.formatFloat(eval(tempAns), 1).toString();
+				currArr = [lastAns];
+				currArr2 = [lastAns];
+				currX = "";
+				calc_process.innerHTML = "&nbsp;";
+				calc_result.innerHTML = lastAns;
+			}
+		}
+		console.log("answer");
+		if(/\d/.test(currX)){
+			currArr.push(currX);
+			getResult();
+		}else if(!/\d/.test(currArr[currArr.length - 1])){
+			currArr.pop();
+			getResult();
+		}else if(/\d/.test(currArr[currArr.length - 1])){
+			getResult();
+		}
+	}
+	function calcBack(){
+		if(currX){
+			if(currX.length > 1){
+				currX = currX.substring(0,currX.length - 1);
+				let tempStr = currArr2.join("") + currX;
+				calc_process.innerHTML = tempStr;
+			}else{
+				if(currArr.length > 0){
+					currX = "";
+					let tempStr = currArr2.join("");
+					calc_process.innerHTML = tempStr;
+				}else{
+					currX = "";
+					calc_process.innerHTML = "&nbsp;";
+					calc_result.innerHTML = "0";
+				}
+			}
+		}else{
+			if(currArr.length > 1){
+				currArr.pop();
+				currArr2.pop();
+				let tempStr = currArr2.join("");
+				calc_process.innerHTML = tempStr;
+			}else{
+				calcClear();
+			}
+		}
+	}
+	function calc(x){
+		if(/\d/.test(x)){
+			calcNum(x);
+		}else if(x == "Back"){
+			calcBack();
+		}else if(x == "C"){
+			calcClear();
+		}else if(x == "+" || x == "-" || x == "×" || x == "÷"){
+			calcOpe(x);
+		}else if(x == "."){
+			calcDot();
+		}else if(x == "="){
+			calcEqual();
+		}
+		console.log(currArr);
+	}
+	onkeyup = function (e){
+		if(e.keyCode == 8){
+			calc("Back");
+		}else if(e.keyCode == 27){
+			calc("C");
+		}else if(e.keyCode == 187 && e.shiftKey){
+			calc("+");
+		}else if(e.keyCode == 107){
+			calc("+");
+		}else if(e.keyCode == 189 && !e.shiftKey){
+			calc("-");
+		}else if(e.keyCode == 109){
+			calc("-");
+		}else if(e.keyCode == 56 && e.shiftKey){
+			calc("×");
+		}else if(e.keyCode == 106){
+			calc("×");
+		}else if(e.keyCode == 191 || e.keyCode == 111){
+			calc("÷");
+		}else if(e.keyCode == 54 && e.shiftKey){
+			calc("×");
+			calc("×");
+		}else if(e.keyCode == 187 && !e.shiftKey){
+			calc("=");
+		}else if(e.keyCode == 13){
+			calc("=");
+		}else if(e.keyCode == 110 || e.keyCode == 190){
+			calc(".");
+		}else if(e.keyCode > 47 && e.keyCode < 58 && !e.shiftKey){
+			let tempKey = (e.keyCode - 48).toString();
+			calc(tempKey);
+		}else if(e.keyCode > 95 && e.keyCode < 106 && !e.shiftKey){
+			let tempKey = (e.keyCode - 96).toString();
+			calc(tempKey);
+		}
+	};
+	var nums = document.getElementsByClassName("num_outer");
+	for(let i = 0; i < nums.length; i++){
+		nums[i].onmousedown = function (){
+			var inner = this.children[0];
+			inner.className = "num_inner_on";
+		};
+		nums[i].ontouchstart = function (e){
+			var inner = this.children[0];
+			inner.className = "num_inner_on";
+		};
+		nums[i].onmouseup = function (){
+			var inner = this.children[0];
+			inner.className = "num_inner";
+			calc(inner.innerHTML);
+		};
+		nums[i].ontouchend = function (e){
+			var inner = this.children[0];
+			inner.className = "num_inner";
+			calc(inner.innerHTML);
+		};
+		nums[i].onmouseout = function (){
+			var inner = this.children[0];
+			inner.className = "num_inner";
+		};
+	}
+}
+</script>
+</body>
+</html>
+ 
