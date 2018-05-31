@@ -297,6 +297,31 @@ body{
 </div>
 <script >
 window.onload = function(){
+	var audioList = {"1":"https://disqus-api-hzn.000webhostapp.com/calculator/01-one.mp3",
+"2":"https://disqus-api-hzn.000webhostapp.com/calculator/02-two.mp3",
+"3":"https://disqus-api-hzn.000webhostapp.com/calculator/03-three.mp3",
+"4":"https://disqus-api-hzn.000webhostapp.com/calculator/04-four.mp3",
+"5":"https://disqus-api-hzn.000webhostapp.com/calculator/05-five.mp3",
+"6":"https://disqus-api-hzn.000webhostapp.com/calculator/06-six.mp3",
+"7":"https://disqus-api-hzn.000webhostapp.com/calculator/07-seven.mp3",
+"8":"https://disqus-api-hzn.000webhostapp.com/calculator/08-eight.mp3",
+"9":"https://disqus-api-hzn.000webhostapp.com/calculator/09-nine.mp3",
+"0":"https://disqus-api-hzn.000webhostapp.com/calculator/10-zero.mp3",
+".":"https://disqus-api-hzn.000webhostapp.com/calculator/11-dot.mp3",
+"+":"https://disqus-api-hzn.000webhostapp.com/calculator/12-plus.mp3",
+"-":"https://disqus-api-hzn.000webhostapp.com/calculator/13-minus.mp3",
+"×":"https://disqus-api-hzn.000webhostapp.com/calculator/14-times.mp3",
+"÷":"https://disqus-api-hzn.000webhostapp.com/calculator/15-divide.mp3",
+"=":"https://disqus-api-hzn.000webhostapp.com/calculator/16-equals.mp3",
+"Back":"https://disqus-api-hzn.000webhostapp.com/calculator/17-back.mp3",
+"C":"https://disqus-api-hzn.000webhostapp.com/calculator/18-clear.mp3"};
+	
+	for(let k in audioList){
+		let calc_audio = new Audio();
+		calc_audio.src = audioList[k];
+		calc_audio.id = "calc_audio_" + k;
+		document.getElementsByTagName("body")[0].appendChild(calc_audio);
+	}
 	/* 解决浮点数问题 start */
 	/* http://www.jb51.net/article/47659.htm */
 	Math.formatFloat = function(f, digit) { 
@@ -429,7 +454,10 @@ window.onload = function(){
 				tempAns = "0" + tempAns;
 			}
 			if(tempAns){
-				lastAns = Math.formatFloat(eval(tempAns), 1).toString();
+				console.log("tempAns = " + tempAns);
+				// lastAns = Math.formatFloat(eval(tempAns), 1).toString();
+				// lastAns = eval(tempAns).toString();
+				lastAns = Number(eval(tempAns));
 				currArr = [lastAns];
 				currArr2 = [lastAns];
 				currX = "";
@@ -477,6 +505,8 @@ window.onload = function(){
 		}
 	}
 	function calc(x){
+		document.getElementById("calc_audio_" + x).currentTime = 0;
+		document.getElementById("calc_audio_" + x).play();
 		if(/\d/.test(x)){
 			calcNum(x);
 		}else if(x == "Back"){
