@@ -319,6 +319,7 @@ window.onload = function(){
 	for(let k in audioList){
 		let calc_audio = new Audio();
 		calc_audio.src = audioList[k];
+		calc_audio.loop = false;
 		calc_audio.id = "calc_audio_" + k;
 		document.getElementsByTagName("body")[0].appendChild(calc_audio);
 	}
