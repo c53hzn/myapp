@@ -20,6 +20,7 @@
 <button id="brBtn">Add br</button>
 <button id="noTagBtn">delete excel formats</button>
 <button id="pBtn">To p</button>
+<button id="pBtn2">To p2</button>
 <button id="ulBtn">To ul</button>
 <button id="olBtn">To ol</button>
 <button id="olBtni">To i ol</button>
@@ -90,6 +91,25 @@ $(document).ready(function(){
 			if(m != ""){
 				var str = "<p>" + m + "</p>";
 				newArr.push(str);
+			}
+		});
+		var newTxt = newArr.join("\n");
+		$("#outputTxt").val(newTxt);//输出
+	});
+	//转成段落2
+	$("#pBtn2").on("click",function(){
+		var regEx = /\n{2,}/g;
+		$("#outputTxt").val("");//清空結果的textarea
+		var origTxt = $("#sourceTxt").val();//获取输入的内容
+		var pTxt = origTxt.replace(regEx,"paraSplit");
+		var pArr = pTxt.split("paraSplit");
+
+		var newArr = [];
+		arr.forEach(function(m){
+			if(m != ""){
+				var str = m.replace("\n","</br>");
+				var str2 = "<p>" + str + "</p>";
+				newArr.push(str2);
 			}
 		});
 		var newTxt = newArr.join("\n");
