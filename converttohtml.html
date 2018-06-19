@@ -102,7 +102,7 @@ $(document).ready(function(){
 		$("#outputTxt").val("");//清空結果的textarea
 		var origTxt = $("#sourceTxt").val();//获取输入的内容
 		var pTxt = origTxt.replace(regEx,"paraSplit");
-		var pArr = pTxt.split("paraSplit");
+		var arr = pTxt.split("paraSplit");
 
 		var newArr = [];
 		arr.forEach(function(m){
