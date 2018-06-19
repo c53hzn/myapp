@@ -91,7 +91,7 @@ $(document).ready(function(){
 		var newArr = [];
 		arr.forEach(function(m){
 			if(m != ""){
-				var str = m.replace(/\n/g,"</br>");
+				var str = m.replace(/\n/g,"</br>\n");
 				str = str.replace(/&/g,"&amp;");
 				var str2 = "<p>" + str + "</p>";
 				newArr.push(str2);
