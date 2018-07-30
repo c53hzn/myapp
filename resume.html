@@ -1,267 +1,534 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en" >
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0,user-scalable=0"
-      http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="https://fonts.gdgdocs.org/css?family=Lobster">
-	<link rel="stylesheet" type="text/css" href="topstyles.css">
-	<link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
-<title>Jenny's ressume</title>
-</head>
-
+  <meta charset="UTF-8">
+  <title>Jenny's ressume</title>
+  <meta id="viewport" name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
+  <link rel='stylesheet' href='https://fonts.gdgdocs.org/css?family=Lobster'>
+  <link rel='stylesheet' href='https://www.houzhenni.com/myapp/topstyles.css'>
+  <link rel='stylesheet' href='https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css'>
 <style>
-body{min-width: 320px;}
-.thumbnail{
-	transition: transform 0.5s;
-	padding: 0px;
-	overflow: hidden;
+body{
+	margin: 0px;
+	min-width: 320px;
 }
-.thumbnail:hover{
-	transform: scale(1.08);
-	transition: transform 0.5s;
+.flex-album{
+	display: flex;
+	justify-content: space-evenly;
+	flex-wrap: wrap;
+	padding-bottom: 13px;
 }
-.myHeaderText{font-family: Lobster;}
-.myHeaderText:after{
-	content: "Jenny";
+.flex-album-unit{
+	margin-top: 13px;
+	width: 48%;
 }
-.menuBarQuater{font-family: Microsoft Yahei;}
-.menuDropDown a{font-family: Times New Roman; font-weight: bold;}
-.menuBarText p:nth-child(1){display: block;}
-.menuBarText p:nth-child(2){display: none;}
-.myIntro_text{margin: 20px; font-size: 18px; text-align: left;}
-.myPortfolio{padding-bottom: 10px;}
-.myPortfolio div{margin: 20px; width: 40%; display: inline-block;}
-.myPortfolio div:hover {box-shadow: 0px 0px 5px gray;}
-.centered{text-align: center;}
-.centered a{text-decoration: none;}
-.contactBtn{width: 20%; margin: 10px auto; display: inline-block;}
-.contactBtn span{font-size: 21px;}
-@media all and (max-width: 1080px)
-{
-	.myIntro_text{margin: 10px 10px 20px 10px;}
-	#backToIndex{right: 5%;}
+.flex-album-unit img{
+	width: 100%;
 }
-@media all and (max-width: 768px)
-{
-	.myPortfolio div{margin: 10px;}
-	.contactBtn{width: 40%;}
+.flex-album-desc{
+	margin: 4px auto;
+	text-align: center;
 }
-@media all and (max-width: 600px)
-{
-	.menuBarText p:nth-child(1){display: none;}
-	.menuBarText p:nth-child(2){display: block;}
-	.myHeaderText:after{
-		display: block;
+.flex-album-desc a{
+	font-size: 20px;
+	color: blue;
+	text-decoration: none;
+	text-shadow: 0px 1px 1px yellow;
+}
+.flex-album-desc a:hover{
+	color: orange;
+}
+.flex-album-detail{
+	position: fixed;
+	width: 280px;
+	background: white;
+	border: 2px solid white;
+	display: none;
+}
+.flex-album-detail img{
+	width: 100%;
+}
+
+@media all and (max-width: 768px){
+	.flex-album-unit{
+		margin: 13px 13px 0px 13px;
+		width: 100%;
 	}
-	.myHeaderText{
-		top: 0px;
-		height: 60px;
-		line-height: 60px;
+	.flex-album-unit img{
+		cursor: pointer;
 	}
 }
-@media all and (max-width: 485px)
-{
-	.myPortfolio div{width: 80%;}
-	.contactBtn i{font-size: 18px;}
-	.contactBtn span{font-size: 15px;}
-	.myHeaderText{
-		font-size: 35px;
-		height: 40px;
-		line-height: 40px;
-	}
+
+a {
+  text-decoration: none;
+}
+.thumbnail {
+  transition: transform 0.5s;
+  padding: 0px;
+  overflow: hidden;
+}
+.thumbnail:hover {
+  transform: scale(1.08);
+  transition: transform 0.5s;
+}
+.myHeaderText {
+  font-family: Lobster;
+}
+.myHeaderText:after {
+  content: "Jenny";
+}
+.menuBarQuater {
+  font-family: Microsoft Yahei;
+}
+.menuDropDown a {
+  font-family: Times New Roman;
+  font-weight: bold;
+}
+.menuBarText p:nth-child(1) {
+  display: block;
+}
+.menuBarText p:nth-child(2) {
+  display: none;
+}
+.myIntro_text {
+  margin: 20px;
+  font-size: 18px;
+  text-align: left;
+}
+.myPortfolio {
+  padding-bottom: 10px;
+}
+.centered {
+  text-align: center;
+}
+.centered a {
+  text-decoration: none;
+}
+.contactBtn {
+  width: 20%;
+  margin: 10px auto;
+  display: inline-block;
+}
+.contactBtn span {
+  font-size: 21px;
+}
+@media all and (max-width: 1080px) {
+  .myIntro_text {
+    margin: 10px 10px 20px 10px;
+  }
+  #backToIndex {
+    right: 5%;
+  }
+}
+@media all and (max-width: 768px) {
+  .contactBtn {
+    width: 40%;
+  }
+}
+@media all and (max-width: 600px) {
+  .menuBarText p:nth-child(1) {
+    display: none;
+  }
+  .menuBarText p:nth-child(2) {
+    display: block;
+  }
+  .myHeaderText:after {
+    display: block;
+  }
+  .myHeaderText {
+    top: 0px;
+    height: 60px;
+    line-height: 60px;
+  }
+}
+@media all and (max-width: 485px) {
+  .contactBtn i {
+    font-size: 18px;
+  }
+  .contactBtn span {
+    font-size: 15px;
+  }
+  .myHeaderText {
+    font-size: 35px;
+    height: 40px;
+    line-height: 40px;
+  }
 }
 </style>
 
-<html>
-	<body>
-		<div class="subBody">
-			<div class="upperPart">
-				<div class="myHeaderPhoto">
-				</div>
-				<div class="myHeaderText">
-					HOU Zhenni
-				</div>
-			</div>
-			<div class="menuBar" id="float_menubar">
-				<div class="menuBarQuater" onmouseover="">
-					<div class="menuBarText">
-						<p>About me</p>
-						<p>About</p>
-					</div>
-					<div class="menuDropDown">
-						<a href="#myIntro">Who am I?</a>
-					</div>
-				</div>
-				<div class="menuBarQuater" onmouseover="">
-					<div class="menuBarText">
-						<p>My skills</p>
-						<p>Skills</p>
-					</div>
-					<div class="menuDropDown">
-						<a href="#mySkills">What I can do</a>
-					</div>
-				</div>
-				<div class="menuBarQuater" onmouseover="">
-					<div class="menuBarText">
-						<p>My Portfolio</p>
-						<p>Portfolio</p>
-					</div>
-					<div class="menuDropDown">
-						<a href="#myPortfolio">Projects accomplished</a>
-					</div>
-				</div>
-				<div class="menuBarQuater" onmouseover="">
-					<div class="menuBarText">
-						<p>Contact Me</p>
-						<p>Contact</p>
-					</div>
-					<div class="menuDropDown">
-						<a href="#myContact">You can find me here</a>
-					</div>
-				</div>
-			</div>
-			<div id="myIntro"></div>
-			<div class="middlePart" id="float_middlePart">
-			</div>
-			<div class="lowerPart">
-				<div class="lowerInnerPart">
-					<div class="panel panel-default">
-						<h3>Jenny HOU</h3>
-						<div class="row myIntro_text">
-							<div class="col-sm-8 col-md-8">
-								<div class="thumbnail" style="margin-bottom: 0px;">
-									<img class="img-responsive" src="https://www.houzhenni.com/myapp/photo/index-04.jpg" alt="picture of me" title="picture of me"/>
-								</div>
-							</div>
-							<div class="col-sm-4 col-md-4">
-								<div class="myIntro_text">
-									<p>Customer support for IT company, with passion to learn various programming languages</p>
-									<hr style="border-top-color: black;"/>
-									<p>
-										Customer Support
-										<br/>
-										Chi/Jap/Eng Translator
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<p id="mySkills">&nbsp;</p>
-					<p>&nbsp;</p>
-					<div class="panel panel-default">
-						<h3>My Skills</h3>
-						<div class="row myIntro_text">
-							<div class="col-sm-8 col-md-8 col-md-push-4 col-sm-push-4">
-								<div class="thumbnail" style="margin-bottom: 0px;">
-									<img class="img-responsive" src="https://www.brainscape.com/blog/wp-content/uploads/2014/07/Languages1.png" alt="natural languages" title="natural languages"/>
-								</div>
-							</div>
-							<div class="col-sm-4 col-md-4 col-md-pull-8 col-sm-pull-8">
-								<div class="myIntro_text">
-									<p>Natural Languages</p>
-									<hr style="border: 1px solid black;"/>
-									<p>
-										Mandarin(Native)
-										<br/>
-										Japanese(Fluent)
-										<br/>
-										English(Fluent)
-										<br/>
-										Cantonese(Fluent)
-										<br/>
-										Korean(Fair)
-									</p>
-								</div>
-							</div>
-						</div>
-						<div class="row myIntro_text">
-							<div class="col-sm-8 col-md-8">
-								<div class="thumbnail" style="margin-bottom: 0px;">
-									<img class="img-responsive" src="https://www.houzhenni.com/myapp/photo/front-end-languages.jpg" alt="programming languages" title="programming languages"/>
-								</div>
-							</div>
-							<div class="col-sm-4 col-md-4">
-								<div class="myIntro_text">
-									<p>Programming Languages</p>
-									<hr style="border: 1px solid black;"/>
-									<p>
-										HTML
-										<br/>
-										CSS
-										<br/>
-										JavaScript
-										<br/>
-										jQuery
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<p id="myPortfolio">&nbsp;</p>
-					<p>&nbsp;</p>
-					<div class="panel panel-default">
-						<h3>My Portfolio</h3>
-						<div class="myPortfolio">
-							<div class="thumbnail">
-								<a href="https://www.houzhenni.com/myapp/dailyreport.html" target="_blank">
-									<img class="img-responsive" src="https://s1.ax1x.com/2018/03/31/9xRgV1.jpg" alt="one page application for work report" title="one page application for work report"/>
-								</a>
-							</div>
-							<div class="thumbnail">
-								<a href="https://www.houzhenni.com/myapp/wikipage.html" target="_blank">
-									<img class="img-responsive" src="https://s1.ax1x.com/2018/03/31/9xR08U.png" alt="Wikipedia Viewer" title="Wikipedia Viewer"/>
-								</a>
-							</div>
-							<div class="thumbnail">
-								<a href="https://www.houzhenni.com/myapp/randomquote.html" target="_blank">
-									<img class="img-responsive" src="https://s1.ax1x.com/2017/12/24/vmUP0.png" alt="Random Quote Machine: Criminal Minds Season 3 Quotes" title="Random Quote Machine: Criminal Minds Season 3 Quotes"/>
-								</a>
-							</div>
-							<div class="thumbnail">
-								<a href="https://www.houzhenni.com/myapp/calculator.html" target="_blank">
-									<img class="img-responsive" src="https://s1.ax1x.com/2017/12/24/vmt5q.png" alt="JavaScript Calculator" title="JavaScript Calculator"/>
-								</a>
-							</div>
+</head>
+
+<body translate="no" >
+  <div class="subBody">
+  <div class="upperPart">
+    <div class="myHeaderPhoto">
+    </div>
+    <div class="myHeaderText">
+      HOU Zhenni
+    </div>
+  </div>
+  <div class="menuBar" id="float_menubar">
+    <div class="menuBarQuater" onmouseover="">
+      <div class="menuBarText">
+        <p>About me</p>
+        <p>About</p>
+      </div>
+      <div class="menuDropDown">
+        <a href="#myIntro">Who am I?</a>
+      </div>
+    </div>
+    <div class="menuBarQuater" onmouseover="">
+      <div class="menuBarText">
+        <p>My skills</p>
+        <p>Skills</p>
+      </div>
+      <div class="menuDropDown">
+        <a href="#mySkills">What I can do</a>
+      </div>
+    </div>
+    <div class="menuBarQuater" onmouseover="">
+      <div class="menuBarText">
+        <p>My Portfolio</p>
+        <p>Portfolio</p>
+      </div>
+      <div class="menuDropDown">
+        <a href="#myPortfolio">Projects accomplished</a>
+      </div>
+    </div>
+    <div class="menuBarQuater" onmouseover="">
+      <div class="menuBarText">
+        <p>Contact Me</p>
+        <p>Contact</p>
+      </div>
+      <div class="menuDropDown">
+        <a href="#myContact">You can find me here</a>
+      </div>
+    </div>
+  </div>
+  <div id="myIntro"></div>
+  <div class="middlePart" id="float_middlePart">
+  </div>
+  <div class="lowerPart">
+    <div class="lowerInnerPart">
+      <div class="panel panel-default">
+        <h3>Jenny HOU</h3>
+        <div class="row myIntro_text">
+          <div class="col-sm-8 col-md-8">
+            <div class="thumbnail" style="margin-bottom: 0px;">
+              <img class="img-responsive" src="https://www.houzhenni.com/myapp/photo/index-04.jpg" alt="picture of me" title="picture of me" />
+            </div>
+          </div>
+          <div class="col-sm-4 col-md-4">
+            <div class="myIntro_text">
+              <p>Customer support for IT company, with passion to learn various programming languages</p>
+              <hr style="border-top-color: black;" />
+              <p>
+                Customer Support
+                <br/> Chi/Jap/Eng Translator
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p id="mySkills">&nbsp;</p>
+      <p>&nbsp;</p>
+      <div class="panel panel-default">
+        <h3>My Skills</h3>
+        <div class="row myIntro_text">
+          <div class="col-sm-8 col-md-8 col-md-push-4 col-sm-push-4">
+            <div class="thumbnail" style="margin-bottom: 0px;">
+              <img class="img-responsive" src="https://www.brainscape.com/blog/wp-content/uploads/2014/07/Languages1.png" alt="natural languages" title="natural languages" />
+            </div>
+          </div>
+          <div class="col-sm-4 col-md-4 col-md-pull-8 col-sm-pull-8">
+            <div class="myIntro_text">
+              <p>Natural Languages</p>
+              <hr style="border: 1px solid black;" />
+              <p>
+                Mandarin(Native)
+                <br/> Japanese(Fluent)
+                <br/> English(Fluent)
+                <br/> Cantonese(Fluent)
+                <br/> Korean(Fair)
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="row myIntro_text">
+          <div class="col-sm-8 col-md-8">
+            <div class="thumbnail" style="margin-bottom: 0px;">
+              <img class="img-responsive" src="https://www.houzhenni.com/myapp/photo/front-end-languages.jpg" alt="programming languages" title="programming languages" />
+            </div>
+          </div>
+          <div class="col-sm-4 col-md-4">
+            <div class="myIntro_text">
+              <p>Programming Languages</p>
+              <hr style="border: 1px solid black;" />
+              <p>
+                HTML
+                <br/> CSS
+                <br/> JavaScript
+                <br/> jQuery
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p id="myPortfolio">&nbsp;</p>
+      <p>&nbsp;</p>
+      <div class="panel panel-default">
+        <h3>My Portfolio</h3>
+        <div class="myPortfolio">
+          <div class="flex-album">
+            <div class="flex-album-unit">
+              <img src="https://image.ibb.co/n8gDPT/wikipedia_viewer_home.png" alt="wikipedia_viewer_home">
+              <div class="flex-album-desc">
+                <a target="_blank" href="https://codepen.io/houzhenni/pen/qpqLjR">Wikipedia Viewer</a>
+              </div>
+              <div class="flex-album-detail">
+                <img src="https://image.ibb.co/mSNCjT/wikipedia_viewer_home.png" alt="wiki_details">
+                <img src="https://image.ibb.co/mOWir8/wikipedia_viewer_result.png" alt="wiki_details">
+              </div>
+            </div>
+            <div class="flex-album-unit">
+              <img src="https://image.ibb.co/cmwf4T/xiaomi_clock.png" alt="xiaomi_clock">
+              <div class="flex-album-desc">
+                <a target="_blank" href="https://codepen.io/houzhenni/pen/errgwo">Xiaomi Clock</a>
+              </div>
+              <div class="flex-album-detail">
+                <img src="https://image.ibb.co/mpZgdo/xiaomi_clock.png" alt="xiaomi_clock">
+              </div>
+            </div>
+            <div class="flex-album-unit">
+              <img src="https://image.ibb.co/cYgmdo/random_quote_machine.png" alt="random_quote_machine">
+              <div class="flex-album-desc">
+                <a target="_blank" href="https://codepen.io/houzhenni/pen/GyjzZb">Random Quote Machine</a>
+              </div>
+              <div class="flex-album-detail">
+                <img src="https://image.ibb.co/mnA9W8/random_quote_machine.png" alt="random_quote_machine">
+                <img src="https://image.ibb.co/cRToto/random_quote_machine_2.png" alt="random_quote_machine_2">
+                <img src="https://image.ibb.co/cJ0weT/random_quote_machine_3.png" alt="random_quote_machine_3">
+              </div>
+            </div>
+            <div class="flex-album-unit">
+              <img src="https://image.ibb.co/gTssJo/pomodoro_clock.png" alt="pomodoro_clock">
+              <div class="flex-album-desc">
+                <a target="_blank" href="https://codepen.io/houzhenni/pen/OvZzpX">Pomodoro Clock</a>
+              </div>
+              <div class="flex-album-detail">
+                <img src="https://image.ibb.co/e4KsjT/pomodoro_clock.png" alt="pomodoro_clock">
+              </div>
+            </div>
+            <div class="flex-album-unit">
+              <img src="https://image.ibb.co/g5ZuW8/product_landing_page.png" alt="product_landing_page">
+              <div class="flex-album-desc">
+                <a target="_blank" href="https://codepen.io/houzhenni/pen/vaevqP">Product Landing Page</a>
+              </div>
+              <div class="flex-album-detail">
+                <img src="https://image.ibb.co/jcrir8/product_landing_page.png" alt="product_landing_page">
+              </div>
+            </div>
+            <div class="flex-album-unit">
+              <img src="https://image.ibb.co/dCtcjT/order_form.png" alt="order_form">
+              <div class="flex-album-desc">
+                <a target="_blank" href="https://codepen.io/houzhenni/pen/ZjJNJj">Order Form</a>
+              </div>
+              <div class="flex-album-detail">
+                <img src="https://image.ibb.co/eKyUW8/order_form.png" alt="order_form">
+              </div>
+            </div>
+            <div class="flex-album-unit">
+              <img src="https://image.ibb.co/diF1B8/image_size_checker.png" alt="image_size_checker">
+              <div class="flex-album-desc">
+                <a target="_blank" href="https://codepen.io/houzhenni/pen/bMjVLe">Image Size Checker for eBay</a>
+              </div>
+              <div class="flex-album-detail">
+                <img src="https://image.ibb.co/jZnOr8/image_size_checker.png" alt="image_size_checker">
+              </div>
+            </div>
+            <div class="flex-album-unit">
+              <img src="https://image.ibb.co/eu51B8/calculator.png" alt="calculator">
+              <div class="flex-album-desc">
+                <a target="_blank" href="https://codepen.io/houzhenni/pen/rvEZZg">JavaScript Calculator</a>
+              </div>
+              <div class="flex-album-detail">
+                <img src="https://image.ibb.co/bBTUW8/calculator.png" alt="calculator">
+              </div>
+            </div>
+            <div class="flex-album-unit">
+              <img src="https://image.ibb.co/c3kwdo/tech_doc_PC.png" alt="tech_doc_PC">
+              <div class="flex-album-desc">
+                <a target="_blank" href="https://codepen.io/houzhenni/pen/gjXwdE">CSS Shape Guidebook</a>
+              </div>
+              <div class="flex-album-detail">
+                <img src="https://image.ibb.co/dC0yPT/tech_doc_PC.png" alt="tech_doc_PC">
+                <img src="https://image.ibb.co/dmSZyo/tech_doc_mobile.png" alt="tech_doc_mobile">
+              </div>
+            </div>
+          </div>
         </div>
         <div>Or click <a href="https://www.houzhenni.com/myapp" target="_blank">here</a> for more projects</div>
         <p></p>
-					</div>
-					<p id="myContact">&nbsp;</p>
-					<p>&nbsp;</p>
-					<div class="panel panel-default">
-						<h3>Contact Me</h3>
-						<div class="row myIntro_text centered">
-							<a href="https://www.github.com/houzhenni" target="_blank">
+      </div>
+      <p id="myContact">&nbsp;</p>
+      <p>&nbsp;</p>
+      <div class="panel panel-default">
+        <h3>Contact Me</h3>
+        <div class="row myIntro_text centered">
+          <a href="https://www.github.com/houzhenni" target="_blank">
 								<button type="button" class="btn btn-danger contactBtn">
 									<i class="fa fa-2x fa-github-square"></i>
 									<span>Github</span>
 								</button>
 							</a>
-							<a href="https://codepen.io/houzhenni" target="_blank">
+          <a href="https://codepen.io/houzhenni" target="_blank">
 								<button type="button" class="btn btn-danger contactBtn">
 									<i class="fa fa-2x fa-codepen"></i>
 									<span>Codepen</span>
 								</button>
 							</a>
-							<a href="mailto:admin@houzhenni.com">
+          <a href="mailto:admin@houzhenni.com">
 								<button type="button" class="btn btn-danger contactBtn">
 									<i class="fa fa-2x fa-envelope"></i>
 									<span>Email</span>
 								</button>
 							</a>
-							<a href="https://facebook.com/jenny.hou.1048" target="_blank">
+          <a href="https://facebook.com/jenny.hou.1048" target="_blank">
 								<button type="button" class="btn btn-danger contactBtn">
 									<i class="fa fa-2x fa-facebook"></i>
 									<span>Facebook</span>
 								</button>
 							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</body>
-<script src="topjs.js" type="text/javascript"></script>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<script>
+window.onload = function(){
+	var flex_album_units = document.getElementsByClassName("flex-album-unit");
+	var flex_album_thumbs = [];
+	var flex_album_details = [];
+	toShowDetailPic();
+	function toShowDetailPic(){
+		for(let i = 0; i < flex_album_units.length; i++){
+			flex_album_units[i].children[0].setAttribute("data-index",i);
+			flex_album_thumbs.push(flex_album_units[i].children[0]);
+			flex_album_details.push(flex_album_units[i].children[2]);
+			flex_album_units[i].onmousemove = function(){
+				var that = this;
+				var flex_album_thumb = that.children[0];
+				var flex_album_detail = that.children[2];
+				flex_album_thumb.onmousemove = function(){
+					if(document.body.clientWidth > 751){//to include vertical scroll bar width 17px
+						flex_album_detail.style.display = "block";
+						var index = this.getAttribute("data-index");
+						if (!flex_album_detail) {//判断图片是否加载完了，如果没加载 
+							return;
+						}
+						if(index % 2 == 0){
+							var x = window.event.clientX + 24; 
+						}else{
+							var x = window.event.clientX - 300; 
+						}
+						var y = window.event.clientY - (flex_album_detail.offsetHeight * 3 / 7);
+						flex_album_detail.style.left = x +"px"; 
+						flex_album_detail.style.top = y +"px"; 
+					}
+				}
+				flex_album_thumb.onmouseout = function(){
+					flex_album_detail.style.display = "none";
+				}
+			}
+		}
+		for(let j = 0; j < flex_album_units.length; j++){
+			flex_album_thumbs[j].onclick = function(){
+				if(document.body.clientWidth < 752){
+					var index = this.getAttribute("data-index");
+					var code = "<div style='margin: 0px auto; max-width: 800px;'>" + flex_album_details[index].innerHTML + "</div>";
+					runCode(code);
+				}
+			}
+		}
+	}
+
+	function runCode(html){ 
+		var newWin=window.open('','',''); 
+		var meta = "<meta name='viewport' content='width=device-width, initial-scale=1'>";
+		var css = "<style>body{margin: 0px;}img{width: 100%;}</style>";
+		newWin.opener = null;
+		newWin.document.write(meta + css); 
+		newWin.document.write(html); 
+		newWin.document.close();
+	}
+}
+//ref: https://www.cnblogs.com/yichengbo/archive/2011/09/15/2177708.html
+
+
+$(".menuBarQuater").click(function(){
+  var that = this;
+  var menuChild_0 = this.children[0];
+  var menuChild_1 = this.children[1];
+  if(menuChild_1.style.display == "block"){
+  	that.style.backgroundColor = "transparent";
+  	menuChild_0.style.color = "white";
+    menuChild_1.style.display = "none";
+  }else{
+  	that.style.backgroundColor = "#FFAD86";
+  	menuChild_0.style.color = "black";
+    menuChild_1.style.display = "block";
+  }
+});
+$(".menuBarQuater").mouseover(function(){
+  var that = this;
+  var menuChild_0 = this.children[0];
+  var menuChild_1 = this.children[1];
+  that.style.backgroundColor = "#FFAD86";
+  menuChild_0.style.color = "black";
+  menuChild_1.style.display = "block";
+});
+$(".menuBarQuater").mouseout(function(){
+  var that = this;
+  var menuChild_0 = this.children[0];
+  var menuChild_1 = this.children[1];
+  that.style.backgroundColor = "transparent";
+  menuChild_0.style.color = "white";
+  menuChild_1.style.display = "none";
+});
+function toFixate(){
+	$("#float_menubar").attr("class", "menuBarFixated");
+	$("#float_middlePart").attr("class", "middlePartFixated");
+}
+function toNotFixate(){
+	$("#float_menubar").attr("class", "menuBar");
+	$("#float_middlePart").attr("class", "middlePart");
+}
+$(document).scroll(
+	function(){
+		if( $(window).width() <401){
+			if( $(document).scrollTop() > 120){
+				toFixate();
+			}
+			else{toNotFixate();}
+		}
+		else if( $(document).scrollTop() > 150){
+			toFixate();
+		}
+		else{toNotFixate();
+		}
+	}
+);
+</script>
+
+
+
+  
+  
+
+</body>
+
 </html>
+ 
