@@ -1,0 +1,315 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0,user-scalable=0"
+      http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Product Landing Page</title>
+
+<style>
+*{
+  box-sizing: border-box;
+}
+body{
+  margin: 0px; 
+  min-width: 320px;
+  background: #ffeaa7;
+}
+h3{
+  font-family: Times New Roman;
+}
+p{
+  padding: 0px 16px;
+}
+#video{
+  margin: 20px auto;
+  border: none;
+  display:block;
+  z-index: -100;
+}
+footer{
+  padding: 10px 0px;
+  background: rgba(0,0,0,0.25);
+  box-shadow: 0px 3px 4px rgba(0,0,0,0.3) inset, 0px 5px 8px rgba(0,0,0,0.2) inset;
+}
+#header{
+  position: fixed;
+  width: 100%;
+  height: 44px;
+  background: #ffeaa7;
+  box-shadow: 0px 2px 3px gray;
+  display: flex;
+  flex-flow: row;
+}
+#header-left{
+  width: 200px;
+}
+#header-left, .header-right{
+  display: flex;
+  align-items: center;
+}
+.header-right{
+  flex: 1;
+  margin-right: 0px;
+  display: flex;
+  flex-flow: row;
+  justify-content: flex-end;
+}
+.nav-link{
+  margin-right: 20px;
+  text-decoration: none;
+  color: black;
+  text-shadow: 0px 1px 1px gray;
+}
+#header-left img, #header-left h2{
+  margin-left: 10px;
+  font-family: Impact;
+  color: sienna;
+  text-shadow: 1px 2px 1px white;
+  cursor: pointer;
+}
+#header-left img{
+  width: 40px;
+}
+.centered{
+  margin: 0px auto;
+  text-align: center;
+}
+.left-sided{
+  text-align: left;
+}
+.title{
+  margin-top: 55px;
+}
+#main{
+  width: 800px;
+  margin: 0px auto;
+}
+.item-line{
+  margin-bottom: 30px;
+  background: white;
+  box-shadow: 6px 8px 10px rgba(0,0,0,0.19), 2px 4px 3px rgba(0,0,0,0.23);
+  overflow: hidden;
+}
+.hollow-line{
+  margin-bottom: 30px;
+}
+.anchor-id{
+  height: 50px;
+  margin-top: -50px;
+  display: block;
+}
+#gallery-pic_PC{
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  padding-bottom: 16px;
+  overflow: visible;
+}
+#gallery-pic_PC img{
+  margin: 16px 0px 0px 0px;
+  width: 30%;
+  height: 100%;
+  transition: transform 0.2s;
+}
+#gallery-pic_PC img:hover{
+  transform: scale(1.6);
+}
+#gallery-pic_mobile{
+  display: none;
+}
+#gallery-pic_mobile img{
+  width: 100%;
+}
+#price-opt{
+  display: flex;
+  justify-content: space-between;
+}
+.price-card{
+  width: 30%;
+  background: white;
+  box-shadow: 6px 8px 10px rgba(0,0,0,0.19), 2px 4px 3px rgba(0,0,0,0.23);
+  overflow: hidden;
+}
+.price-card h3{
+  margin-top: 20px;
+}
+#form{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+#form input[type="email"]{
+  width: 100%;
+  height: 28px;
+}
+#form input[type="submit"]{
+  margin-top: 10px;
+  width: 80px;
+  font-size: 18px;
+}
+
+
+@media all and (max-width: 1080px){
+  #main{
+    width: auto;
+    margin: 0px 70px;
+  }
+}
+
+@media all and (max-width: 768px){
+  #video{
+    margin: 0px;
+    width: 100%;
+  }
+  #main{
+    margin: 0px 10px;
+  }
+  #gallery-pic_PC{
+    display: none;
+  }
+  #gallery-pic_mobile{
+    display: block;
+  }
+  #price-opt{
+    display: block;
+  }
+  .price-card{
+    margin: 0px auto 20px auto;
+    width: 78%;
+  }
+}
+
+@media all and (max-width: 425px){
+  #video{
+    height: 240px;
+  }
+  .nav-link{
+    margin-right: 5px;
+    font-size: 15px;
+    text-shadow: 0px 0px 1px black;
+  }
+  #header-left img, #header-left h2{
+    margin-left: 5px;
+    font-size: 18px;
+  }
+  .price-card{
+    width: 100%;
+  }
+}
+ </style>
+
+ </head>
+
+<body translate="no" >
+<header id="header">
+  <div id="header-left">
+    <img id="header-img" alt="my logo" src="https://www.houzhenni.com/assets/icons/icon@0,25x.png" />
+    <h2>Jenny's Shop</h2>
+  </div>
+  <nav class="header-right" id="nav-bar">
+    <a class="nav-link" href="#product" target="_self">Product</a>
+    <a class="nav-link" href="#feature" target="_self">Feature</a>
+    <a class="nav-link" href="#price" target="_self">Price</a>
+  </nav>
+</header>
+<div style="height: 50px"></div>
+<main id="main">
+  <div class="anchor-id" id="product"></div>
+  <h1 class="centered">Custom-made T-Shirts</h1>
+  <h3 class="left-sided">Product Photo</h3>
+  <div id="gallery-pic_PC" class="item-line">
+    <img src="https://preview.ibb.co/mc8Br8/T_shirt_1.jpg" alt="T_shirt_1">
+    <img src="https://preview.ibb.co/eQDNyo/T_shirt_2.jpg" alt="T_shirt_2">
+    <img src="https://preview.ibb.co/ifRLjT/T_shirt_3.jpg" alt="T_shirt_3">
+    <img src="https://preview.ibb.co/hZMaJo/T_shirt_4.jpg" alt="T_shirt_4">
+    <img src="https://preview.ibb.co/gAEHW8/T_shirt_5.jpg" alt="T_shirt_5">
+    <img src="https://preview.ibb.co/k2UUdo/T_shirt_6.jpg" alt="T_shirt_6">
+  </div>
+  <div id="gallery-pic_mobile" class="item-line">
+    <img src="https://preview.ibb.co/mc8Br8/T_shirt_1.jpg" alt="T_shirt_1">
+    <img src="https://preview.ibb.co/eQDNyo/T_shirt_2.jpg" alt="T_shirt_2">
+    <img src="https://preview.ibb.co/ifRLjT/T_shirt_3.jpg" alt="T_shirt_3">
+    <img src="https://preview.ibb.co/hZMaJo/T_shirt_4.jpg" alt="T_shirt_4">
+    <img src="https://preview.ibb.co/gAEHW8/T_shirt_5.jpg" alt="T_shirt_5">
+    <img src="https://preview.ibb.co/k2UUdo/T_shirt_6.jpg" alt="T_shirt_6">
+  </div>
+  <h3 class="left-sided">How we make them</h3>
+  <div class="item-line">
+    <iframe id="video" width="560" height="315" src="https://www.youtube.com/embed/y6mTVFTljG4?rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  </div>
+
+  <div id="feature" class="anchor-id"></div>
+  <h1 class="centered">What we offer</h1>
+  <h3>Best Quality of product</h3>
+  <div class="item-line">
+    <p>Heat-transfer printing, also referred to as thermal printing, thermal-transfer printing and thermal-wax transfer, uses heat to transfer an image from wax to an object. Thermal-based printing methods work with pre-printed images on a single wax sheet
+      or produce printed-on-the-fly images made by layering wax dye onto an object. Heat-transfer printing can replace or supplement alternative printing methods.</p>
+    <p>For materials, we use pure cotton white T-shirt as base and the inks we use are all natural color inks, the T-shirts are just best fit for your daily life.</p>
+  </div>
+  <h3>PayPal verified payment</h3>
+  <div class="item-line">
+    <p>We accept PayPal only.</p>
+    <p>All transactions are protected by PayPal, and if there is any discount or refund, they certainly will be handled through PayPal
+  </div>
+  <h3>Fast Shipping</h3>
+  <div class="item-line">
+    <p>After confirming your payment, we need 7 business day to make products according to your requirements, and will ship out once they are ready.</p>
+    <p>All products will be shipped by DHL.</p>
+  </div>
+  <h3>24/7 Customer Service</h3>
+  <div class="item-line">
+    <p>You can reach us through the following channels:</p>
+    <p>
+      <ol>
+        <li>Tel: (852)1234-5678</li>
+        <li>email: admin@houzhenni.com</li>
+        <li>Facebook: <a target="_blank" href="https://www.facebook.com/jenny.hou.1048">Jenny HOU</a></li>
+      </ol>
+    </p>
+  </div>
+
+  <div id="price" class="anchor-id"></div>
+  <h1 class="centered">Choose your order</h1>
+  <h3>Three option of price</h3>
+  <div class="hollow-line" id="price-opt">
+    <div class="price-card">
+      <h3 class="centered">1-10 pc</h3>
+      <p>
+        For order quantity less than or equal to 10, we charge 38 USD for each T-shirt.
+      </p>
+      <p>
+        Shipping cost is 2 usd for each quantity ordered.
+      </p>
+    </div>
+    <div class="price-card">
+      <h3 class="centered">11-50 pc</h3>
+      <p>
+        For order quantity between 11 to 50, we charge 32 USD for each T-shirt.
+      </p>
+      <p>
+        Shipping cost will be 2 USD in total
+      </p>
+    </div>
+    <div class="price-card">
+      <h3 class="centered">51-200 pc</h3>
+      <p>
+        For order quantity between 51 to 200, we charge 30 USD for each T-shirt. 
+      </p>
+      <p>We offer free shipping for this kind of order.</p>
+    </div>
+  </div>
+  <h3>If you want to request quotation for more quantity, please leave your email here.</h3>
+  <div class="hollow-line">
+    <form id="form" action="https://www.freecodecamp.com/email-submit">
+      <input id="email" type="email" name="email" placeholder="Type your email here">
+      <input id="submit" type="submit">
+    </form>
+  </div>
+</main>
+<footer>
+  <p class="centered">Designed by Jenny</p>
+  <p class="centered">2018-07-28</p>
+</footer>
+</body>
+</html>
+

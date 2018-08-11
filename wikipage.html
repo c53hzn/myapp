@@ -29,7 +29,7 @@ body{margin: 0px; background: #003333; text-align: center; min-width: 320px;}
   #searchResultBox{width: 80%;}
 }
 @media all and (max-width: 768px){
-  #searchResultBox{ margin-left: 10px; margin-right: 0px; width: 90%;}
+  #searchResultBox{ margin-left: 10px; margin-right: 25px; width: auto;}
 }
  </style>
 
@@ -64,6 +64,7 @@ $(document).ready(function() {
         $("#searchContent").css("width", "83%");
         $("#closeIcon").css("display", "inline-block");
         $("#searchContent").css("display", "inline-block");
+        $("#searchContent").focus();
       }
       $("#searchBox").css("margin-top", 10);
       $("#searchBox").css("display", "block");
@@ -113,43 +114,48 @@ $(document).ready(function() {
           val +
           "&gsrnamespace=0&gsrlimit=10&callback=?",
         function(data) {
-          var dataArr = data.query.pages;
-          console.log("Data retrieved successfully");
-          console.log(dataArr);
-          var wikiIDs = [];
-          //遍历一个有未知属性的JSON对象并获取所有属性名，此处为所有文章的ID
-          function getAttr(obj) {
-            var arr = [];
-            for (var key in obj) arr.push(key);
-            return arr;
+          if(data.query){
+            var dataArr = data.query.pages;
+            console.log("Data retrieved successfully");
+            console.log(dataArr);
+            var wikiIDs = [];
+            //遍历一个有未知属性的JSON对象并获取所有属性名，此处为所有文章的ID
+            function getAttr(obj) {
+              var arr = [];
+              for (var key in obj) arr.push(key);
+              return arr;
+            }
+            wikiIDs = getAttr(dataArr);
+            console.log(wikiIDs);
+            for (i = 0; i < wikiIDs.length; i++) {
+              var resultTitle = dataArr[wikiIDs[i]].title;
+              //创造节点并赋予内容，此时内容有冗余HTML标签
+              var resultExtract = $("<div></div>").html(
+                dataArr[wikiIDs[i]].extract
+              );
+              //用text()提取内容，可消除所有HTML标签
+              var resultContent =
+                "<div class='searchResultTitle'>" +
+                resultTitle +
+                "</div>" +
+                resultExtract.text();
+              var resultDIV = $('<div class="searchResult"></div>').html(
+                resultContent
+              );
+              var resultURL = $('<a target="_blank"></a>').html(resultDIV);
+              resultURL.attr(
+                "href",
+                "https://en.wikipedia.org/?curid=" + wikiIDs[i]
+              );
+              $("#searchResultBox").append(resultURL);
+            }
+            jQuery (function ($){
+              myFade ($ ("#searchResultBox a:first"));
+            });
+          }else{
+            var resultDIV = $('<div class="searchResult" style="text-align: center;"></div>').html("No Result Found");
+            $("#searchResultBox").append(resultDIV);
           }
-          wikiIDs = getAttr(dataArr);
-          console.log(wikiIDs);
-          for (i = 0; i < wikiIDs.length; i++) {
-            var resultTitle = dataArr[wikiIDs[i]].title;
-            //创造节点并赋予内容，此时内容有冗余HTML标签
-            var resultExtract = $("<div></div>").html(
-              dataArr[wikiIDs[i]].extract
-            );
-            //用text()提取内容，可消除所有HTML标签
-            var resultContent =
-              "<div class='searchResultTitle'>" +
-              resultTitle +
-              "</div>" +
-              resultExtract.text();
-            var resultDIV = $('<div class="searchResult"></div>').html(
-              resultContent
-            );
-            var resultURL = $('<a target="_blank"></a>').html(resultDIV);
-            resultURL.attr(
-              "href",
-              "https://en.wikipedia.org/?curid=" + wikiIDs[i]
-            );
-            $("#searchResultBox").append(resultURL);
-          }
-          jQuery (function ($){
-          	myFade ($ ("#searchResultBox a:first"));
-          });
         }
       );
     }

@@ -16,6 +16,8 @@ I made some applications for real use, some for work, and some for entertainment
 
 * [a pomodoro clock for better time management](https://www.houzhenni.com/myapp/pomodoro.html)
 
+* [a product display page](https://www.houzhenni.com/myapp/productpage.html)
+
 ### Useful tools
 
 * [an alternative way for making daily report](https://www.houzhenni.com/myapp/dailyreport.html)

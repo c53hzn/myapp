@@ -315,6 +315,7 @@ window.onload = function(){
 "=":"https://disqus-api-hzn.000webhostapp.com/calculator/16-equals.mp3",
 "Back":"https://disqus-api-hzn.000webhostapp.com/calculator/17-back.mp3",
 "C":"https://disqus-api-hzn.000webhostapp.com/calculator/18-clear.mp3"};
+
 	
 	for(let k in audioList){
 		let calc_audio = new Audio();
@@ -456,9 +457,9 @@ window.onload = function(){
 			}
 			if(tempAns){
 				console.log("tempAns = " + tempAns);
-				// lastAns = Math.formatFloat(eval(tempAns), 1).toString();
+				lastAns = Math.formatFloat(eval(tempAns), 1).toString();//要使用formatFloat需要把下面两行都注释掉
 				// lastAns = eval(tempAns).toString();
-				lastAns = Number(eval(tempAns));
+				// lastAns = Number(eval(tempAns));
 				currArr = [lastAns];
 				currArr2 = [lastAns];
 				currX = "";
