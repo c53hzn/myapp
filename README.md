@@ -34,4 +34,6 @@ I made some applications for real use, some for work, and some for entertainment
 
 * [another round clock that actually ticks](https://www.houzhenni.com/myapp/xiaomi-clock.html)
 
+* [flexbox layout picture album](https://www.houzhenni.com/myapp/flexalbum.html)
+
 
