@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+	    <meta charset="utf-8" />
+	    <meta name="apple-mobile-web-app-capable" content="yes" />
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	    <title>MineSweeper - 扫雷</title>
+	    <meta id="viewport" name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0" />
+	    <link href="minesweeper-vue.css" rel="stylesheet" type="text/css" />
+	</head>
+    <body>
+    	<div id="app" v-cloak>
+    		<div class="outer-block" :style="{width: line_width + 'px'}">
+    			<div style="display: flex; justify-content: center; margin-bottom: 10px;">
+    				<div class="blocks" :class="gear_class" @mousedown="btn_down('gear_btn')" @mouseup="btn_up('gear_btn')" style="display: block; margin-right: 10px;">
+    					<div class="gearOuter" style="top: -1px; left: -2px;">
+							<div class="gearCircle border-white"></div>
+							<div class="tooth1 bg-white"></div>
+							<div class="tooth2 bg-white"></div>
+							<div class="tooth3 bg-white"></div>
+							<div class="tooth4 bg-white"></div>
+							<div class="tooth5 bg-white"></div>
+							<div class="tooth6 bg-white"></div>
+							<div class="tooth7 bg-white"></div>
+							<div class="tooth8 bg-white"></div>
+						</div>
+    					<div class="gearOuter" style="top: -1px; left: -0.5px;">
+							<div class="gearCircle border-gray"></div>
+							<div class="tooth1 bg-gray"></div>
+							<div class="tooth2 bg-gray"></div>
+							<div class="tooth3 bg-gray"></div>
+							<div class="tooth4 bg-gray"></div>
+							<div class="tooth5 bg-gray"></div>
+							<div class="tooth6 bg-gray"></div>
+							<div class="tooth7 bg-gray"></div>
+							<div class="tooth8 bg-gray"></div>
+						</div>
+    				</div>
+    				<div class="counterOuter" style="width: 40px;">
+						<div id="counter" class="counterInner">{{num_of_mine_left}}</div>
+					</div>
+    				<div class="blocks" :class="face_class" style="display: block; margin: 0px 10px;" @mousedown="btn_down('face')" @mouseup="btn_up('face')">
+	    				<div class="faceOuter">
+							<div class="eyeLeft"></div>
+							<div class="eyeRight"></div>
+							<div class="smileLips"></div>
+						</div>
+	    			</div>
+	    			<div class="blocks" :class="flag_btn_class" style="display: block; margin-right: 10px;" @mousedown="btn_down('flag_btn')" @mouseup="btn_up('flag_btn')">
+	    				<div class="pos-abslt" >
+	    					<div class="flag"></div>
+							<div class="pole"></div>
+							<div class="stand"></div>
+	    				</div>
+	    			</div>
+	    			<div class="counterOuter" style="width: 80px;">
+						<div id="counter" class="counterInner">{{time_spent}}</div>
+					</div>
+    			</div>
+    			<div v-for="(lines, row) in minefield" style="line-height: 0px;">
+	    			<div v-for="(block, col) in lines" :data-row="row" :data-col="col" class="blocks" :class="{untouched: !block.exposed, cleared: block.exposed}" @contextmenu.prevent="add_drop_flag(block)" @click="expose_block(block, row, col)" @dblclick="dblclick_expose(block, row, col)" @touchend="touchend_func(block, row, col)">
+	    				<div class="pos-abslt" :class="{'num-hidden': !block.exposed}" :style="{color: block.color}">{{block.num}}</div>
+	    				<div class="pos-abslt" :class="{'flag-hidden': !block.flagged}">
+	    					<div class="flag"></div>
+							<div class="pole"></div>
+							<div class="stand"></div>
+	    				</div>
+	    				<div class="pos-abslt cross" :class="{'cross-hidden': !block.crossed}">✖</div>
+	    			</div>
+	    		</div>
+    		</div>
+    		<div :class="{'mask-layer': slide_visible}" @click="set_close"></div>
+    		<div class="slide-container" :class="{'hidden': !slide_visible}">
+    			<div class="slides">
+    				<div class="slide-general" :class="slides_class[0]">
+    					<h3>游戏说明</h3>
+    				</div>
+    				<div class="slide-general" :class="slides_class[1]">
+    					<h3>扫雷英雄榜</h3>
+    				</div>
+    				<div class="slide-general" :class="slides_class[2]">
+    					<h3>地雷设置</h3>
+    					<p>输入您想要的地雷数</p>
+    					<p><input type="number" /></p>
+    					<p><input type="button" value="确定"/></p>
+    				</div>
+    			</div>
+    			<div class="slide-to-left" @click="slide_to_left(curr_slide)">&lt;</div>
+    			<div class="slide-to-right" @click="slide_to_right(curr_slide)">&gt;</div>
+    			<p class="return-p"><input type="button" value="返回" @click="set_close"/></p>
+    		</div>
+    	</div>
+	    <script src='vue.min.js'></script>
+	    <script src='minesweeper-vue.js'></script>
+  	</body>
+</html>

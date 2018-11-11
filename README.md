@@ -30,6 +30,8 @@ I made some applications for real use, some for work, and some for entertainment
 
 * [my favorite PC game: minesweeper](https://www.houzhenni.com/myapp/minesweeper.html)
 
+* [a vue powered minesweeper](https://www.houzhenni.com/myapp/minesweeper-vue.html)
+
 * [a round clock that actually ticks](https://www.houzhenni.com/myapp/clock.html)
 
 * [another round clock that actually ticks](https://www.houzhenni.com/myapp/xiaomi-clock.html)

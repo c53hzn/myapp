@@ -1,0 +1,333 @@
+html, body {
+	margin: 0px;
+	width: 100%;
+	height: 100%;
+}
+body {
+	user-select: none;
+	min-width: 320px;
+	background: rgb(192, 192, 192);
+}
+input[type="button"] {
+	padding: 5px 10px;
+	border: none;
+	border-radius: 3px;
+	color: white;
+	background: #2f435e;
+}
+[v-cloak] {
+	display: none;
+}
+#app {
+	height: 100%;
+}
+.mask-layer {
+	position: fixed;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	background: black;
+	opacity: 0.5;
+}
+.outer-block {
+	position: relative;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	margin: auto;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content:center;
+}
+.counterOuter{
+	background-color: black;
+	color: red;
+	line-height: 24px;
+	border: 2px solid rgb(90, 84, 84);
+}
+.counterInner{
+	margin: 2px auto auto auto;
+	padding-right: 8px;
+	vertical-align: bottom;
+	text-align: right;
+}
+.faceOuter{
+	position: absolute;
+	top: 4px;
+	left: 4px;
+	width: 20px;
+	height: 20px;
+	border-radius: 20px;
+	background-color: yellow;
+}
+.eyeLeft{
+	position: absolute;
+	top: 5px;
+	left: 6px;
+	width: 2px;
+	height: 2px;
+	border-radius: 2px;
+	background-color: black;
+}
+.eyeRight{
+	position: absolute;
+	top: 5px;
+	left: 12px;
+	width: 2px;
+	height: 2px;
+	border-radius: 2px;
+	background-color: black;
+}
+.smileLips{
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	width: 10px;
+	height: 10px;
+	border-bottom: 2px solid black;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+.block-line {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 10px;
+	overflow: scroll;
+}
+.blocks {
+	position: relative;
+	user-select: none;
+	margin: 0px;
+	width: 28px;
+	height: 28px;
+	display: inline-block;
+}
+.untouched {
+	border: 2px solid;
+	border-left-color: white;
+	border-top-color: white;
+	border-right-color: rgb(100, 100, 100);
+	border-bottom-color: rgb(100, 100, 100);
+}
+.cleared {
+	border: 2px solid;
+	border-left-color: rgb(119, 119, 119);
+	border-top-color: rgb(119, 119, 119);
+	border-right-color: rgb(159, 159, 159);
+	border-bottom-color: rgb(159, 159, 159);
+}
+.pos-abslt {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	width: 100%;
+	height: 100%;
+	font-weight: bold;
+	line-height: 26px;
+}
+.num-hidden, .cross-hidden, .flag-hidden {
+	opacity: 0;
+}
+.cross {
+	font-size: 24px;
+}
+.flag{
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	width: 0px; 
+	height: 0px; 
+	border-top: 5px solid transparent; 
+	border-right: 10px solid red; 
+	border-bottom: 5px solid transparent;
+}
+.pole{
+	position: absolute;
+	margin: 0px;
+	padding: 0px;
+	border: none;
+	top: 4.5px;
+	left: 14px;
+	width: 2px;
+	height: 16px;
+	background-color: black;
+}
+.stand{
+	position: absolute;
+	margin: 0px;
+	padding: 0px;
+	border: none;
+	top: 19px;
+	left: 7px;
+	width: 13px;
+	height: 2px;
+	background-color: black;
+}
+/*eight-tooth gear CSS start*/
+.gearOuter{
+	position: absolute;
+	/*change size start*/
+	width: 30px;
+	height: 30px;
+	/*change size end*/
+}
+.border-gray {
+	border-color: gray;
+}
+.border-white {
+	border-color: white;
+}
+.gearCircle{
+	position: absolute;
+	top: 16.67%;
+	left: 16.67%;
+	height: 33.33%;
+	width: 33.33%;
+	/*change border width start*/
+	border-width: 5px;
+	border-style: solid;
+	/*border-width must be 1/6 of outer box
+	 *border-width cannot be percentage
+	/*change border width end*/
+	border-radius: 50%;
+}
+.bg-gray {
+	background: gray;
+}
+.bg-white {
+	background: white;
+}
+.tooth1, .tooth2, .tooth3, .tooth4, .tooth5, .tooth6, .tooth7, .tooth8{
+	position: absolute;
+	border-radius: 20%;
+}
+.tooth1{
+	top: 8.5%;
+	left: 41.667%;
+	width: 16.67%;
+	height: 16.67%;
+}
+.tooth2{
+	top: 41.667%;
+	left: 8.5%;
+	width: 16.67%;
+	height: 16.67%;
+}
+.tooth3{
+	transform:rotate(45deg);
+	top: 18%;
+	left: 18%;
+	width: 16.67%;
+	height: 16.67%;
+}
+.tooth4{
+	transform:rotate(-45deg);
+	top: 18%;
+	right: 18%;
+	width: 16.67%;
+	height: 16.67%;
+}
+.tooth5{
+	bottom: 8.5%;
+	right: 41.667%;
+	width: 16.67%;
+	height: 16.67%;
+}
+.tooth6{
+	top: 41.667%;
+	right: 8.5%;
+	width: 16.67%;
+	height: 16.67%;
+}
+.tooth7{
+	transform:rotate(45deg);
+	bottom: 18%;
+	left: 18%;
+	width: 16.67%;
+	height: 16.67%;
+}
+.tooth8{
+	transform:rotate(-45deg);
+	bottom: 18%;
+	right: 18%;
+	width: 16.67%;
+	height: 16.67%;
+}
+/*eight-tooth gear CSS end*/
+.slide-container {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	margin: auto;
+	width: 300px;
+	height: 400px;
+	background: white;
+}
+.hidden {
+	display: none;
+}
+.slides {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	margin: auto;
+	width: 240px;
+	height: 300px;
+	padding: 10px;
+	background: lightblue;
+}
+.slide-general {
+	position: absolute;
+	top: 0px;
+}
+.slide-visible {
+	opacity: 1;
+	z-index: 1;
+	transition: opacity .5s;
+}
+.slide-hidden {
+	opacity: 0;
+	z-index: 0;
+	transition: opacity .5s;
+}
+.slide-to-left, .slide-to-right {
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	margin: auto 0px;
+	width: 40px;
+	height: 40px;
+	color: gray;
+	font-size: 40px;
+	font-weight: bold;
+	line-height: 30px;
+}
+.slide-to-left {
+	left: -20px;
+	text-shadow: 2px 2px 2px silver;
+	text-align: right;
+}
+.slide-to-right {
+	right: -20px;
+	text-shadow: -2px 2px 2px silver;
+	text-align: left;
+}
+.return-p {
+	position: absolute;
+    left: 0px;
+    right: 0px;
+    bottom: -5px;
+    margin: 14px auto;
+    width: 50px;
+    text-align: center;
+}
