@@ -14,6 +14,7 @@ input[type="button"] {
 	border-radius: 3px;
 	color: white;
 	background: #2f435e;
+	cursor: pointer;
 }
 [v-cloak] {
 	display: none;
@@ -311,6 +312,7 @@ input[type="button"] {
 	font-size: 40px;
 	font-weight: bold;
 	line-height: 30px;
+	cursor: pointer;
 }
 .slide-to-left {
 	left: -20px;
