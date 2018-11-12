@@ -74,15 +74,75 @@
     			<div class="slides">
     				<div class="slide-general" :class="slides_class[0]">
     					<h3>游戏说明</h3>
+    					<div style="display: flex; justify-content: left; margin-bottom: 10px;">
+    						<div class="blocks untouched" style="display: block; margin-right: 30px;">
+		    					<div class="gearOuter" style="top: -1px; left: -2px;">
+									<div class="gearCircle border-white"></div>
+									<div class="tooth1 bg-white"></div>
+									<div class="tooth2 bg-white"></div>
+									<div class="tooth3 bg-white"></div>
+									<div class="tooth4 bg-white"></div>
+									<div class="tooth5 bg-white"></div>
+									<div class="tooth6 bg-white"></div>
+									<div class="tooth7 bg-white"></div>
+									<div class="tooth8 bg-white"></div>
+								</div>
+		    					<div class="gearOuter" style="top: -1px; left: -0.5px;">
+									<div class="gearCircle border-gray"></div>
+									<div class="tooth1 bg-gray"></div>
+									<div class="tooth2 bg-gray"></div>
+									<div class="tooth3 bg-gray"></div>
+									<div class="tooth4 bg-gray"></div>
+									<div class="tooth5 bg-gray"></div>
+									<div class="tooth6 bg-gray"></div>
+									<div class="tooth7 bg-gray"></div>
+									<div class="tooth8 bg-gray"></div>
+								</div>
+		    				</div>
+		    				<div style="line-height: 32px;">设置</div>
+    					</div>
+    					<div style="display: flex; justify-content: left; margin-bottom: 10px;">
+    						<div class="counterOuter" style="width: 28px; margin-right: 30px;">
+    							<div id="counter" class="counterInner">10</div>
+    						</div>
+    						<div style="line-height: 32px;">剩余地雷数</div>
+    					</div>
+    					<div style="display: flex; justify-content: left; margin-bottom: 10px;">
+    						<div class="blocks untouched" style="display: block; margin-right: 30px;">
+    							<div class="faceOuter">
+    								<div class="eyeLeft"></div>
+    								<div class="eyeRight"></div>
+    								<div class="smileLips"></div>
+    							</div>
+    						</div>
+    						<div style="line-height: 32px;">开始新一局</div>
+    					</div>
+    					<div style="display: flex; justify-content: left; margin-bottom: 10px;">
+    						<div class="blocks untouched" style="display: block; margin-right: 30px;">
+    							<div class="pos-abslt">
+    								<div class="flag"></div>
+	    							<div class="pole"></div>
+	    							<div class="stand"></div>
+	    						</div>
+	    					</div>
+	    					<div style="line-height: 32px; width: 150px;">按一下可标记地雷，要取消就再按一下</div>
+    					</div>
+    					<div style="display: flex; justify-content: left;">
+    						<div class="counterOuter" style="width: 28px; margin-right: 30px;">
+    							<div id="counter" class="counterInner">0</div>
+    						</div>
+    						<div style="line-height: 32px;">用时</div>
+    					</div>
     				</div>
     				<div class="slide-general" :class="slides_class[1]">
     					<h3>扫雷英雄榜</h3>
+    					<ol v-html="liHTML"></ol>
     				</div>
     				<div class="slide-general" :class="slides_class[2]">
     					<h3>地雷设置</h3>
     					<p>输入您想要的地雷数</p>
-    					<p><input type="number" /></p>
-    					<p><input type="button" value="确定"/></p>
+    					<p><input type="number" min="1" :max="mine_max" @input="get_mine_input(mine_input)" v-model="mine_input"/></p>
+    					<p><input type="button" value="确定" @click="set_mine(mine_input)"/></p>
     				</div>
     			</div>
     			<div class="slide-to-left" @click="slide_to_left(curr_slide)">&lt;</div>
