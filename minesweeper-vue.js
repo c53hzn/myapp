@@ -542,7 +542,14 @@ var app = new Vue({
   		that.slide_visible = false;
   	},
     get_mine_input: function (mine_input) {
-      this.mine_input = mine_input;
+    	var that = this;
+    	if (mine_input < 1) {
+    		that.mine_input = 1;
+    	} else if (mine_input > that.mine_max) {
+    		that.mine_input = that.mine_max;
+    	} else {
+    		that.mine_input = mine_input;
+    	}
     },
     set_mine: function (mine_input) {
       var that = this;
