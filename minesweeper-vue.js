@@ -149,28 +149,38 @@ var app = new Vue({
   		0: "slide-visible",
   		1: "slide-hidden",
   		2: "slide-hidden"
-  	}
+  	},
+    mine_max: 0,
+    mine_input: 0,
+    best_5_score: [],
+    liHTML: "<li>无</li><li>无</li><li>无</li><li>无</li><li>无</li>"
   },
   created: function (){
   	let w = window.innerWidth;
   	let h = window.innerHeight;
   	
   	console.log("w = " + w + "px, h = " + h + "px")
-  	var mine_row, mine_col, num_of_mine;
+  	var mine_row, mine_col, num_of_mine, mine_max, mine_input;
   	if (w < 768) {
   		mine_row = Math.floor(h / 32) - 2;
   		mine_col = Math.floor(w / 32);
   		num_of_mine = 10;
+      mine_input = 10;
+      mine_max = 20;
   	} else {
   		mine_row = Math.floor(h / 32) - 3;
   		mine_col = Math.floor(w / 32) - 4;
   		num_of_mine = 20;
+      mine_input = 20;
+      mine_max = 99;
   	}
   	this.line_width = mine_col * 32;
   	this.mine_row = mine_row;
   	this.mine_col = mine_col;
   	this.num_of_mine = num_of_mine;
+    this.mine_input = mine_input;
   	this.num_of_mine_left = num_of_mine;
+    this.mine_max = mine_max;
   	var mine_matrix = makeMatrix(mine_row, mine_col, num_of_mine);
   	this.minefield = mine_matrix;
   },
@@ -245,28 +255,29 @@ var app = new Vue({
   	},
   	dblclick_expose: function (block, row, col){
   		var that = this;
-  		var minefield = that.minefield;
-  		var block_arr = that.get_other_blocks(minefield, row, col);
-  		var coordinates = that.get_other_coordinates(row, col);
-  		var blk_flagged = 0;
-  		var wrong_flagged = 0;
-  		for (let i = 0; i < 8; i++) {
-  			if (block_arr[i]) {
-  				if (block_arr[i].flagged) {
-	  				blk_flagged++;
-	  				if (!block_arr[i].mine) {
-	  					wrong_flagged++;
-	  				}
-	  			}
-  			}
-  		}
-  		if (wrong_flagged) {
-  			that.mine_exploded();
-  		} else {
-  			if (blk_flagged == block.num) {
-  				that.expose_other(minefield[row][col], row, col);
-  			}
-  		}
+      if (that.flag_btn_status == "off") {
+        var minefield = that.minefield;
+        var block_arr = that.get_other_blocks(minefield, row, col);
+        var blk_flagged = 0;
+        var wrong_flagged = 0;
+        for (let i = 0; i < 8; i++) {
+          if (block_arr[i]) {
+            if (block_arr[i].flagged) {
+              blk_flagged++;
+              if (!block_arr[i].mine) {
+                wrong_flagged++;
+              }
+            }
+          }
+        }
+        if (wrong_flagged) {
+          that.mine_exploded();
+        } else {
+          if (blk_flagged == block.num) {
+            that.expose_other(minefield[row][col], row, col);
+          }
+        }
+      }	
   	},
   	mine_exploded: function (){
   		var that = this;
@@ -286,46 +297,103 @@ var app = new Vue({
   	},
   	get_other_blocks: function (matrix, row, col){
   		var row_len = matrix.length;
+      var col_len = matrix[0].length;
   		var block_arr = [];
   		if (row == 0) {
   			block_arr.push(undefined);
   			block_arr.push(undefined);
   			block_arr.push(undefined);
-  		} else {
-  			block_arr.push(matrix[row - 1][col - 1]);
-	  		block_arr.push(matrix[row - 1][col]);
-	  		block_arr.push(matrix[row - 1][col + 1]);
-  		}
-  		block_arr.push(matrix[row][col - 1]);
-  		block_arr.push(matrix[row][col + 1]);
-  		if (row == row_len - 1) {
-  			block_arr.push(undefined);
-  			block_arr.push(undefined);
-  			block_arr.push(undefined);
-  		} else {
-  			block_arr.push(matrix[row + 1][col - 1]);
-	  		block_arr.push(matrix[row + 1][col]);
-	  		block_arr.push(matrix[row + 1][col + 1]);
-  		}
+        if (col == 0) {
+          block_arr.push(undefined);
+          block_arr.push(matrix[row][col + 1]);
+          block_arr.push(undefined);
+          block_arr.push(matrix[row + 1][col]);
+          block_arr.push(matrix[row + 1][col + 1]);
+        } else if (col == col_len - 1) {
+          block_arr.push(matrix[row][col - 1]);
+          block_arr.push(undefined);
+          block_arr.push(matrix[row + 1][col - 1]);
+          block_arr.push(matrix[row + 1][col]);
+          block_arr.push(undefined);
+        } else {
+          block_arr.push(matrix[row][col - 1]);
+          block_arr.push(matrix[row][col + 1]);
+          block_arr.push(matrix[row + 1][col - 1]);
+          block_arr.push(matrix[row + 1][col]);
+          block_arr.push(matrix[row + 1][col + 1]);
+        }
+  		} else if (row == row_len - 1) {
+        if (col == 0) {
+          block_arr.push(undefined);
+          block_arr.push(matrix[row - 1][col]);
+          block_arr.push(matrix[row - 1][col + 1]);
+          block_arr.push(undefined);
+          block_arr.push(matrix[row][col + 1]);
+        } else if (col == col_len - 1) {
+          block_arr.push(matrix[row - 1][col - 1]);
+          block_arr.push(matrix[row - 1][col]);
+          block_arr.push(undefined);
+          block_arr.push(matrix[row][col - 1]);
+          block_arr.push(undefined);
+        } else {
+          block_arr.push(matrix[row - 1][col - 1]);
+          block_arr.push(matrix[row - 1][col]);
+          block_arr.push(matrix[row - 1][col + 1]);
+          block_arr.push(matrix[row][col - 1]);
+          block_arr.push(matrix[row][col + 1]);
+        }
+        block_arr.push(undefined);
+        block_arr.push(undefined);
+        block_arr.push(undefined);
+      } else {
+        if (col == 0) {
+          block_arr.push(undefined);
+          block_arr.push(matrix[row - 1][col]);
+          block_arr.push(matrix[row - 1][col + 1]);
+          block_arr.push(undefined);
+          block_arr.push(matrix[row][col + 1]);
+          block_arr.push(undefined);
+          block_arr.push(matrix[row + 1][col]);
+          block_arr.push(matrix[row + 1][col + 1]);
+        } else if (col == col_len - 1) {
+          block_arr.push(matrix[row - 1][col - 1]);
+          block_arr.push(matrix[row - 1][col]);
+          block_arr.push(undefined);
+          block_arr.push(matrix[row][col - 1]);
+          block_arr.push(undefined);
+          block_arr.push(matrix[row + 1][col - 1]);
+          block_arr.push(matrix[row + 1][col]);
+          block_arr.push(undefined);
+        } else {
+          block_arr.push(matrix[row - 1][col - 1]);
+          block_arr.push(matrix[row - 1][col]);
+          block_arr.push(matrix[row - 1][col + 1]);
+          block_arr.push(matrix[row][col - 1]);
+          block_arr.push(matrix[row][col + 1]);
+          block_arr.push(matrix[row + 1][col - 1]);
+          block_arr.push(matrix[row + 1][col]);
+          block_arr.push(matrix[row + 1][col + 1]);
+        }
+      }
   		return block_arr;
   	},
-  	get_other_coordinates: function (row, col){
-  		var coordinates = [];
-  		coordinates.push([row - 1, col - 1]);
-  		coordinates.push([row - 1, col]);
-  		coordinates.push([row - 1, col + 1]);
-  		coordinates.push([row, col - 1]);
-  		coordinates.push([row, col + 1]);
-  		coordinates.push([row + 1, col - 1]);
-  		coordinates.push([row + 1, col]);
-  		coordinates.push([row + 1, col + 1]);
-  		return coordinates;
-  	},
+    get_other_coordinates: function (row, col){
+      var coordinates = [];
+      coordinates.push([row - 1, col - 1]);
+      coordinates.push([row - 1, col]);
+      coordinates.push([row - 1, col + 1]);
+      coordinates.push([row, col - 1]);
+      coordinates.push([row, col + 1]);
+      coordinates.push([row + 1, col - 1]);
+      coordinates.push([row + 1, col]);
+      coordinates.push([row + 1, col + 1]);
+      return coordinates;
+    },
   	btn_down: function (btn){
   		var that = this;
   		if (btn == "face" && that.face_class == "untouched") {
   			that.face_class = "cleared";
-  		} else if (btn == "flag_btn" && that.flag_btn_class == "untouched") {
+  		} else if (btn == "flag_btn" && that.flag_btn_class == "untouched" && that.game_on) {
   			that.flag_btn_class = "cleared";
   		} else if (btn == "gear_btn" && that.gear_class == "untouched") {
   			that.gear_class = "cleared";
@@ -338,14 +406,14 @@ var app = new Vue({
   		if (btn == "face" && that.face_class == "cleared") {
   			that.face_class = "untouched";
   			var mine_matrix = makeMatrix(mine_row, mine_col, that.num_of_mine);
-			this.minefield = mine_matrix;
-			that.game_on = true;
-			that.num_of_mine_left = that.num_of_mine;
-			that.clear_timeout();
-			that.time_spent = 0;
-  		} else if (btn == "flag_btn" && that.flag_btn_status == "off") {
+  			that.minefield = mine_matrix;
+  			that.game_on = true;
+  			that.num_of_mine_left = that.num_of_mine;
+  			that.clear_timeout();
+  			that.time_spent = 0;
+  		} else if (btn == "flag_btn" && that.flag_btn_status == "off" && that.game_on) {
   			that.flag_btn_status = "on";
-  		} else if (btn == "flag_btn" && that.flag_btn_status == "on") {
+  		} else if (btn == "flag_btn" && that.flag_btn_status == "on" && that.game_on) {
   			that.flag_btn_class = "untouched";
   			that.flag_btn_status = "off";
   		} else if (btn == "gear_btn" && that.gear_class == "cleared") {
@@ -380,8 +448,27 @@ var app = new Vue({
   				that.minefield[coordinates[k][0]][coordinates[k][1]].flagged = true;
   			}
   			that.num_of_mine_left = 0;
-  			console.log(that.timer)
   			that.clear_timeout();
+
+        /*扫雷英雄榜*/
+        that.best_5_score.push(that.time_spent);
+        function sortNumber(a, b) {
+          return a - b
+        }
+        that.best_5_score.sort(sortNumber);
+        if (that.best_5_score.length == 6) {
+          that.best_5_score.pup();
+        }
+        var liStr = "";
+        for (let m = 0; m < 5; m++) {
+          if (that.best_5_score[m]) {
+            liStr = liStr + "<li>" + that.best_5_score[m] + " 秒</li>";
+          } else {
+            liStr += "<li>无</li>";
+          }
+        }
+        that.liHTML = liStr;
+        /*扫雷英雄榜*/
   		}
   	},
   	timer_func: function (){
@@ -411,11 +498,11 @@ var app = new Vue({
   		} else {
   			var time_now = new Date();
   			var time_passed = time_now - that.last_touchend;
-  			if (time_passed < 400 && that.block_touched[0] == row && that.block_touched[1] == col) {
+  			if (time_passed < 500 && that.block_touched[0] == row && that.block_touched[1] == col) {
   				that.dblclick_expose(block, row, col);
   			}
   			that.block_touched = [row,col];
-			that.last_touchend = time_now;
+        that.last_touchend = time_now;
   		}
   	},
   	slide_to_left: function (curr_slide){
@@ -453,8 +540,23 @@ var app = new Vue({
   	set_close: function (){
   		var that = this;
   		that.slide_visible = false;
-  	}
+  	},
+    get_mine_input: function (mine_input) {
+      this.mine_input = mine_input;
+    },
+    set_mine: function (mine_input) {
+      var that = this;
+      that.num_of_mine = mine_input;
+      var mine_row = that.mine_row;
+      var mine_col = that.mine_col;
+      var mine_matrix = makeMatrix(mine_row, mine_col, that.num_of_mine);
+      that.minefield = mine_matrix;
+      that.game_on = true;
+      that.num_of_mine_left = that.num_of_mine;
+      that.clear_timeout();
+      that.time_spent = 0;
+      that.set_close();
+    }
   }
 })
-
 
