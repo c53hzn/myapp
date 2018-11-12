@@ -141,7 +141,7 @@
     				<div class="slide-general" :class="slides_class[2]">
     					<h3>地雷设置</h3>
     					<p>输入您想要的地雷数</p>
-    					<p><input type="number" style="width: 40px;" min="1" :max="mine_max" @input="get_mine_input(mine_input)" v-model="mine_input"/></p>
+    					<p><input type="number" style="width: 40px;" min="1" :max="mine_max" @input="get_mine_input(mine_input)" @keyup.enter="set_mine(mine_input)" v-model="mine_input"/></p>
     					<p><input type="button" value="确定" @click="set_mine(mine_input)"/></p>
     				</div>
     			</div>

@@ -197,6 +197,9 @@ var app = new Vue({
 						that.num_of_mine_left--;
 					}
 				}
+				if (!that.time_start) {
+					that.timer_func();
+				}
 			}
 		},
 		expose_block: function (block, row, col) {
@@ -547,7 +550,9 @@ var app = new Vue({
 		},
 		get_mine_input: function (mine_input) {
 			var that = this;
-			if (mine_input < 1) {
+			if (mine_input === "") {
+				return;
+			} else if (mine_input < 1) {
 				that.mine_input = 1;
 			} else if (mine_input > that.mine_max) {
 				that.mine_input = that.mine_max;
