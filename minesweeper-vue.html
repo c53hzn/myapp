@@ -45,6 +45,11 @@
 							<div class="eyeRight"></div>
 							<div class="smileLips"></div>
 						</div>
+						<div class="glass_outer" :class="{hidden: notWinning}">
+							<div class="glass_left"></div>
+							<div class="glass_middle"></div>
+							<div class="glass_right"></div>
+						</div>
 	    			</div>
 	    			<div class="blocks" :class="flag_btn_class" style="display: block; margin-right: 10px;" @mousedown="btn_down('flag_btn')" @mouseup="btn_up('flag_btn')">
 	    				<div class="pos-abslt" >
@@ -135,10 +140,20 @@
     					</div>
     				</div>
     				<div class="slide-general" :class="slides_class[1]">
-    					<h3>扫雷英雄榜</h3>
-    					<ol v-html="liHTML"></ol>
+    					<h3>游戏说明</h3>
+    					<ol style="margin-right: 20px;">
+    						<li>打开页面时会自动生成适应设备屏幕尺寸的雷区和地雷数</li>
+    						<li>电脑端可右击未翻开的方块对其进行标记或取消标记</li>
+    						<li>鼠标双击数字与周围标记雷数相符的方块，可自动翻开其他方块</li>
+    						<li>移动端可用手指双击达到第3条的效果</li>
+    					</ol>
     				</div>
     				<div class="slide-general" :class="slides_class[2]">
+    					<h3>扫雷英雄榜</h3>
+    					<ol v-html="liHTML"></ol>
+    					<p><input type="button" value="重置" @click="reset_score"/></p>
+    				</div>
+    				<div class="slide-general" :class="slides_class[3]">
     					<h3>地雷设置</h3>
     					<p>输入您想要的地雷数</p>
     					<p><input type="number" style="width: 40px;" min="1" :max="mine_max" @input="get_mine_input(mine_input)" @keyup.enter="set_mine(mine_input)" v-model="mine_input"/></p>
