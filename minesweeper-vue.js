@@ -94,7 +94,7 @@ function minesweeper(matrix) {
 
 function makeMatrix(a, b, c) { //a是row，b是col, c是雷数
 	console.log("a = " + a + ", b = " + b)
-	if (c > a * b - 1) {
+	if (c > (a-1) * (b-1) - 1) {
 		alert("雷区太小，地雷太多，没法玩啦");
 		return;
 	}
@@ -157,7 +157,7 @@ var app = new Vue({
 		liHTML: "<li>无</li><li>无</li><li>无</li><li>无</li><li>无</li>",
 		notWinning: true
 	},
-	created: function () {
+	mounted: function () {
 		let w = window.innerWidth;
 		let h = window.innerHeight;
 
@@ -411,7 +411,36 @@ var app = new Vue({
 				}
 			}
 			if (blk_remained == that.num_of_mine) {
-				console.log("you win")
+				if (that.game_on) {
+					/*扫雷英雄榜*/
+					/*
+					*由于翻开一大片的时候
+					*每翻开一个都会检测一下
+					*此时如果已经赢了
+					*会产生冗余的成绩
+					*所以限制一下
+					*/
+					that.best_5_score.push(that.time_spent);
+
+					function sortNumber(a, b) {
+						return a - b
+					}
+					that.best_5_score.sort(sortNumber);
+					if (that.best_5_score.length == 6) {
+						that.best_5_score.pop();
+					}
+					var liStr = "";
+					for (let m = 0; m < 5; m++) {
+						if (that.best_5_score[m] === 0 || that.best_5_score[m] > 0) {
+							liStr = liStr + "<li>" + that.best_5_score[m] + " 秒</li>";
+						} else {
+							liStr += "<li>无</li>";
+						}
+					}
+					that.liHTML = liStr;
+					/*扫雷英雄榜*/
+					console.log("you win")
+				}
 				that.game_on = false;
 				that.notWinning = false;
 				for (let k = 0; k < coordinates.length; k++) {
@@ -419,27 +448,6 @@ var app = new Vue({
 				}
 				that.num_of_mine_left = 0;
 				that.clear_timeout();
-
-				/*扫雷英雄榜*/
-				that.best_5_score.push(that.time_spent);
-
-				function sortNumber(a, b) {
-					return a - b
-				}
-				that.best_5_score.sort(sortNumber);
-				if (that.best_5_score.length == 6) {
-					that.best_5_score.pop();
-				}
-				var liStr = "";
-				for (let m = 0; m < 5; m++) {
-					if (that.best_5_score[m]) {
-						liStr = liStr + "<li>" + that.best_5_score[m] + " 秒</li>";
-					} else {
-						liStr += "<li>无</li>";
-					}
-				}
-				that.liHTML = liStr;
-				/*扫雷英雄榜*/
 			}
 		},
 		timer_func: function () {
