@@ -120,6 +120,7 @@ function makeMatrix(a, b, c) { //a是row，b是col, c是雷数
 	}
 	//返回的object矩阵里的雷已经设置好了，但是数字还是-1
 	var matrix_with_mine = minesweeper(matrix);
+	//现在数字都齐全了
 	return matrix_with_mine;
 }
 
