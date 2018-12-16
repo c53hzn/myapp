@@ -26,6 +26,8 @@ I made some applications for real use, some for work, and some for entertainment
 
 * [Image size checker](https://www.houzhenni.com/myapp/image-size-checker.html)
 
+* [A VueJS powered Carousel](https://www.houzhenni.com/myapp/carousel-vue.html)
+
 ### Interesting things
 
 * [my favorite PC game: minesweeper](https://www.houzhenni.com/myapp/minesweeper.html)
