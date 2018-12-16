@@ -1,0 +1,192 @@
+{
+	"section_order": {
+		"0": "personal_info",
+		"1": "seeking_job_for",
+		"2": "personal_desc",
+		"3": "education",
+		"4": "award_n_scholarship",
+		"5": "personal_skill",
+		"6": "work_exp",
+		"7": "project_exp",
+		"8": "portfolio"
+	},"personal_info": {
+		"full_name": "Jenny Zhenni HOU",
+		"gender": "female",
+		"age": "28",
+		"location": "Hong Kong",
+		"year_of_exp": "4",
+		"phone_no": "51346809",
+		"email": "hznfantasy@gmail.com"
+	},
+	"seeking_job_for": {
+		"job_title": "Front-End Developer",
+		"job_location": "Hong Kong"
+	},
+	"personal_desc": "Know several E-Commerce platforms operation and familiar with the related product page requirements\nProficent in Excel formulas and short-cuts, can process data quickly and efficiently\n4-year of multi-lingual workspace experience, can be a key coordinator in a team",
+	"education": [
+		{
+			"start_year": "2017",
+			"start_month": "Nov",
+			"end_year": "2018",
+			"end_month": "Aug",
+			"school": "FreeCodeCamp",
+			"award_name": "Front-End Libraries Certification",
+			"award_nature": "Online Education"
+		},
+		{
+			"start_year": "2017",
+			"start_month": "Nov",
+			"end_year": "2018",
+			"end_month": "Jul",
+			"school": "FreeCodeCamp",
+			"award_name": "Responsive Web Design Certification",
+			"award_nature": "Online Education"
+		},
+		{
+			"start_year": "2013",
+			"start_month": "Sep",
+			"end_year": "2014",
+			"end_month": "Nov",
+			"school": "Hong Kong Polytechnic University",
+			"award_name": "MA in Japanese Studies for the Professions",
+			"award_nature": "Master's Degree"
+		},
+		{
+			"start_year": "2009",
+			"start_month": "Sep",
+			"end_year": "2013",
+			"end_month": "Jun",
+			"school": "Fuyang Teachers College",
+			"award_name": "BA in Japanese",
+			"award_nature": "Bachelor's degree"
+		}
+	],
+	"personal_skill": [
+		{
+			"skill_type": "Communication",
+			"skill_itm": [
+				{
+					"skill_name": "Oral Languages",
+					"skill_desc": "Japanese N1 Certificate, English CET-6, Native in Mandarin and Cantonese Chinese"
+				},
+				{
+					"skill_name": "Written Languages",
+					"skill_desc": "Excellent Chi/Jap/Eng business writing, able to switch from Traditional and Simplified Chinese quickly"
+				}
+			]
+		},
+		{
+			"skill_type": "Front-End Skills",
+			"skill_itm": [
+				{
+					"skill_name": "Programming Languages",
+					"skill_desc": "HTML, CSS, JavaScript"
+				},
+				{
+					"skill_name": "Front-End Libraries",
+					"skill_desc": "jQuery, BootStrap, VueJS"
+				}
+			]
+		},
+		{
+			"skill_type": "Computer Skills",
+			"skill_itm": [
+				{
+					"skill_name": "Batch Process",
+					"skill_desc": "copy, xcopy, dir, ren, etc"
+				},
+				{
+					"skill_name": "Visual Graphic/ Multi-Media",
+					"skill_desc": "Photoshop, Goldwave, ijianji"
+				},
+				{
+					"skill_name": "Office Software",
+					"skill_desc": "Word, Powerpoint, Excel\nHigh level formula and data processing, including SUM, IF, VLOOKUP, Data Validation, Pivot, Conditional Formatting, etc"
+				}
+			]
+		}
+	],
+	"work_exp": [
+		{
+			"start_year": "2017",
+			"start_month": "Apr",
+			"end_year": "-",
+			"end_month": "-",
+			"company": "Holistic Technology Company Ltd",
+			"Title": "Senior Customer Relationship Officer",
+			"job_duty_itm": [
+				{
+					"duty_name": "Multi-Channel Customer Support",
+					"duty_desc": "aaaaa\nbbbbbbb"
+				},
+				{
+					"duty_name": "Regular Online Webinar Hosting",
+					"duty_desc": "aaaaa\nbbbbbbb"
+				},
+				{
+					"duty_name": "User Document Writing",
+					"duty_desc": "aaaaa\nbbbbbbb"
+				},
+				{
+					"duty_name": "System Optimization",
+					"duty_desc": "aaaaa\nbbbbbbb"
+				}
+			]
+		},
+		{
+			"start_year": "2015",
+			"start_month": "Mar",
+			"end_year": "2016",
+			"end_month": "10",
+			"company": "Brand Off Ltd",
+			"Title": "E-Commerce Assistant",
+			"job_duty_itm": [
+				{
+					"duty_name": "Platform Operation",
+					"duty_desc": "aaaaa\nbbbbbbb"
+				},
+				{
+					"duty_name": "Brand Auction Support",
+					"duty_desc": "aaaaa\nbbbbbbb"
+				}
+			]
+		}
+	],
+	"project_exp": [
+		{
+			"start_year": "2018",
+			"start_month": "Feb",
+			"end_year": "-",
+			"end_month": "-",
+			"company": "Holistic Technology Company Ltd",
+			"Title": "Project Leader",
+			"job_duty_itm": [
+				{
+					"duty_name": "Platform Operation",
+					"duty_desc": "aaaaa\nbbbbbbb"
+				},
+				{
+					"duty_name": "Brand Auction Support",
+					"duty_desc": "aaaaa\nbbbbbbb"
+				}
+			]
+		}
+	],
+	"portfolio": [
+		{
+			"name": "Github page",
+			"link_desc": "https://github.com/houzhenni",
+			"link_href": "https://github.com/houzhenni"
+		},
+		{
+			"name": "Codepen page",
+			"link_desc": "https://codepen.io/houzhenni",
+			"link_href": "https://codepen.io/houzhenni"
+		},
+		{
+			"name": "Personal Website",
+			"link_desc": "https://www.houzhenni.com",
+			"link_href": "https://www.houzhenni.com"
+		}
+	]
+}
