@@ -10,19 +10,19 @@
 		"7": "project_exp",
 		"8": "portfolio"
 	},"personal_info": {
-		"full_name": "Jenny Zhenni HOU",
-		"gender": "female",
-		"age": "28",
+		"full_name": "Jane Doe",
+		"gender": "Female",
+		"age": "99",
 		"location": "Hong Kong",
 		"year_of_exp": "4",
-		"phone_no": "51346809",
-		"email": "hznfantasy@gmail.com"
+		"phone_no": "12345678",
+		"email": "12345678@gmail.com"
 	},
 	"seeking_job_for": {
 		"job_title": "Front-End Developer",
 		"job_location": "Hong Kong"
 	},
-	"personal_desc": "Know several E-Commerce platforms operation and familiar with the related product page requirements\nProficent in Excel formulas and short-cuts, can process data quickly and efficiently\n4-year of multi-lingual workspace experience, can be a key coordinator in a team",
+	"personal_desc": "Knows several E-Commerce platforms operation and familiar with the related product page requirements\nProficent in Excel formulas and short-cuts, can process data quickly and efficiently\n4-year of multi-lingual workspace experience, can be a key coordinator in a team",
 	"education": [
 		{
 			"start_year": "2017",
@@ -47,8 +47,8 @@
 			"start_month": "Sep",
 			"end_year": "2014",
 			"end_month": "Nov",
-			"school": "Hong Kong Polytechnic University",
-			"award_name": "MA in Japanese Studies for the Professions",
+			"school": "Hong Kong - University",
+			"award_name": "MA in -",
 			"award_nature": "Master's Degree"
 		},
 		{
@@ -56,8 +56,8 @@
 			"start_month": "Sep",
 			"end_year": "2013",
 			"end_month": "Jun",
-			"school": "Fuyang Teachers College",
-			"award_name": "BA in Japanese",
+			"school": "- College",
+			"award_name": "BA in -",
 			"award_nature": "Bachelor's degree"
 		}
 	],
@@ -112,7 +112,7 @@
 			"start_month": "Apr",
 			"end_year": "-",
 			"end_month": "-",
-			"company": "Holistic Technology Company Ltd",
+			"company": "- Ltd",
 			"Title": "Senior Customer Relationship Officer",
 			"job_duty_itm": [
 				{
@@ -138,7 +138,7 @@
 			"start_month": "Mar",
 			"end_year": "2016",
 			"end_month": "10",
-			"company": "Brand Off Ltd",
+			"company": "- Ltd",
 			"Title": "E-Commerce Assistant",
 			"job_duty_itm": [
 				{
@@ -146,7 +146,7 @@
 					"duty_desc": "aaaaa\nbbbbbbb"
 				},
 				{
-					"duty_name": "Brand Auction Support",
+					"duty_name": "Auction Support",
 					"duty_desc": "aaaaa\nbbbbbbb"
 				}
 			]
@@ -158,7 +158,7 @@
 			"start_month": "Feb",
 			"end_year": "-",
 			"end_month": "-",
-			"company": "Holistic Technology Company Ltd",
+			"company": "- Ltd",
 			"Title": "Project Leader",
 			"job_duty_itm": [
 				{
@@ -166,7 +166,7 @@
 					"duty_desc": "aaaaa\nbbbbbbb"
 				},
 				{
-					"duty_name": "Brand Auction Support",
+					"duty_name": "Auction Support",
 					"duty_desc": "aaaaa\nbbbbbbb"
 				}
 			]
