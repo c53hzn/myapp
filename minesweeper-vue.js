@@ -546,6 +546,7 @@ var app = new Vue({
 			that.game_on = true;
 			that.time_spent = 0;
 			that.set_close();
+			that.notWinning = true;
 		},
 		reset_score: function (){
 			var that = this;
