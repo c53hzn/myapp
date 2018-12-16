@@ -29,6 +29,7 @@ body {
 	right: 0px;
 	bottom: 0px;
 	margin: 10px;
+	overflow: hidden;
 }
 .slide-general {
 	position: absolute;
@@ -58,8 +59,8 @@ body {
 	top: 0px;
 	bottom: 0px;
 	margin: auto 0px;
-	width: 40px;
-	height: 40px;
+	width: 34px;
+	height: 36px;
 	color: black;
 	font-size: 40px;
 	font-weight: bold;
@@ -68,10 +69,20 @@ body {
 	background: rgba(255, 255, 255, 0.3);
 	cursor: pointer;
 	z-index: 1;
+	transform: translateX(0px);
+	transition: transform .5s;
 }
 .slide-to-left {
-	left: 0px;	
+	left: 0px;
 }
 .slide-to-right {
 	right: 0px;
+}
+.slide-to-left-off {
+	transform: translateX(-34px);
+	transition: transform .5s;
+}
+.slide-to-right-off {
+	transform: translateX(34px);
+	transition: transform .5s;
 }

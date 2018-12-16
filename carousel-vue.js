@@ -11,20 +11,26 @@ var app = new Vue({
 			4: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542542514935&di=582ce1b4c0046da6cc25a7eef3f67133&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2Fdbb44aed2e738bd4e0bd340aaa8b87d6277ff969.jpg",
 			5: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542542514933&di=8127b1d4e5c828f203e8f5c99ddb5997&imgtype=0&src=http%3A%2F%2Fpic40.photophoto.cn%2F20160822%2F0011024058227686_b.jpg"
 		},
-		slides_class: {
-			0: "slide-visible",
-			1: "slide-hidden",
-			2: "slide-hidden",
-			3: "slide-hidden",
-			4: "slide-hidden",
-			5: "slide-hidden"
-		},
+		slides_class: {},
 		slide_auto_play_status: true,
 		slide_play_time: 2000,
 		slide_timer: null
 	},
 	mounted: function () {
-		this.slide_auto_play();
+		var that = this;
+		var pics = that.slides_pics;
+		var num_of_pics = 0;
+		var slides_class = {};
+		for (var key in pics) {
+			num_of_pics++;
+			if (num_of_pics == 1) {
+				slides_class[0] = "slide-visible";
+			} else {
+				slides_class[num_of_pics - 1] = "slide-hidden";
+			}
+		}
+		that.slides_class = slides_class;
+		that.slide_auto_play();
 	},
 	methods: {
 		slide_to_left: function (curr_slide) {
@@ -70,10 +76,13 @@ var app = new Vue({
 		},
 		slide_clear_play: function () {
 			clearTimeout(this.slide_timer);
+			this.slide_timer = null;
 		},
 		slide_resume_play: function (){
 			var that = this;
-			that.slide_timer = setTimeout(that.slide_auto_play, that.slide_play_time + 500);
+			if (that.slide_auto_play_status) {
+				that.slide_timer = setTimeout(that.slide_auto_play, that.slide_play_time + 500);
+			}
 		}
 	}
 })

@@ -16,9 +16,9 @@
     				<div class="slide-general" v-for="pic, index in slides_pics"  :class="slides_class[index]">
     					<img :src="pic"/>
     				</div>
+                    <div class="slide-to-left" :class="{'slide-to-left-off': slide_timer}" @click="slide_to_left(curr_slide)">&lt;</div>
+                    <div class="slide-to-right" :class="{'slide-to-right-off': slide_timer}" @click="slide_to_right(curr_slide)">&gt;</div>
     			</div>
-    			<div class="slide-to-left" @click="slide_to_left(curr_slide)">&lt;</div>
-    			<div class="slide-to-right" @click="slide_to_right(curr_slide)">&gt;</div>
     		</div>
     	</div>
 	    <script src='vue.min.js'></script>
