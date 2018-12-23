@@ -11,9 +11,10 @@ window.onload = function(){
         },
         methods: {
             get: function(url) {
+                var that = this;
                 //发送get请求
-                this.$http.get(url).then(function(res) {
-                    console.log(res.body)
+                that.$http.get(url).then(function(res) {
+                    that.my_resume = res.body;
                 },
                 function() {
                     console.log('请求失败处理');
