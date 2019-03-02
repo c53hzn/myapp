@@ -156,7 +156,9 @@ var app = new Vue({
 		mine_input: 0,
 		best_5_score: [],
 		liHTML: "<li>无</li><li>无</li><li>无</li><li>无</li><li>无</li>",
-		notWinning: true
+		notWinning: true,
+		leftBtnUp: false,
+		rightBtnUp: false
 	},
 	mounted: function () {
 		let w = window.innerWidth;
@@ -282,6 +284,26 @@ var app = new Vue({
 						that.expose_other(minefield[row][col], row, col);
 					}
 				}
+			}
+		},
+		leftRightClk: function (block, row, col) {
+			var that = this;
+			if (event.button === 0) {
+				that.leftBtnUp = true;
+				if (that.rightBtnUp) {
+					that.dblclick_expose(block, row, col);
+				}
+				setTimeout(function() {
+					that.leftBtnUp = false;
+				}, 100);
+			} else if (event.button === 2) {
+				that.rightBtnUp = true;
+				if (that.leftBtnUp) {
+					that.dblclick_expose(block, row, col);
+				}
+				setTimeout(function() {
+					that.rightBtnUp = false;
+				});
 			}
 		},
 		mine_exploded: function () {

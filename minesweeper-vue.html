@@ -64,7 +64,7 @@
 					</div>
     			</div>
     			<div v-for="(lines, row) in minefield" style="line-height: 0px;">
-	    			<div v-for="(block, col) in lines" :data-row="row" :data-col="col" class="blocks" :class="{untouched: !block.exposed, cleared: block.exposed}" @contextmenu.prevent="add_drop_flag(block)" @click="expose_block(block, row, col)" @dblclick="dblclick_expose(block, row, col)" @touchend="touchend_func(block, row, col)">
+	    			<div v-for="(block, col) in lines" :data-row="row" :data-col="col" class="blocks" :class="{untouched: !block.exposed, cleared: block.exposed}" @contextmenu.prevent="add_drop_flag(block)" @click="expose_block(block, row, col)" @mouseup="leftRightClk(block, row, col)" @touchend="touchend_func(block, row, col)">
 	    				<div class="pos-abslt" :class="{'num-hidden': !block.exposed}" :style="{color: block.color}">{{block.num}}</div>
 	    				<div class="pos-abslt" :class="{'flag-hidden': !block.flagged}">
 	    					<div class="flag"></div>
@@ -145,7 +145,7 @@
     					<ol style="margin-right: 20px;">
     						<li>打开页面时会自动生成适应设备屏幕尺寸的雷区和地雷数</li>
     						<li>电脑端可右击未翻开的方块对其进行标记或取消标记</li>
-    						<li>鼠标双击数字与周围标记雷数相符的方块，可自动翻开其他方块</li>
+    						<li>若确定某个已翻开的方块周围的地雷都已标记，同时点击鼠标左键和右键可翻开剩余方块</li>
     						<li>移动端可用手指双击达到第3条的效果</li>
     					</ol>
     				</div>
