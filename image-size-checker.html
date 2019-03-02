@@ -5,11 +5,17 @@
   <meta charset="UTF-8">
   <title>Image size checker</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
- <style>
+<style>
 html, body{
   width: 100%;
   margin: 0px;
 }
+body{
+	background: #ffeaa7;
+}
+::-ms-clear{display: none;}
+::-ms-reveal{display: none;}
+::-o-clear{display: none;}
 #container{
 	width: 80%;
 	margin: 20px auto;
@@ -27,36 +33,55 @@ html, body{
 	max-height: 80px;
 	min-height: 80px;
 }
-</style>
-</head>
+    </style>
 
+  
+  
+  
+  
+
+</head>
 <body translate="no" >
-<div id="container">
+  <div id="container">
 	<h3>Image Size Checker for eBay</h3>
-	<h5>eBay require sellers to use pictures bigger than 500 x 500 px, check if your pics are qualified here</h5>
+	<h5>eBay requires sellers to use pictures bigger than 500 x 500 px, check if your pics are qualified here</h5>
 	<p>How to check:<br>
 		Seperate your image URLs with ";"(semicolon) or white space, both are acceptable.<br>
 		Put your URLs in the box and press "Get Size".<br>
 		Picture smaller than <strong>500 x 500 px</strong> will stand out with red border and red text.
 	</p>
-	<input id="myImg" value="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1495785/profile/profile-80.jpg;https://www.houzhenni.com/myassets/starry-night.jpg" type="text"/>
-	<p></p>
-	<button id="getSize">Get Size</button>
-	<p></p>
+	<p>Image URLs to be examined: </p>
+	<p>
+		<input id="myImg" value="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1495785/profile/profile-80.jpg;https://www.houzhenni.com/myassets/starry-night.jpg;https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2419928724,3244806497&fm=27&gp=0.jpg" type="text"/>
+	</p>
+	<p>
+		<button id="getSize">Get Size</button>
+	</p>
+	<p>Failed image URLs: </p>
+	<p>
+		<textarea id="failedImg" style="width: 99.5%; height: 80px;">https://s3-us-west-2.amazonaws.com/s.cdpn.io/1495785/profile/profile-80.jpg
+https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2419928724,3244806497&fm=27&gp=0.jpg</textarea>
+	</p>
+	<p>All images: </p>
 	<div id="imgOutput">
 		<p><img style="border: 2px solid red;" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1495785/profile/profile-80.jpg" /><span style="color: red;">Picture 1: w 80 x h 80 px</span></p>
-		<p><img style="border: 2px black solid;" src="https://www.houzhenni.com/myassets/starry-night.jpg" /><span>Picture 2: w 1280 x h 1014 px</span>
+		<p><img style="border: 2px black solid;" src="https://www.houzhenni.com/myassets/starry-night.jpg" /><span>Picture 2: w 1280 x h 1014 px</span></p>
+		<p><img style="border: 2px solid red;" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2419928724,3244806497&fm=27&gp=0.jpg" /><span style="color: red;">Picture 1: w 320 x h 320 px</span></p>
 	</div>
 </div>
   
+  
+  
+
 <script >
+var needCopy = true;
 var myImg = document.getElementById("myImg");
 myImg.onfocus = function(){
 	this.select();
 }
 var getSize = document.getElementById("getSize");
 myImg.onkeydown = function(e){
-	if(e.keyCode == 13){
+	if(e.keyCode == "13"){
 		getSize.click();
 		this.blur();
 	}
@@ -64,11 +89,28 @@ myImg.onkeydown = function(e){
 var imgOutput = document.getElementById("imgOutput");
 var outputValue = "";
 var container = document.getElementById("container");
+var failedImg = document.getElementById("failedImg");
+failedImg.onclick = function(){
+	if (needCopy) {
+		this.select();
+		document.execCommand("copy");
+		setTimeout(function() {
+			alert("Failed Image URLs copied successfully")
+			needCopy = false;
+		}, 100);
+	}
+}
+failedImg.onchange = function() {
+	needCopy = true;
+}
 getSize.onclick = function(){
 	var imgSrc = myImg.value;
 	imgOutput.innerHTML = "";
+	failedImg.value = "";
+	console.log("failedImg.value = ")
+	console.log(failedImg.value);
 	if(imgSrc.indexOf(" ")){
-		imgSrc = imgSrc.replace(/\s+/g,';');
+		imgSrc = imgSrc.replace(/\s+/g, ';');
 	}
 	if(imgSrc.indexOf(";")){
 		imgSrc = imgSrc.split(";");
@@ -76,7 +118,7 @@ getSize.onclick = function(){
 	var tempArr = [];
 	for(var k = 0; k < imgSrc.length; k++){
 		if(imgSrc[k]){
-			tempArr.push(imgSrc[k]);
+			tempArr.push(imgSrc[k].replace(/\s+/g, ""));
 		}
 	}
 	imgSrc = tempArr;
@@ -97,6 +139,7 @@ getSize.onclick = function(){
 			if(img.width < 500 || img.height < 500){
 				img.style.borderColor = "red";
 				tempSpan.style = "color: red;"
+				failedImg.value += imgSrc[i] + "\n";
 			}
 			p.appendChild(tempSpan);
 			imgOutput.appendChild(p);
@@ -109,6 +152,7 @@ getSize.onclick = function(){
 		}
 		img.onerror = function(){
 			tempSpan.innerHTML = "Picture " + (i + 1) + ": Invalid Picture Path";
+			failedImg.value += imgSrc[i] + "\n";
 			p.appendChild(tempSpan);
 			imgOutput.appendChild(p);
 			if(i < imgSrc.length - 1){
@@ -122,6 +166,7 @@ getSize.onclick = function(){
 	iterateImg();
 }
 </script>
+
 </body>
 </html>
  
