@@ -64,7 +64,7 @@
 					</div>
     			</div>
     			<div v-for="(lines, row) in minefield" style="line-height: 0px;">
-	    			<div v-for="(block, col) in lines" :data-row="row" :data-col="col" class="blocks" :class="{untouched: !block.exposed, cleared: block.exposed}" @contextmenu.prevent="add_drop_flag(block)" @click="expose_block(block, row, col)" @mouseup="leftRightClk(block, row, col)" @touchend="touchend_func(block, row, col)">
+	    			<div v-for="(block, col) in lines" :data-row="row" :data-col="col" class="blocks" :class="{untouched: !block.exposed && !block.tempDown, cleared: block.exposed && !block.tempDown, tempCleared: block.tempDown}" @contextmenu.prevent="add_drop_flag(block)" @mousedown="leftRightDown(block, row, col)" @mouseup="leftRightUp(block, row, col)" @mouseenter="handleMouseEnter(block, row, col)" @mouseleave="handleMouseLeave(block, row, col)" @touchend="touchend_func(block, row, col)">
 	    				<div class="pos-abslt" :class="{'num-hidden': !block.exposed}" :style="{color: block.color}">{{block.num}}</div>
 	    				<div class="pos-abslt" :class="{'flag-hidden': !block.flagged}">
 	    					<div class="flag"></div>

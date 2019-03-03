@@ -43,6 +43,7 @@ function minesweeper(matrix) {
 			"crossed": false,
 			"flagged": false,
 			"exposed": false,
+			"tempDown": false,
 			"color": "transparent"
 		};
 		for (var i = 0; i < arr[0].length + 2; i++) {
@@ -108,6 +109,7 @@ function makeMatrix(a, b, c) { //a是row，b是col, c是雷数
 				"crossed": false,
 				"flagged": false,
 				"exposed": false,
+				"tempDown": false,
 				"color": "transparent"
 			};
 			line.push(obj);
@@ -157,8 +159,11 @@ var app = new Vue({
 		best_5_score: [],
 		liHTML: "<li>无</li><li>无</li><li>无</li><li>无</li><li>无</li>",
 		notWinning: true,
+		leftBtnDown: false,
+		rightBtnDown: false,
 		leftBtnUp: false,
-		rightBtnUp: false
+		rightBtnUp: false,
+		bothMouseDown: false
 	},
 	mounted: function () {
 		let w = window.innerWidth;
@@ -192,7 +197,9 @@ var app = new Vue({
 	methods: {
 		add_drop_flag: function (block) {
 			var that = this;
-			if (that.game_on) {
+			var bothMouseDown = that.leftBtnDown && that.rightBtnDown;
+			var bothMouseDown = that.leftBtnUp && that.rightBtnUp;
+			if (that.game_on && !bothMouseDown && !bothMouseDown) {
 				if (block.flagged) {
 					block.flagged = false;
 					that.num_of_mine_left++;
@@ -286,27 +293,108 @@ var app = new Vue({
 				}
 			}
 		},
-		leftRightClk: function (block, row, col) {
+		leftRightDown: function (block, row, col) {
 			var that = this;
+			var minefield = that.minefield;
+			function testMouseDown() {
+				if (that.flag_btn_status == "off" && that.game_on) {
+					if (that.leftBtnDown && that.rightBtnDown) {
+						that.bothMouseDown = true;
+						//左右键同时按下按下，应当有9个方块变成按下的状态
+						var block_arr = that.get_other_blocks(minefield, row, col);
+						block_arr.splice(4, 0, block);
+						for (let i = 0; i < 9; i++) {
+							if (block_arr[i]) {
+								if (!block_arr[i].flagged) { //没有旗标
+									block_arr[i].tempDown = true;//变成按下状态
+								}
+							}
+						}
+					} else if (that.leftBtnDown && !block.exposed && !block.flagged) {
+						//左键按下，方块未翻开、未标旗，则方块自己变为按下状态
+						block.tempDown = true;//变成按下状态
+					}
+				}
+			}
+			if (event.button == 0) {
+				that.leftBtnDown = true;	
+			} else if (event.button == 2) {
+				that.rightBtnDown = true;
+			}
+			testMouseDown();
+		},
+		leftRightUp: function (block, row, col) {
+			var that = this;
+			var minefield = that.minefield;
+			function testMouseUp() {
+				if (that.flag_btn_status == "off" && that.game_on) {
+					if (that.leftBtnUp && that.rightBtnUp) {
+						if (block.exposed) {
+							//如果该方块已翻开，左右键同时按下按下后放开
+							that.dblclick_expose(block, row, col);
+							console.log("that.dblclick_expose(block, row, col)")
+						}
+					} else if (that.leftBtnUp && !that.bothMouseDown && !block.exposed && !block.flagged) {
+						//如果该方块未翻开，未标旗，左键按下后放开
+						that.expose_block(block, row, col);//翻开方块
+						block.tempDown = false;//恢复放开状态
+						console.log("bothMouseDown = " + that.bothMouseDown)
+						console.log("左击翻开方块")
+					}
+				}
+				//不管是放开了左键还是右键，都应该有9个方块恢复放开状态
+				var block_arr = that.get_other_blocks(minefield, row, col);
+				block_arr.splice(4, 0, block);
+				//由于翻开方块的计算需时较长，可能会先恢复放开才翻开
+				//为避免闪烁，需要延迟100毫秒再恢复放开状态
+				setTimeout(function() {
+					for (let i = 0; i < 9; i++) {
+						if (block_arr[i]) {
+							if (!block_arr[i].flagged) { //没有旗标
+								block_arr[i].tempDown = false;//恢复放开状态
+							}
+						}
+					}
+					that.leftBtnUp = false;
+					that.rightBtnUp = false;
+					that.bothMouseDown = false;
+				}, 100);
+			}
 			if (event.button === 0) {
 				that.leftBtnUp = true;
-				if (that.rightBtnUp) {
-					that.dblclick_expose(block, row, col);
-				}
-				setTimeout(function() {
-					that.leftBtnUp = false;
-				}, 100);
+				that.leftBtnDown = false;
 			} else if (event.button === 2) {
 				that.rightBtnUp = true;
-				if (that.leftBtnUp) {
-					that.dblclick_expose(block, row, col);
+				that.rightBtnDown = false;
+			}
+			testMouseUp();
+		},
+		handleMouseEnter: function (block, row, col) {
+			var that = this;
+			if (that.leftBtnDown && that.rightBtnDown) {
+				//左右键按下状态移动鼠标，则9个按下状态的方块应发生位移
+				that.leftRightDown(block, row, col);
+			} else if (that.leftBtnDown) {
+				//只有左键按下并移动鼠标，则按下状态的方块应发生位移
+				block.tempDown = true;;
+			}
+		},
+		handleMouseLeave: function (block, row, col) {
+			//鼠标离开，则恢复放开状态
+			var that = this;
+			var minefield = that.minefield;
+			var block_arr = that.get_other_blocks(minefield, row, col);
+			block_arr.splice(4, 0, block);
+			for (let i = 0; i < 9; i++) {
+				if (block_arr[i]) {
+					if (!block_arr[i].flagged) { //没有旗标
+						block_arr[i].tempDown = false;//恢复放开状态
+					}
 				}
-				setTimeout(function() {
-					that.rightBtnUp = false;
-				});
 			}
 		},
 		mine_exploded: function () {
+			//雷炸了
 			var that = this;
 			var minefield = that.minefield;
 			var row_len = minefield.length;
