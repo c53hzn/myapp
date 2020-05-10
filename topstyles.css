@@ -39,7 +39,7 @@ body{width: 1080px;
 	height: 120px;
 	border-radius: 60px;
 	box-shadow: 0px 0px 10px black;
-	background: #F75000 url(https://www.houzhenni.com/assets/img/author-pic-1x.png) no-repeat;
+	background: #F75000 url(https://www.houzhenni.com/img/favicon.ico) no-repeat;
 	background-size: contain;
 	background-blend-mode: luminosity;
 	overflow: hidden;
