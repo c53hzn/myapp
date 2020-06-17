@@ -28,6 +28,8 @@ I made some applications for real use, some for work, and some for entertainment
 
 * [A VueJS powered Carousel](https://www.houzhenni.com/myapp/carousel-vue.html)
 
+* [Excel Manipulator](https://www.houzhenni.com/myapp/excel-manipulator.html "A tool that allows you to connect texts from table cells freely")
+
 ### Interesting things
 
 * [my favorite PC game: minesweeper](https://www.houzhenni.com/myapp/minesweeper.html)
