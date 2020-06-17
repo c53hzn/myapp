@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" type="image/png" href="https://www.houzhenni.com/img/favicon.ico" />
+<meta name="apple-mobile-web-app-title" content="Excel Manipulator">
+<meta data-n-head="ssr" data-hid="description" name="description" content="Tired of writing complicated excel formulas? Try this excel manipulator and generate your own texts in seconds!">
+<link rel="shortcut icon" type="image/x-icon" href="https://www.houzhenni.com/img/favicon.ico" />
+<title>Excel Manipulator | Jenny的小站</title>
+<style>
+html,
+body {
+	width: 100%;
+	margin: 0px;
+}
+body {
+	background: #ffeaa7;
+}
+#container {
+	width: 70%;
+	margin: 20px auto;
+}
+textarea {
+	width: 99.5%;
+	resize: vertical;
+}
+@media all and (max-width: 768px) {
+	#container {
+		width: 100%;
+	}
+}
+</style>
+</head>
+<body translate="no">
+<div id="container">
+<p>Copy data from excel and paste to the following textarea, set rules for concatenating cell contents, click "Load Data", copy the result then paste back to your excel.</p>
+<p>Pay attention to the following points:</p>
+<ol>
+<li>First column must be unique identifier</li>
+<li>Consecutive multiple lines can share the same identifier, if some lines don't have identifier, they are considered to share the most immediate identifier above.</li>
+<li>All headers should be distinctive</li>
+<li>"result" is taken for default output header, don't use it in data source</li>
+</ol>
+<p>
+<textarea id="src" style="width: 99.5%; height: 180px; word-wrap" type="text" /></textarea>
+</p>
+<p>
+<span>connector: </span>
+<input type="text" id="connector" />
+</p>
+<p>
+<span>Columns(other than identifier) to be kept: </span>
+<input type="text" style="min-width: 300px;max-width: 100%;" id="keep_profile" />
+</p>
+<p>&nbsp;</p>
+<p>
+<span>Arrange texts this way: </span>
+<input type="text" style="min-width: 300px;max-width: 100%;" id="arrange_profile" />
+</p>
+<p>
+<span>Before: </span>
+<input type="text" style="min-width: 300px;max-width: 100%;" id="beforeTxt" />
+</p>
+<p>
+<span>After: </span>
+<input type="text" style="min-width: 300px;max-width: 100%;" id="afterTxt" />
+</p>
+<p>&nbsp;</p>
+<p>
+<span>简体的拼接方式: </span>
+<input type="text" style="min-width: 300px;max-width: 100%;" id="arrange_profile_sc" />
+</p>
+<p>
+<span>简体Before: </span>
+<input type="text" style="min-width: 300px;max-width: 100%;" id="beforeTxt_sc" />
+</p>
+<p>
+<span>简体After: </span>
+<input type="text" style="min-width: 300px;max-width: 100%;" id="afterTxt_sc" />
+</p>
+<p>&nbsp;</p>
+<p>
+<span>繁體的拼接方式: </span>
+<input type="text" style="min-width: 300px;max-width: 100%;" id="arrange_profile_tc" />
+</p>
+<p>
+<span>繁體Before: </span>
+<input type="text" style="min-width: 300px;max-width: 100%;" id="beforeTxt_tc" />
+</p>
+<p>
+<span>繁體After: </span>
+<input type="text" style="min-width: 300px;max-width: 100%;" id="afterTxt_tc" />
+</p>
+<p>&nbsp;</p>
+<p>
+<button id="loadData">Load Data</button>
+<label for="keepEmptyRow"><input type="checkbox" id="keepEmptyRow" checked />Keep empty rows?</label>
+</p>
+<div>
+<textarea id="result" style="width: 99.5%; height: 180px; word-wrap" type="text" /></textarea>
+</div>
+</div>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+<script id="rendered-js">
+var sampleSrc = `type	nature	region	dangerousness	email	name	number
+tree	plant	CN	no	123@123.com	apple	1
+					pear	2
+					peach	3
+					cherry	4
+fruit	plant	HK	no	asdf@asdf.com	apple	1
+bird	animal	TW	yes	123@asdf.com	finch	11
+bird					sparrow	12
+bird					rooster	13
+vegetable	plant	US	no	asdf@1234.com	tomato	100
+`;
+$("#connector").attr("placeholder", "<br>");
+$("#arrange_profile").attr("placeholder", "The number of {name} is {number}");
+$("#keep_profile").attr("placeholder", "{region},{email},{dangerousness},{nature}");
+$("#beforeTxt").attr("placeholder", "Here is the summary of {nature}:");
+$("#afterTxt").attr("placeholder", "Text ends here.{region}");
+$("#connector").val("<br>");
+$("#arrange_profile").val("The number of {name}({nature}) is {number}");
+$("#keep_profile").val("{region},{email},{dangerousness},{nature}");
+$("#beforeTxt").val("Here is the summary of {nature}:");
+$("#afterTxt").val("Text ends here.{region}");
+
+$("#arrange_profile_sc").attr("placeholder", "你的{name}({nature})有{number}个");
+$("#beforeTxt_sc").attr("placeholder", "以下是关于{nature}的详情:");
+$("#afterTxt_sc").attr("placeholder", "以上。{region}");
+$("#arrange_profile_sc").val("你的{name}({nature})有{number}个");
+$("#beforeTxt_sc").val("以下是关于{nature}的详情:");
+$("#afterTxt_sc").val("以上。{region}");
+
+$("#arrange_profile_tc").attr("placeholder", "你的{name}({nature})有{number}個");
+$("#beforeTxt_tc").attr("placeholder", "以下是關於{nature}的詳情:");
+$("#afterTxt_tc").attr("placeholder", "以上。{region}");
+$("#arrange_profile_tc").val("你的{name}({nature})有{number}個");
+$("#beforeTxt_tc").val("以下是關於{nature}的詳情:");
+$("#afterTxt_tc").val("以上。{region}");
+
+$("#src").html(sampleSrc);
+loadData();
+
+$("#loadData").click(function() {
+	loadData();
+});
+$("#src").focus(function(){
+	$(this).select();
+});
+$("#result").focus(function(){
+	$(this).select();
+});
+
+function loadData() {
+	$("#result").val("");
+	var src = $("#src").val();
+	var isNeedEmptyRow = $("#keepEmptyRow").prop("checked")
+	var connector = $("#connector").val();
+	var keepPro = $("#keep_profile").val();
+	
+	var arrngPro = $("#arrange_profile").val();
+	var beforeTxt = $("#beforeTxt").val()?$("#beforeTxt").val()+connector:"";
+	var afterTxt = $("#afterTxt").val()?connector+$("#afterTxt").val():"";
+	
+	var arrngPro_sc = $("#arrange_profile_sc").val();
+	var beforeTxt_sc = $("#beforeTxt_sc").val()?$("#beforeTxt_sc").val()+connector:"";
+	var afterTxt_sc = $("#afterTxt_sc").val()?connector+$("#afterTxt_sc").val():"";
+	
+	var arrngPro_tc = $("#arrange_profile_tc").val();
+	var beforeTxt_tc = $("#beforeTxt_tc").val()?$("#beforeTxt_tc").val()+connector:"";
+	var afterTxt_tc = $("#afterTxt_tc").val()?connector+$("#afterTxt_tc").val():"";
+	
+	var arr = src.split("\n");
+	var headerArr = arr[0].split("\t");
+	var headerObj = {};
+	for (let m = 0; m < headerArr.length; m++) {
+		headerObj[headerArr[m]] = m;
+	}
+	if (!arrngPro) {
+		arrngPro = "{"+arr[0].replace(/\t/g,"}{")+"}";
+	}
+	//output header row
+	var str = headerArr[0] + keepPro.replace(/\{/g,"\t").replace(/\}(,)?/g,"") + "\tresult\n";
+	var rowId = "";
+	var rowArr = [];
+	var emptyRowStr = "";
+	var region = "";
+	var tempBefore = beforeTxt;
+	var tempAfter = afterTxt;
+	var keepStr = keepPro;
+	for (let i = 1; i < arr.length; i++) {
+		
+		if (arr[i]) {
+			let currArr = arr[i].split("\t");
+			let prevArr = arr[i-1]?arr[i-1].split("\t"):[];
+			let nextArr = arr[i+1]?arr[i+1].split("\t"):[];			
+			var isNewRow = function() {
+				return rowId=="" || (currArr[0].length>0 && rowId != currArr[0]);
+			}
+			var isRowEnd = function() {
+				return nextArr.length==0 || (rowId != nextArr[0] && nextArr[0].length>0);
+			}
+			if (isNewRow()) {
+				emptyRowStr = "";
+				rowId = currArr[0];
+				rowArr = currArr;
+				keepStr = keepPro.replace(/\,/g,"");
+				region = rowArr[headerObj['region']]||"";
+				if (region == "CN") {
+					var arrngStr = arrngPro_sc;
+					tempBefore = beforeTxt_sc;
+					tempAfter = afterTxt_sc;
+				} else if (region == "TW" || region == "HK") {
+					var arrngStr = arrngPro_tc;
+					tempBefore = beforeTxt_tc;
+					tempAfter = afterTxt_tc;
+				} else {
+					var arrngStr = arrngPro;
+					tempBefore = beforeTxt;
+					tempAfter = afterTxt;
+				}
+				
+				headerArr.forEach(function(el, index) {
+					let regEx = new RegExp(`{${el}}`,'g');
+					keepStr = keepStr.replace(regEx,"\t"+currArr[index]);
+					arrngStr = arrngStr.replace(regEx,currArr[index]);
+					tempBefore = tempBefore.replace(regEx,currArr[index]);
+					tempAfter = tempAfter.replace(regEx,currArr[index]);			
+				});
+				tempBefore = tempBefore?"\t"+tempBefore:"\t";
+				str += rowId + keepStr + tempBefore + arrngStr;
+				if (isRowEnd()) {
+					str += tempAfter + "\n";
+				} else {
+					emptyRowStr = isNeedEmptyRow?emptyRowStr+"\n":"";
+				}
+			} else {
+				if (region == "CN") {
+					var arrngStr = arrngPro_sc;
+				} else if (region == "TW" || region == "HK") {
+					var arrngStr = arrngPro_tc;
+				} else {
+					var arrngStr = arrngPro;
+				}
+				headerArr.forEach(function(el, index) {
+					let regEx = new RegExp(`{${el}}`,'g');
+					arrngStr = arrngStr.replace(regEx,(currArr[index]||rowArr[index]));		
+				});
+				str += connector + arrngStr;
+				if (isRowEnd()) {
+					str += tempAfter + "\n" + emptyRowStr;
+				} else {
+					emptyRowStr = isNeedEmptyRow?emptyRowStr+"\n":"";
+				}
+			}
+		} else {
+			if (isNeedEmptyRow) {
+				str += "\n";
+			}
+		}
+	}
+	$("#result").val(str);
+}
+    </script>
+</body>
+</html>
