@@ -167,7 +167,7 @@ input[type="button"] {
 .cross {
 	font-size: 24px;
 }
-.flag-pressed {
+.flag-pressed div{
 	transform: translate(1px, 1px);
 }
 .flag{
