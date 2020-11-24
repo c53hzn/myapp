@@ -473,7 +473,7 @@ var app = new Vue({
 			if (btn == "face" && that.face_class == "untouched") {
 				that.face_class = "cleared";
 			} else if (btn == "flag_btn" && that.flag_btn_class == "untouched" && that.game_on) {
-				that.flag_btn_class = "cleared";
+				that.flag_btn_class = "cleared flag-pressed";
 			} else if (btn == "gear_btn" && that.gear_class == "untouched") {
 				that.gear_class = "cleared";
 			}
