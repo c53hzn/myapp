@@ -327,7 +327,8 @@ var app = new Vue({
 			var that = this;
 			var minefield = that.minefield;
 			function testMouseUp() {
-				if (that.flag_btn_status == "off" && that.game_on) {
+				if (that.flag_btn_status == "off") {
+					that.game_on = true;
 					if (that.leftBtnUp && that.rightBtnUp) {
 						if (block.exposed) {
 							//如果该方块已翻开，左右键同时按下按下后放开
@@ -490,7 +491,7 @@ var app = new Vue({
 				that.minefield = mine_matrix;
 				that.num_of_mine_left = that.num_of_mine;
 				that.clear_timeout();
-				that.game_on = true;
+				that.game_on = false;
 				that.time_spent = 0;
 				that.notWinning = true;
 			} else if (btn == "flag_btn" && that.flag_btn_status == "off" && that.game_on) {
