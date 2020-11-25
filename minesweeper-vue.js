@@ -131,7 +131,7 @@ var app = new Vue({
 	el: "#app",
 	data: {
 		minefield: [],
-		game_on: true,
+		game_on: false,
 		gear_class: "untouched",
 		face_class: "untouched",
 		flag_btn_class: "untouched",
@@ -341,6 +341,8 @@ var app = new Vue({
 						console.log("bothMouseDown = " + that.bothMouseDown)
 						console.log("左击翻开方块")
 					}
+				} else if (that.flag_btn_status == "on" && that.game_on) {
+					that.add_drop_flag(block);
 				}
 				//不管是放开了左键还是右键，都应该有9个方块恢复放开状态
 				var block_arr = that.get_other_blocks(minefield, row, col);
