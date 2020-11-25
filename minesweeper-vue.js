@@ -174,7 +174,7 @@ var app = new Vue({
 		console.log("w = " + w + "px, h = " + h + "px")
 		var mine_row, mine_col, num_of_mine, mine_max, mine_input;
 		if (w < 768) {
-			if (h < 569) {
+			if (h < 600) {
 				mine_row = 12;
 			} else {
 				mine_row = Math.floor(h / 32) - 2;
