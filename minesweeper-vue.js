@@ -132,6 +132,7 @@ var app = new Vue({
 	data: {
 		minefield: [],
 		game_on: false,
+		game_break: false,
 		gear_class: "untouched",
 		face_class: "untouched",
 		flag_btn_class: "untouched",
@@ -225,6 +226,7 @@ var app = new Vue({
 					block.exposed = true;
 					if (block.mine) { //踩雷了
 						that.game_on = false; //游戏结束
+						that.game_break = true;
 						that.mine_exploded();
 					} else {
 						//不是雷，判断数字是否为0
@@ -327,7 +329,7 @@ var app = new Vue({
 			var that = this;
 			var minefield = that.minefield;
 			function testMouseUp() {
-				if (that.flag_btn_status == "off") {
+				if (that.flag_btn_status == "off" && !that.game_break) {
 					that.game_on = true;
 					if (that.leftBtnUp && that.rightBtnUp) {
 						if (block.exposed) {
@@ -494,6 +496,7 @@ var app = new Vue({
 				that.game_on = false;
 				that.time_spent = 0;
 				that.notWinning = true;
+				that.game_break = false;
 			} else if (btn == "flag_btn" && that.flag_btn_status == "off" && that.game_on) {
 				that.flag_btn_status = "on";
 			} else if (btn == "flag_btn" && that.flag_btn_status == "on" && that.game_on) {
@@ -557,6 +560,7 @@ var app = new Vue({
 				}
 				that.game_on = false;
 				that.notWinning = false;
+				that.game_break = true;
 				for (let k = 0; k < coordinates.length; k++) {
 					that.minefield[coordinates[k][0]][coordinates[k][1]].flagged = true;
 				}
