@@ -365,3 +365,7 @@ input[type="button"] {
     width: 50px;
     text-align: center;
 }
+.game-guide {
+	margin-right: 20px;
+	padding-left: 20px;
+}

@@ -167,13 +167,18 @@ var app = new Vue({
 		bothMouseDown: false
 	},
 	mounted: function () {
+		var that = this;
 		let w = window.innerWidth;
 		let h = window.innerHeight;
 
 		console.log("w = " + w + "px, h = " + h + "px")
 		var mine_row, mine_col, num_of_mine, mine_max, mine_input;
 		if (w < 768) {
-			mine_row = Math.floor(h / 32) - 2;
+			if (h < 569) {
+				mine_row = 12;
+			} else {
+				mine_row = Math.floor(h / 32) - 2;
+			}
 			mine_col = Math.floor(w / 32);
 			num_of_mine = 10;
 			mine_input = 10;
@@ -185,15 +190,15 @@ var app = new Vue({
 			mine_input = 20;
 			mine_max = 99;
 		}
-		this.line_width = mine_col * 32;
-		this.mine_row = mine_row;
-		this.mine_col = mine_col;
-		this.num_of_mine = num_of_mine;
-		this.mine_input = mine_input;
-		this.num_of_mine_left = num_of_mine;
-		this.mine_max = mine_max;
+		that.line_width = mine_col * 32;
+		that.mine_row = mine_row;
+		that.mine_col = mine_col;
+		that.num_of_mine = num_of_mine;
+		that.mine_input = mine_input;
+		that.num_of_mine_left = num_of_mine;
+		that.mine_max = mine_max;
 		var mine_matrix = makeMatrix(mine_row, mine_col, num_of_mine);
-		this.minefield = mine_matrix;
+		that.minefield = mine_matrix;
 	},
 	methods: {
 		add_drop_flag: function (block) {
