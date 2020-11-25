@@ -502,6 +502,8 @@ var app = new Vue({
 				that.time_spent = 0;
 				that.notWinning = true;
 				that.game_break = false;
+				that.flag_btn_class = "untouched";
+				that.flag_btn_status = "off";
 			} else if (btn == "flag_btn" && that.flag_btn_status == "off" && that.game_on) {
 				that.flag_btn_status = "on";
 			} else if (btn == "flag_btn" && that.flag_btn_status == "on" && that.game_on) {
