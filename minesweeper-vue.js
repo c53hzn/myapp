@@ -231,7 +231,6 @@ var app = new Vue({
 					block.exposed = true;
 					if (block.mine) { //踩雷了
 						that.game_on = false; //游戏结束
-						that.game_break = true;
 						that.mine_exploded();
 					} else {
 						//不是雷，判断数字是否为0
@@ -419,6 +418,7 @@ var app = new Vue({
 				}
 			}
 			that.clear_timeout();
+			that.game_break = true;
 		},
 		get_other_blocks: function (matrix, row, col) {
 			var row_len = matrix.length;
