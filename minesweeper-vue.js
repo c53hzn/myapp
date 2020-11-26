@@ -668,10 +668,9 @@ var app = new Vue({
 			that.num_of_mine_left = that.num_of_mine;
 			that.clear_timeout();
 			that.game_on = false;
-			that.game_break = false;
 			that.time_spent = 0;
-			that.set_close();
 			that.notWinning = true;
+			that.game_break = false;
 		},
 		reset_score: function (){
 			var that = this;
