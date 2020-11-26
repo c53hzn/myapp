@@ -667,7 +667,7 @@ var app = new Vue({
 			that.minefield = mine_matrix;
 			that.num_of_mine_left = that.num_of_mine;
 			that.clear_timeout();
-			that.game_on = true;
+			that.game_on = false;
 			that.game_break = false;
 			that.time_spent = 0;
 			that.set_close();
