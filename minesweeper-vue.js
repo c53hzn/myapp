@@ -153,7 +153,8 @@ var app = new Vue({
 			0: "slide-visible",
 			1: "slide-hidden",
 			2: "slide-hidden",
-			3: "slide-hidden"
+			3: "slide-hidden",
+			4: "slide-hidden"
 		},
 		mine_max: 0,
 		mine_input: 0,
