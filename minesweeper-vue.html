@@ -162,6 +162,9 @@
     					<p><input type="number" style="width: 40px;" min="1" :max="mine_max" @input="get_mine_input(mine_input)" @keyup.enter="set_mine(mine_input)" v-model="mine_input"/></p>
     					<p><input type="button" value="确定" @click="set_mine(mine_input)"/></p>
     				</div>
+				<div class="slide-general" :class="slides_class[4]">
+					<p>回到<a href="/">首页</a></p>
+    				</div>
     			</div>
     			<div class="slide-to-left" @click="slide_to_left(curr_slide)">&lt;</div>
     			<div class="slide-to-right" @click="slide_to_right(curr_slide)">&gt;</div>
