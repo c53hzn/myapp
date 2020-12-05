@@ -249,7 +249,7 @@ var app = new Vue({
 		that.minefield = mine_matrix;
 
 		var lang = localStorage.getItem("lang");
-		if (!lang || lang == "chi") {
+		if (!lang || lang == "Chi") {
 			that.ui_str = that.ui_str_chi;
 			that.best_score_html = that.best_score_html_chi;
 		} else {
@@ -612,7 +612,7 @@ var app = new Vue({
 						that.best_5_score.pop();
 					}
 					var liStr = "";
-					if (!lang || lang == "chi") {
+					if (!lang || lang == "Chi") {
 						for (let m = 0; m < 5; m++) {
 							if (that.best_5_score[m] === 0 || that.best_5_score[m] > 0) {
 								liStr = liStr + "<li>" + that.best_5_score[m] + " 秒</li>";
@@ -744,7 +744,7 @@ var app = new Vue({
 		reset_score: function (){
 			var that = this;
 			var lang = localStorage.getItem("lang");
-			if (!lang || lang == "chi") {
+			if (!lang || lang == "Chi") {
 				that.best_score_html = "<li>无</li><li>无</li><li>无</li><li>无</li><li>无</li>";
 			} else {
 				that.best_score_html = "<li>N/A</li><li>N/A</li><li>N/A</li><li>N/A</li><li>N/A</li>";
