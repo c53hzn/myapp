@@ -4,7 +4,7 @@
 	    <meta charset="utf-8" />
 	    <meta name="apple-mobile-web-app-capable" content="yes" />
 	    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-	    <title>Minesweeper - 扫雷(VueJS版)</title>
+	    <title>Minesweeper - 扫雷(VueJS版) | Jenny的小站</title>
 	    <meta id="viewport" name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0" />
 	    <meta name="description" content="A Vue powered minesweeper game. Responsive design with classic Windows look." /><meta property="og:description" content="A Vue powered minesweeper game. Responsive design with classic Windows look." />
 	    <link href="minesweeper-vue.css?2020-11-25-2338" rel="stylesheet" type="text/css" />
@@ -80,7 +80,7 @@
     		<div class="slide-container" :class="{'hidden': !slide_visible}">
     			<div class="slides">
     				<div class="slide-general" :class="slides_class[0]">
-    					<h3>游戏说明</h3>
+    					<h3>{{ui_str[0]}}</h3>
     					<div style="display: flex; justify-content: left; margin-bottom: 10px;">
     						<div class="blocks untouched" style="display: block; margin-right: 30px;">
 		    					<div class="gearOuter" style="top: -1px; left: -2px;">
@@ -106,13 +106,13 @@
 									<div class="tooth8 bg-gray"></div>
 								</div>
 		    				</div>
-		    				<div style="line-height: 32px;">设置</div>
+		    				<div style="line-height: 32px;">{{ui_str[1]}}</div>
     					</div>
     					<div style="display: flex; justify-content: left; margin-bottom: 10px;">
     						<div class="counterOuter" style="width: 28px; margin-right: 30px;">
     							<div id="counter" class="counterInner">10</div>
     						</div>
-    						<div style="line-height: 32px;">剩余地雷数</div>
+    						<div style="line-height: 32px;">{{ui_str[2]}}</div>
     					</div>
     					<div style="display: flex; justify-content: left; margin-bottom: 10px;">
     						<div class="blocks untouched" style="display: block; margin-right: 30px;">
@@ -122,7 +122,7 @@
     								<div class="smileLips"></div>
     							</div>
     						</div>
-    						<div style="line-height: 32px;">开始新一局</div>
+    						<div style="line-height: 32px;">{{ui_str[3]}}</div>
     					</div>
     					<div style="display: flex; justify-content: left; margin-bottom: 10px;">
     						<div class="blocks untouched" style="display: block; margin-right: 30px;">
@@ -132,47 +132,47 @@
 	    							<div class="stand"></div>
 	    						</div>
 	    					</div>
-	    					<div style="line-height: 32px; width: 150px;">按下可标记地雷</div>
+	    					<div style="line-height: 32px; width: 150px;">{{ui_str[4]}}</div>
     					</div>
     					<div style="display: flex; justify-content: left;">
     						<div class="counterOuter" style="width: 28px; margin-right: 30px;">
     							<div id="counter" class="counterInner">0</div>
     						</div>
-    						<div style="line-height: 32px;">用时</div>
+    						<div style="line-height: 32px;">{{ui_str[5]}}</div>
     					</div>
     				</div>
     				<div class="slide-general" :class="slides_class[1]">
-    					<h3>游戏说明</h3>
+    					<h3>{{ui_str[6]}}</h3>
     					<ol class="game-guide">
-    						<li>打开页面时会自动生成适应设备屏幕尺寸的雷区和地雷数</li>
-    						<li>电脑端可右击未翻开的方块对其进行标记或取消标记</li>
-    						<li>若确定某个已翻开的方块周围的地雷都已标记，同时点击鼠标左键和右键可翻开剩余方块</li>
-    						<li>移动端可用手指双击达到第3条的效果</li>
+    						<li>{{ui_str[7]}}</li>
+    						<li>{{ui_str[8]}}</li>
+    						<li>{{ui_str[9]}}</li>
+    						<li>{{ui_str[10]}}</li>
     					</ol>
     				</div>
     				<div class="slide-general" :class="slides_class[2]">
-    					<h3>扫雷英雄榜</h3>
-    					<ol v-html="liHTML"></ol>
-    					<p><input type="button" value="重置" @click="reset_score"/></p>
+    					<h3>{{ui_str[11]}}</h3>
+    					<ol v-html="best_score_html"></ol>
+    					<p><input type="button" :value="ui_str[12]" @click="reset_score"/></p>
     				</div>
     				<div class="slide-general" :class="slides_class[3]">
-    					<h3>地雷设置</h3>
-    					<p>输入您想要的地雷数</p>
-    					<p>最多{{mine_max}}个</p>
+    					<h3>{{ui_str[13]}}</h3>
+    					<p>{{ui_str[14]}}</p>
+    					<p>{{ui_str[15]}}：{{mine_max}}</p>
     					<p><input type="number" style="width: 40px;" min="1" :max="mine_max" @input="get_mine_input(mine_input)" @keyup.enter="set_mine(mine_input)" v-model="mine_input"/></p>
-    					<p><input type="button" value="确定" @click="set_mine(mine_input)"/></p>
+    					<p><input type="button" :value="ui_str[16]" @click="set_mine(mine_input)"/></p>
     				</div>
 				<div class="slide-general" :class="slides_class[4]">
-					<p>回到<a href="/">首页</a></p>
+					<p>{{ui_str[17]}}<a href="/">{{ui_str[18]}}</a></p>
     				</div>
     			</div>
     			<div class="slide-to-left" @click="slide_to_left(curr_slide)">&lt;</div>
     			<div class="slide-to-right" @click="slide_to_right(curr_slide)">&gt;</div>
-    			<p class="return-p"><input type="button" value="返回" @click="set_close"/></p>
+    			<p class="return-p"><input type="button" :value="ui_str[19]" @click="set_close"/></p>
     		</div>
     	</div>
 	    <script src='vue.min.js'></script>
-	    <script src='minesweeper-vue.js?2020-11-25-2339'></script>
+	    <script src='minesweeper-vue.js?2020-12-06-0106'></script>
 	    <script src='/js/statcounter.js'></script>
   	</body>
 </html>

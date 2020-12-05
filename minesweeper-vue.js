@@ -159,13 +159,60 @@ var app = new Vue({
 		mine_max: 0,
 		mine_input: 0,
 		best_5_score: [],
-		liHTML: "<li>无</li><li>无</li><li>无</li><li>无</li><li>无</li>",
+		best_score_html_eng: "<li>N/A</li><li>N/A</li><li>N/A</li><li>N/A</li><li>N/A</li>",
+		best_score_html_chi: "<li>无</li><li>无</li><li>无</li><li>无</li><li>无</li>",
+		best_score_html: "",
 		notWinning: true,
 		leftBtnDown: false,
 		rightBtnDown: false,
 		leftBtnUp: false,
 		rightBtnUp: false,
-		bothMouseDown: false
+		bothMouseDown: false,
+		ui_str_eng: [
+			"How to play",
+			"Setting",
+			"Mines left",
+			"Start a new game",
+			"Enter or cancel flagging mode",
+			"Time passed",
+			"How to play",
+			"The game will fit your device automatically",
+			"Right click to flag/unflag",
+			"If no more mine is to be flagged around an opened block, left & right click to clear remaining unopened blocks",
+			"Tap twice on mobile devices to achieve the previous action",
+			"Best scores",
+			"Reset scores",
+			"Set minefield",
+			"Please input the number if mines that you want",
+			"Maximum",
+			"Confirm",
+			"Back to ",
+			"Home",
+			"Back"
+		],
+		ui_str_chi: [
+			"游戏说明",
+			"设置",
+			"剩余地雷数",
+			"开始新一局",
+			"按下可标记地雷",
+			"用时",
+			"游戏说明",
+			"打开页面时会自动生成适应设备屏幕尺寸的雷区和地雷数",
+			"电脑端可右击未翻开的方块对其进行标记或取消标记",
+			"若确定某个已翻开的方块周围的地雷都已标记，同时点击鼠标左键和右键可翻开剩余方块",
+			"移动端可用手指双击达到第3条的效果",
+			"扫雷英雄榜",
+			"重置",
+			"地雷设置",
+			"输入您想要的地雷数",
+			"上限",
+			"确定",
+			"回到",
+			"首页",
+			"返回"
+		],
+		ui_str: []
 	},
 	mounted: function () {
 		var that = this;
@@ -200,6 +247,15 @@ var app = new Vue({
 		that.mine_max = mine_max;
 		var mine_matrix = makeMatrix(mine_row, mine_col, num_of_mine);
 		that.minefield = mine_matrix;
+
+		var lang = localStorage.getItem("lang");
+		if (!lang || lang == "chi") {
+			that.ui_str = that.ui_str_chi;
+			that.best_score_html = that.best_score_html_chi;
+		} else {
+			that.ui_str = that.ui_str_eng;
+			that.best_score_html = that.best_score_html_eng;
+		}
 	},
 	methods: {
 		add_drop_flag: function (block) {
@@ -522,6 +578,7 @@ var app = new Vue({
 		},
 		test_clearance: function () {
 			var that = this;
+			var lang = localStorage.getItem("lang");
 			var minefield = that.minefield;
 			var row_len = minefield.length;
 			var col_len = minefield[0].length;
@@ -555,14 +612,24 @@ var app = new Vue({
 						that.best_5_score.pop();
 					}
 					var liStr = "";
-					for (let m = 0; m < 5; m++) {
-						if (that.best_5_score[m] === 0 || that.best_5_score[m] > 0) {
-							liStr = liStr + "<li>" + that.best_5_score[m] + " 秒</li>";
-						} else {
-							liStr += "<li>无</li>";
+					if (!lang || lang == "chi") {
+						for (let m = 0; m < 5; m++) {
+							if (that.best_5_score[m] === 0 || that.best_5_score[m] > 0) {
+								liStr = liStr + "<li>" + that.best_5_score[m] + " 秒</li>";
+							} else {
+								liStr += "<li>无</li>";
+							}
 						}
-					}
-					that.liHTML = liStr;
+					} else {
+						for (let m = 0; m < 5; m++) {
+							if (that.best_5_score[m] === 0 || that.best_5_score[m] > 0) {
+								liStr = liStr + "<li>" + that.best_5_score[m] + " Sec</li>";
+							} else {
+								liStr += "<li>N/A</li>";
+							}
+						}
+					}	
+					that.best_score_html = liStr;
 					/*扫雷英雄榜*/
 					console.log("you win")
 				}
@@ -676,7 +743,12 @@ var app = new Vue({
 		},
 		reset_score: function (){
 			var that = this;
-			that.liHTML = "<li>无</li><li>无</li><li>无</li><li>无</li><li>无</li>";
+			var lang = localStorage.getItem("lang");
+			if (!lang || lang == "chi") {
+				that.best_score_html = "<li>无</li><li>无</li><li>无</li><li>无</li><li>无</li>";
+			} else {
+				that.best_score_html = "<li>N/A</li><li>N/A</li><li>N/A</li><li>N/A</li><li>N/A</li>";
+			}
 			that.best_5_score = [];
 		}
 	}
